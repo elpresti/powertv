@@ -153,7 +153,6 @@ h1{
   padding: 58px 10px 37px;
   width: 500px;
   margin-right:20px;
-  position: absolute;
 }
 
 .vertical.flip-container {
@@ -200,11 +199,7 @@ h1{
   line-height: 13px;
   padding: 5px 15px 5px;
   text-decoration: none;
-  position: absolute;
-  /* top: 16px; 
-  left: 390px; */
-  bottom: 3px;
-  right: 9px;
+  position: relative;
 }
 
 .btnFb:hover {
@@ -220,7 +215,7 @@ h1{
   padding: 57px 9px 0px;
   width: 500px;
   margin-right:20px;
-  position: absolute;
+ 
 }
 
 .fb-comments{
