@@ -13,23 +13,23 @@ function flipFacebookBox(){
   if (fbFlipped){
     //hide the back panel
     $("#back-fb-container").css('display', '');
-    animateElement("rollOut","back-fb-container");
+    animateElement("fadeOut","back-fb-container");
     setTimeout(function secondHalfOfFx1() {
       $('#back-fb-container').css('display', 'none');
       //show the front panel
       $("#front-fb-container").css('display', '');
-      animateElement("rollIn","front-fb-container");
+      animateElement("fadeIn","front-fb-container");
     }, 700);
     fbFlipped=false;
   }else {
     //hide the front panel
     $("#front-fb-container").css('display', '');
-    animateElement("rollOut","front-fb-container");
+    animateElement("fadeOut","front-fb-container");
     setTimeout(function secondHalfOfFx2() {
       $('#front-fb-container').css('display', 'none');
       //show the back panel
       $("#back-fb-container").css('display', '');
-      animateElement("rollIn","back-fb-container");
+      animateElement("fadeIn","back-fb-container");
     }, 700);
     fbFlipped=true;
   }
