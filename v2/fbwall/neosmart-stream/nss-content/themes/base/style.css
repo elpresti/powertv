@@ -1,0 +1,544 @@
+/*******************************************************************************
+ * Theme Name: base 
+ * Description: A simple base theme for your website.
+ * Author: neosmart
+ * Version: 1.7
+ ******************************************************************************/
+
+
+/******************************************************************************
+ * Admin Area: Theme preview
+ ******************************************************************************/
+ 
+	.nss-preview{
+		background-color:#fff;
+		text-align:center;
+	}	
+	.nss-preview .nss-stream{
+		max-width:740px;
+		margin:20px auto;
+	}	
+	.nss.nss-load{
+		background:url(ajax-loader.gif) no-repeat center center;
+		min-height:300px;
+	}
+	.nss-load .nss-stream{
+		display:none;
+	}
+
+
+/******************************************************************************
+ * Your CSS
+ ******************************************************************************/
+ 
+	.nss{
+		margin:10px;
+		position:relative;
+		font-family:Arial, Helvetica, sans-serif;
+		color:#000;
+		margin:0;
+		padding:10px 0;
+		line-height:1em;
+		font-size:16px;
+		display:block;
+	}
+	.nss.nss-render{
+		display:block;	
+	}
+	.nss-stream{
+		text-align:left;
+		padding:0 20px;
+	}
+
+	
+/******************************************************************************
+ * Colors
+ ******************************************************************************/
+
+	.nss-item{
+		background-color:#FFF;
+		border:1px solid #ddd;
+		color:#444;
+	}
+	.nss-item a,
+	.nss-feedback-root a{
+		color:#3B5998;
+	}
+	.nss-twitter a,
+	.nss-feedback-twitter .nss-feedback-channel-name a{	
+		color:#19a4d5;
+	}
+	.nss-created,
+	.nss-facebook-comment-created,
+	.nss-facebook-description,
+	.nss-facebook-count-comments,
+	.nss-facebook-count-likes,
+	.nss-facebook-name,
+	.nss-facebook-comments-created,
+	.nss-facebook-meta{
+		color:#666;	
+	}
+
+/******************************************************************************
+ * INFO
+ ******************************************************************************/	
+
+	.nss-info,
+	.nss-error,
+	.nss-success,
+	.nss-loading{
+		background-color:#ffffe0;
+		color:#555;
+		padding:5px 10px;
+		font-size:0.8125em;
+		border-bottom:1px solid #d8d8a4;}
+
+	.nss .nss-success{
+		background-color:#D9FFD9;
+		color:#555;}
+		
+	.nss .nss-error{
+		background-color:#c00;
+		color:#FFFFFF;}
+	
+	.nss .nss-loading{
+		background-color:#ffffe0;
+		color:#555;}
+		
+	
+/******************************************************************************
+ * Base
+ ******************************************************************************/
+	 
+	.nss-item{
+		font-size:.9375em;
+		padding:10px;
+		margin:10px 0;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px; 
+	}
+	.nss-item a{
+		text-decoration:none;
+	}
+	.nss-item a:hover{
+		text-decoration:underline;	
+	}		
+	.nss-author-avatar{
+		font-weight:bold;
+		font-size:0.8125em;
+		float:left;
+		display:block;
+		margin-right:10px;
+	}
+	.nss-author-avatar img{
+		border:0;	
+	}
+	.nss-head{
+		border-bottom:1px solid #ddd;
+		padding-bottom:7px;
+	}
+	.nss-body{
+		line-height:1.2em;
+	}
+	.nss-author-name{
+		font-weight:bold;
+		font-size:.8125em;
+		display:-moz-inline-stack;
+		display:inline-block;
+	}
+	.nss-created{
+		clear:right;
+		font-size:.75em;
+		display:block;
+	}
+	.nss-content{
+		margin:0;
+	}
+	
+/* Comments */
+	
+	.nss-actions{
+		
+	}
+	.nss-comment-form{
+		background-color:#EDEFF4;
+		margin:2px 0;
+		padding:5px;	
+	}
+	.nss-comment-form-textarea{
+		border:1px solid #999;
+		width:300px;
+		height:20px;
+		resize:vertical;
+	}
+	.nss-comment-form-submit{
+		margin-left:3px;
+		font-size:.8125em;
+	}
+	.nss-comment-form-error{
+		color:#990000;
+		font-size:.75em;
+		padding:5px;	
+	}
+	
+/* User */
+	
+	.nss-user{
+		background:#D7FFF0;
+		margin:10px;
+		padding:10px;	
+		font-size:.75em;
+		display:none;
+	}
+	.nss-user .nss-content{
+		margin-top:5px;	
+	}
+	.nss-user .nss-content a{
+		margin-right:5px;
+	}
+
+	
+/******************************************************************************
+ * Facebook
+ ******************************************************************************/
+	
+	.nss-facebook{
+		background:url(facebook.png) no-repeat right top #FFF;
+	}
+	.nss-facebook-content{
+	
+	}
+	.nss-facebook-message{
+		margin:10px 0;
+	} 
+	.nss-facebook-photo{
+		position:relative;
+		margin:0 0 10px 0;
+		padding:0;
+		display:block;
+		text-align:center;
+	}	
+	.nss-facebook-picture{
+		border:0;
+		width:auto;
+		height:auto;
+		max-width:100%;
+		max-height:320px;
+	}
+	.nss-facebook-caption{
+		margin:5px 0;
+	}
+	.nss-facebook-story{
+		margin:5px 0;
+		font-size:.8125em;
+	}
+	.nss-facebook-description{
+		font-size:.8125em;
+		margin:10px 0;
+		display:block;
+	}
+	.nss-facebook-name{
+		font-weight:bold;
+		word-break:break-all;
+	}
+	.nss-facebook-media-name{
+		font-weight:bold;
+	}
+	.nss-facebook-iframe{
+		text-align:center;
+		margin:0 0 10px 0;
+		position:relative;
+	}
+	.nss-facebook-video{
+		border:0;
+		width:100%;
+	}
+	.nss-facebook-comments{
+		font-size:.866666em;
+		display:none;	
+	}
+	.nss-facebook-show-comments{
+		font-size:.866666em;
+		display:block;
+		clear:left;
+		background-color:#fff;
+		margin:2px 0;
+		padding:5px;
+		text-align:right;
+	}
+	.nss-facebook-show-comments:hover{
+		background-color:#EDEFF4;
+	}
+	.nss-facebook-comment,
+	.nss-facebook-count-comments,
+	.nss-facebook-count-likes{
+		clear:left;
+		background-color:#EDEFF4;
+		margin:2px 0;
+		padding:5px;
+	}
+	.nss-facebook-comment-head{
+		float:left;
+	}
+	.nss-facebook-comment-avatar img{
+		width:32px;
+		height:32px;
+	}
+	.nss-facebook-comment-body{
+		margin-left:37px;
+	}
+	.nss-facebook-comment-name{
+		margin-right:5px;
+		font-weight:bold;
+	}
+	.nss-facebook-comment-created{
+		display:block;	
+		margin-top:5px;
+		font-size:.8125em;
+	}
+	.nss-facebook-like{
+		font-size:.8125em;
+		margin-left:5px;
+	}
+	.nss-facebook-count-likes{
+		font-size:.8125em;
+		margin-top:10px;
+	}
+	.nss-facebook-count-comments{
+		font-size:.8125em;
+	}
+	.nss-facebook-link{
+		display:inline-block;
+		margin-bottom:8px;
+	}
+	.nss-facebook-caption-box{
+		padding:10px;
+		background-color:#f2f2f2;
+		border:1px solid #ddd;
+		margin-bottom:10px;	
+	}
+	.nss-facebook-caption .nss-facebook-description{
+		margin:5px 0;
+		line-height:1.2em;
+	}
+	.nss-facebook-comments-created{
+		font-size:.8461em;
+	}
+	
+/******************************************************************************
+ * Facebook > Events
+ ******************************************************************************/
+
+	.nss-facebook-event{
+		margin:10px 0;
+		-moz-border-radius:3px;
+		border-radius:3px;
+		overflow:hidden;
+		border:1px solid #3B5998;
+	}
+	.nss-facebook-event-header{
+		font-size:1em;
+		padding:10px;
+		background-color:#3B5998;
+	}
+	a.nss-facebook-event-name{
+		font-size:1em;
+		margin-bottom:5px;
+		color:#FFF;
+		font-weight:bold;
+	}
+	.nss-facebook-event-body{
+		background-color:#EDEFF4;	
+		padding:10px;
+	}
+	.nss-facebook-event-description{
+		margin-bottom:5px;
+	}
+	.nss-facebook-event-time{
+
+	}
+	.nss-facebook-event-location{
+		
+	}
+	.nss-facebook-meta{
+		font-size:.75em;
+	}
+	
+/******************************************************************************
+ * Twitter
+ ******************************************************************************/
+	
+	.nss-twitter{
+		background:url(twitter.png) no-repeat right top #FFF;
+	}
+	.nss-twitter .nss-content{
+		margin:10px 0;
+	}
+	
+/******************************************************************************
+ * Custom
+ ******************************************************************************/
+	
+	.nss-nss{
+
+	}
+	.nss-nss .nss-content{
+		margin:10px 0;
+	}
+	
+/******************************************************************************
+ * Feedback
+ ******************************************************************************/
+	
+	.nss-feedback-root{
+		border-radius: 5px 5px 5px 5px;
+		font-size:.8125em;
+		margin: 10px 0;
+		padding: 10px;
+		border:1px solid #ddd;
+	}
+	
+	.nss-feedback-channel{
+		clear:both;	
+		border-bottom:1px solid #ddd;
+		border-right:1px solid #ddd;
+		padding-top:5px;
+		margin-top:1px;
+		padding:10px;
+		background-color:#EDEFF4;
+	}
+	
+	.nss-feedback{
+		background-color:#EDEFF4;
+		padding:5px 5px;
+		vertical-align:text-top;
+		margin-top:2px;
+		display:none;
+		font-size:.8125em;
+	}
+	
+	.nss-feedback-link{
+		display:inline-block;}
+
+	.nss-feedback-link a{
+		margin-right:5px;
+		display:inline-block;
+		cursor:pointer;
+	}
+	.nss-feedback-link .nss-close,
+	.nss-feedback-link.nss-active a{
+		display:none;}
+		
+	.nss-feedback-link.nss-active a.nss-close{
+		display:inline-block;}
+
+	.nss-fb-comment-container{}
+	
+	.nss-fb-comment-container iframe{
+		border:0;
+		margin-top:5px;
+	}
+	
+	.nss-feedback-fb-iframe{
+		float:left;	
+	}
+
+	.nss-feedback-facebook{
+	}
+		
+	.nss-feedback-twitter{
+		}
+	
+	.nss-feedback-channel-name{
+		font-size:.9375em;
+		font-weight:bold;
+		margin-bottom:5px;
+		display:block;}
+		
+	.nss-feedback-channel-name a{
+		text-decoration:none;}
+	
+	.nss-feedback-avatar{
+		width:32px;
+		height:32px;
+		float:left;}
+		
+	.nss-feedback-channel-name{
+		display:block;
+		margin-left:10px;
+		margin-right:10px;
+		padding-top:5px;
+		float:left;}
+		
+	.nss-feedback-channel-buttons{
+		margin-left:40px;
+		padding-top:5px;}
+		
+	.nss-feedback-button,
+	.nss-fb-button-small,
+	.nss-feedback-link a{
+		display:inline-block;
+		font-size:.8125em;
+		border:1px solid #cad4e7;
+		background-color:#eceef5;
+		padding:3px 3px;
+		line-height:1em;
+		border-radius: 3px;
+		color:#4f6aa3;
+		cursor:pointer;
+		margin-right:5px;}
+		
+	.nss-feedback-button{
+		float:left;}
+		
+	.nss-feedback-button:hover,
+	.nss-feedback-link a:hover{
+		border:1px solid #29447E;
+		background-color:#3B5998;
+		color:#FFFFFF;
+		text-decoration:none;}
+		
+	.nss-feedback-link a{
+		font-size:11px;
+		background-color:#5a75ad;
+		border:1px solid #3B5998;
+		color:#edeff4;
+		margin-right:2px;}
+		
+	.nss-feedback-link .nss-feedback-link-fb{
+		background:url(like.gif) #5a75ad no-repeat 3px 2px;	
+		padding-left:19px;
+	}	
+	.nss-feedback-button .nss-active-label,
+	.nss-feedback-button.nss-active .nss-normal-label{
+		display:none;}
+		
+	.nss-feedback-button.nss-active .nss-active-label{
+		display:inline-block;}
+
+/******************************************************************************
+ * Extras
+ ******************************************************************************/
+ 	
+	.nss-admin-link{
+		clear:both;
+		margin:0 5px 5px 5px;}
+	
+	.nss-admin-link a{
+		font-size:.75em;
+		color:#190d03;
+		text-decoration:none;}
+	
+	.nss-clean, .nss-head:after, .nss-facebook-content:after,
+	.nss-facebook-comment:after,
+	.nss-feedback-root:after,
+	.nss-feedback-channel:after,
+	.nss-feedback-channel:after{
+		content:'.';
+		display:block;
+		visibility:hidden;
+		height:0;
+		clear:both;
+		line-height:0;
+	}
