@@ -4,32 +4,32 @@ function setAnimationVars(){
   $(document).ready(function(){
     $('a[data-test]').click(function(){
       var anim = $(this).attr('data-test');
-      flipFacebookBox(anim);
+      flipFacebookBox("fadeIn","fadeOut");
     });
   });
 }
 
-function flipFacebookBox(){
+function flipFacebookBox(fxIn,fxOut){
   if (fbFlipped){
     //hide the back panel
     $("#back-fb-container").css('display', '');
-    animateElement("fadeOut","back-fb-container");
+    animateElement(fxOut,"back-fb-container");
     setTimeout(function secondHalfOfFx1() {
       $('#back-fb-container').css('display', 'none');
       //show the front panel
       $("#front-fb-container").css('display', '');
-      animateElement("fadeIn","front-fb-container");
+      animateElement(fxIn,"front-fb-container");
     }, 700);
     fbFlipped=false;
   }else {
     //hide the front panel
     $("#front-fb-container").css('display', '');
-    animateElement("fadeOut","front-fb-container");
+    animateElement(fxOut,"front-fb-container");
     setTimeout(function secondHalfOfFx2() {
       $('#front-fb-container').css('display', 'none');
       //show the back panel
       $("#back-fb-container").css('display', '');
-      animateElement("fadeIn","back-fb-container");
+      animateElement(fxIn,"back-fb-container");
     }, 700);
     fbFlipped=true;
   }
