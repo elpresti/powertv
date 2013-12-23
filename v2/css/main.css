@@ -70,12 +70,15 @@ body {
   padding-bottom: 20px;
 }
 
-videoPlayer, videoPlayer_wrapper {
+#videoPlayer, #videoPlayer_wrapper {
 	box-shadow: #666666 10px 10px 10px;
+  margin:auto;
 }
 
 .videoPlayerContainer{
-  margin: 0px 0px 50px 0px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 h1{
@@ -211,11 +214,11 @@ h1{
 .fbCommentsContainer{
   background: url(../img/fbWallBg.png) no-repeat center top;
   float: left;
-  height: 450px;
+  height: 490px;
   padding: 57px 9px 0px;
   width: 500px;
-  margin-right:20px;
- 
+  margin-right:20px; 
+  overflow: auto;
 }
 
 .fb-comments{
@@ -229,21 +232,37 @@ h1{
   display: block;
 }
 
-.back-fb-container{
-  display: none;
+#back-fb-container{
+  
 }
 
-#animateTest{
-  text-align: center;
-  background: #123;
-  padding: 20px 10px;
-  width: 260px;
-  color: #fff;
-  margin: 0 auto;
-  border-radius: 5px;
-  font-weight: bold;
+#front-fb-container{
+  
 }
 
+.twitterCommentsContainer{
+  background: url(../img/twtWallBg.png) no-repeat center top;
+  float: left;
+  height: 450px;
+  padding: 57px 9px 0px;
+  width: 500px;
+  margin-right:20px;
+}
+
+.twitter-timeline{
+  overflow: auto;
+  height: 360px;
+  width: 480px;
+}
+
+.fbTxt{
+    color: #fff;  
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;  
+    font-size: 16px;  
+    font-weight: bold;
+    line-height: 18px;
+    text-shadow: #fff 0px 0px 7px;
+}
 
 /* ==========================================================================
    Media Queries

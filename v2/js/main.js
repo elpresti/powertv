@@ -7,6 +7,9 @@ function setAnimationVars(){
       flipFacebookBox("fadeIn","fadeOut");
     });
   });
+  fbFlipped=false;
+  $("#back-fb-container").css('display','none');
+  //$("#videoPlayer").css('margin','auto');
 }
 
 function flipFacebookBox(fxIn,fxOut){
@@ -36,7 +39,9 @@ function flipFacebookBox(fxIn,fxOut){
 }
 
 function animateElement(fxName,divId) {
+    var originalClassName=$('.'+divId).attr('class');
 		$('#'+divId).removeClass().addClass(fxName + ' animated').one('webkitAnimationEnd oAnimationEnd', function(){
 			$(this).removeClass();
+      $(this).addClass(originalClassName);
 		}); 
 }
