@@ -9,7 +9,16 @@ function setAnimationVars(){
   });
   fbFlipped=false;
   $("#back-fb-container").css('display','none');
-  //$("#videoPlayer").css('margin','auto');
+  
+  $(document).ready(function(){
+    $('.socialWidgetsSlider').bxSlider({
+      slideWidth: 600,
+      minSlides: 1,
+      maxSlides: 1,
+      startSlide:2
+      //,slideMargin: 10
+    });
+  });
 }
 
 function flipFacebookBox(fxIn,fxOut){

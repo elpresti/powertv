@@ -10,9 +10,9 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/livefyre_main.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
+        <link href="css/jquery.bxslider.css" rel="stylesheet" />
         <link href="css/jquery.neosmart.fb.wall.css" rel="stylesheet" type="text/css"/>
         <link href="css/animate.min.css" rel="stylesheet" type="text/css"/>
 		    <script type="text/javascript" src="jwplayer/jwplayer.js"></script>
@@ -68,65 +68,53 @@
     </div>
     
     <div class="socialWidgetsContainer">
-      <div class="facebookWidgetsContainer">
-        <div class="front-fb-container" id="front-fb-container">
-           <div  id="fbWallContainer" class="fbWallContainer" >
-             <div id="pwrFbWall" class="pwrFbWall"></div>
-             <a id="btnAnimate" class="btnFb" data-test="flipInX" style="bottom: -9px; left: 355px;">Ver comentarios</a>
-             <p class="fbTxt" style="position: relative; bottom: 409px; left: 5px;">Muro Power</p>
-           </div>
-        </div>
-        <div class="back-fb-container" id="back-fb-container">
-           <div id="fbCommentsContainer" class="fbCommentsContainer" >
-             <div class="fb-comments" data-href="http://radiopower.com.ar" data-width="460" data-numposts="10" data-colorscheme="light" data-order-by="reverse_time"></div>
-             <a id="btnAnimate" class="btnFb" data-test="flipInX" style="bottom:-3px; left: 359px;">Ver Muro Power</a>
-             <p class="fbTxt" style="position: relative; bottom: 415px; left: 5px;">Comentarios</p>
-           </div>
-        </div>
-<!-- 
-        <div class="fbPageBadgeContainer">
-          <a href="https://www.facebook.com/radiopowerpinamar" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Power Pinamar">Power Pinamar</a><br/><a href="https://www.facebook.com/radiopowerpinamar" target="_TOP" title="Power Pinamar"><img src="https://badge.facebook.com/badge/269914633110697.962.189477268.png" style="border: 0px;" /></a><br/><a href="https://es-la.facebook.com/advertising" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Crea tu propia insignia">Promocionar tu página también</a>
-        </div>
-        <div class="fbPhotosContainer">
-          <a href="https://www.facebook.com/power.pinamar" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Power Pinamar">Power Pinamar</a><span style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; line-height: 16px; font-variant: normal; font-style: normal; font-weight: normal; color: #555555; text-decoration: none;">&nbsp;|&nbsp;</span><a href="https://www.facebook.com/badges/" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Crea tu propia insignia">Crea tu insignia</a><br/><a href="https://www.facebook.com/power.pinamar" target="_TOP" title="Power Pinamar"><img src="https://badge.facebook.com/badge/513792128.6925.330085094.png" style="border: 0px;" /></a>
-        </div>
--->
-      </div>
-      
-      <div class="twitterWidgetsContainer">
-        <div class="twitterCommentsContainer">
-          <a class="twitter-timeline" href="https://twitter.com/powerpinamar" data-widget-id="412368989927395328">Tweets por @powerpinamar</a>
-        </div>
-      </div>
-<!--      
-      <div class="googlePlusWidgetsContainer">
-        <div class="googlePlusFollowContainer">
-          <div class="g-person" data-href="//plus.google.com/109823829215582098079" data-rel="author"></div>
-        </div>
-      </div>
--->
+      <ul class="socialWidgetsSlider">
+        <li>
+          <div style="width:100%">
+            <div class="fbPageBadgeContainer" style="margin:auto; width:170px;">
+                <a href="https://www.facebook.com/radiopowerpinamar" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Power Pinamar">Power Pinamar</a><br/><a href="https://www.facebook.com/radiopowerpinamar" target="_TOP" title="Power Pinamar"><img src="https://badge.facebook.com/badge/269914633110697.962.189477268.png" style="border: 0px;" /></a><br/><a href="https://es-la.facebook.com/advertising" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Crea tu propia insignia">Promocionar tu página también</a>
+            </div>
+            <div class="fbPhotosContainer" style="margin:auto; width:330px;">
+                <a href="https://www.facebook.com/power.pinamar" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Power Pinamar">Power Pinamar</a><span style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; line-height: 16px; font-variant: normal; font-style: normal; font-weight: normal; color: #555555; text-decoration: none;">&nbsp;|&nbsp;</span><a href="https://www.facebook.com/badges/" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Crea tu propia insignia">Crea tu insignia</a><br/><a href="https://www.facebook.com/power.pinamar" target="_TOP" title="Power Pinamar"><img src="https://badge.facebook.com/badge/513792128.6925.330085094.png" style="border: 0px;" /></a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="facebookWidgetsContainer" style="margin: auto; width: 500px;">
+            <div class="front-fb-container" id="front-fb-container">
+               <div  id="fbWallContainer" class="fbWallContainer" >
+                 <div id="pwrFbWall" class="pwrFbWall"></div>
+                 <a id="btnAnimate" class="btnFb" data-test="flipInX" style="bottom: -9px; left: 355px;">Ver comentarios</a>
+                 <p class="fbTxt" style="position: relative; bottom: 409px;     left: 5px;    ">Muro Power</p>
+               </div>
+            </div>
+            <div class="back-fb-container" id="back-fb-container">
+               <div id="fbCommentsContainer" class="fbCommentsContainer" >
+                 <div class="fb-comments" data-href="http://radiopower.com.ar" data-width="460" data-numposts="10" data-colorscheme="light" data-order-by="reverse_time"></div>
+                 <a id="btnAnimate" class="btnFb" data-test="flipInX" style="bottom:-3px; left: 359px;">Ver Muro Power</a>
+                 <p class="fbTxt" style="position: relative;     bottom: 415px;     left: 5px;    ">Comentarios</p>
+               </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div style="width:100%">
+            <div class="twitterWidgetsContainer" style="margin:auto; width:500px;" >
+              <div class="twitterCommentsContainer">
+                <a class="twitter-timeline" href="https://twitter.com/powerpinamar" data-widget-id="412368989927395328">Tweets por @powerpinamar</a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="googlePlusWidgetsContainer" style="width:100%">
+            <div class="googlePlusFollowContainer" style="width:300px; margin:auto;">
+              <div class="g-person" data-href="//plus.google.com/109823829215582098079" data-rel="author"></div>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
-
-    <!-- START: Livefyre Embed 
-    <div id="livefyre-comments"></div>
-    <script type="text/javascript" src="http://zor.livefyre.com/wjs/v3.0/javascripts/livefyre.js"></script>
-    <script type="text/javascript">
-    (function () {
-        var articleId = fyre.conv.load.makeArticleId(null);
-        fyre.conv.load({}, [{
-            el: 'livefyre-comments',
-            network: "livefyre.com",
-            siteId: "349429",
-            articleId: articleId,
-            signed: false,
-            collectionMeta: {
-                articleId: articleId,
-                url: fyre.conv.load.makeCollectionUrl(),
-            }
-        }], function() {});
-    }());
-    </script>
-    END: Livefyre Embed -->
 
       <hr>
 
@@ -150,11 +138,11 @@
 		    <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/vendor/jquery.bxslider.min.js"></script> 
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         <!-- Place this tag after the last widget tag. -->
         <script type="text/javascript">
           window.___gcfg = {lang: 'es-419'};
-        
           (function() {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
             po.src = 'https://apis.google.com/js/platform.js';
