@@ -77,13 +77,13 @@ function addVideoPlayer(deviceType, deviceOS) {
         if (deviceOS === "android") {
             $('#videoPlayer').css('display','none');
             divVideoPlayer = "<div id='mobile_player_info' style='padding-top: 25px; padding-bottom: 25px;'>";
-            divVideoPlayer += "<img src='images/powerHDandroidOS_exp.png' alt='Click aquí para vernos en vivo!' width='640' height='400' border='0' usemap='#Map' /><map name='Map'><area shape='rect' coords='18,14,341,385' href='rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream' alt='Click aquí para vernos en vivo!' target='_blank'>";
+            divVideoPlayer += "<img src='img/powerHDandroidOS_exp.png' alt='Click aquí para vernos en vivo!' width='640' height='400' border='0' usemap='#Map' /><map name='Map'><area shape='rect' coords='18,14,341,385' href='rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream' alt='Click aquí para vernos en vivo!' target='_blank'>";
             divVideoPlayer += "<area shape='rect' coords='423,45,598,351' href='https://play.google.com/store/apps/details?id=org.videolan.vlc.betav7neon' target='_blank'></map></div>";
         } else {
             if (deviceOS === "ios") {
                 $('#videoPlayer').css('display','none');
                 divVideoPlayer = "<div id='mobile_player_info' style='padding-top: 25px; padding-bottom: 25px;'>";
-                divVideoPlayer += "<img src='images/powerHDiOS_exp.png' alt='Click aquí para vernos en vivo!' width='640' height='400' border='0' usemap='#Map' /><map name='Map'><area shape='rect' coords='18,14,341,385' href='rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream' alt='Click aquí para vernos en vivo!' target='_blank'>";
+                divVideoPlayer += "<img src='img/powerHDiOS_exp.png' alt='Click aquí para vernos en vivo!' width='640' height='400' border='0' usemap='#Map' /><map name='Map'><area shape='rect' coords='18,14,341,385' href='rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream' alt='Click aquí para vernos en vivo!' target='_blank'>";
                 divVideoPlayer += "<area shape='rect' coords='423,45,598,351' href='https://itunes.apple.com/es/app/vlc-for-ios/id650377962' target='_blank'></map></div>";
             }
         }
