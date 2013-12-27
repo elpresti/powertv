@@ -58,18 +58,27 @@ textarea {
 }
 
 
-
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
 
 body {
 	background-color:#CCC;
+  font-family: Ubuntu,Arial,serif;
+  font-size: 14px;
+  padding-top: 5px;
+  padding-bottom: 20px;
 }
 
-#videoPlayer{
+#videoPlayer, #videoPlayer_wrapper {
 	box-shadow: #666666 10px 10px 10px;
+  margin:auto;
+}
+
+.videoPlayerContainer{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 h1{
@@ -80,15 +89,29 @@ h1{
 	line-height: 42px;
 }
 
+.mainContainer{
+  width: 100%;
+  height: 100%;
+}
+
+.powerHdLogoContainer{
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  margin-top: 30px;
+}
+
 /* entire container, keeps perspective */
 .flip-container {
 	perspective: 1000;
+  margin: auto;
 }
-	/* flip the pane when hovered */
-	.flip-container:hover .flipper, .flip-container.hover .flipper {
-		transform: rotateY(180deg);
-    /* -webkit-mask: -webkit-gradient(radial, 17 17, 123, 17 17, 138, from(rgb(0, 0, 0)), color-stop(0.5, rgba(0, 0, 0, 0.2)), to(rgb(0, 0, 0))); */
-	}
+
+/* flip the pane when hovered */
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+	transform: rotateY(180deg);
+   /* -webkit-mask: -webkit-gradient(radial, 17 17, 123, 17 17, 138, from(rgb(0, 0, 0)), color-stop(0.5, rgba(0, 0, 0, 0.2)), to(rgb(0, 0, 0))); */
+}
 
 .flip-container, .front, .back {
 	width: 400px;
@@ -105,8 +128,7 @@ h1{
 
 /* hide back of pane during swap */
 .front, .back {
-	backface-visibility: hidden;	backface-visibility: hidden;
-
+	backface-visibility: hidden;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -126,12 +148,128 @@ h1{
   transform: rotateY(180deg);
 }
 
+.fbWallContainer{
+  background: url(../img/fbWallBg.png) no-repeat center top;
+  float: left;
+  height: 450px;
+  overflow: hidden;
+  padding: 58px 10px 37px;
+  width: 500px;
+  margin-right:20px;
+}
 
+.vertical.flip-container {
+	position: relative;
+}
 
+.vertical .back {
+	transform: rotateX(180deg);
+}
 
+.vertical.flip-container .flipper {
+	transform-origin: 100% 68px; /* half of height */
+}
 
+.vertical.flip-container:hover .flipper {
+	transform: rotateX(-180deg);
+}
 
+.btn{
+  margin-top: 22px;
+  float: right;
+  font-family: 'Droid', sans-serif;
+  font-weight: 300;
+  color: #FFFFFF;
+  font-size: 18px;
+  padding: 10px 25px 10px 25px;
+  box-shadow: none;
+  border-width: 0px;
+  background: #2A2A2A;
+}
 
+.btnFb{
+  border-color: rgba(0, 0, 0, .35);
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, .9);
+  background-clip: padding-box;
+  border: 1px solid #999;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+  color: #333;
+  cursor: pointer;
+  font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 13px;
+  padding: 5px 15px 5px;
+  text-decoration: none;
+  position: relative;
+}
+
+.btnFb:hover {
+  background-color: rgba(255, 255, 255, .8);
+  text-decoration:none;
+  color: #333;
+}
+
+.fbCommentsContainer{
+  background: url(../img/fbWallBg.png) no-repeat center top;
+  float: left;
+  height: 490px;
+  padding: 57px 9px 0px;
+  width: 500px;
+  margin-right:20px; 
+  overflow: auto;
+}
+
+.fb-comments{
+  overflow: auto;
+  height: 360px;
+  width: 480px;
+}
+
+.pwrFbWall{
+  overflow: auto;
+  display: block;
+}
+
+#back-fb-container{
+  
+}
+
+#front-fb-container{
+  
+}
+
+.twitterCommentsContainer{
+  background: url(../img/twtWallBg.png) no-repeat center top;
+  float: left;
+  height: 450px;
+  padding: 57px 9px 0px;
+  width: 500px;
+  margin-right:20px;
+}
+
+.twitter-timeline{
+  overflow: auto;
+  height: 360px;
+  width: 480px;
+}
+
+.fbTxt{
+    color: #fff;  
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;  
+    font-size: 16px;  
+    font-weight: bold;
+    line-height: 18px;
+    text-shadow: #fff 0px 0px 7px;
+}
+
+.footerLink{
+  text-decoration: none;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  color: #333;
+}
 
 /* ==========================================================================
    Media Queries
@@ -280,3 +418,13 @@ h1{
         page-break-after: avoid;
     }
 }
+
+
+
+
+
+
+
+
+
+

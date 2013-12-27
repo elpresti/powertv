@@ -1,0 +1,23 @@
+#nss-preview .nss-stream {
+    padding-top: 1px;
+}
+.nss-first-load{
+	text-align:center;	
+}
+.nss-warning{
+	background-color: #FFFBCC;
+    border: 1px solid #E6DB55;
+    color: #555555;
+	padding:10px;
+	display:inline-block;
+	margin:10px;
+	font-size:12px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px; 
+}
+.nss-first-load span{
+	display:inline-block;
+	padding:70px 20px;
+	background:url(../nss-admin/nss-loader-m.gif) center 20px no-repeat;
+}

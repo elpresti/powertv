@@ -1,0 +1,60 @@
+<?xml version='1.0'?>
+<nss>
+	<item>
+		<channel>facebook | twitter | default</channel>
+		<id>0123456789</id>
+		<created>2012-03-09T15:05:36+0000</created>
+		<updated>2012-03-09T15:05:46+0000 | false</updated>
+		<content></content>
+		<author>
+			<id>0123456789</id>
+			<name>Max Mustermann</name>
+			<link>URL</link>
+			<avatar>Image URL</avatar>
+		</author>
+		<location>
+			<address></address>
+			<latitude></latitude>
+			<longitude></longitude>
+		</location>
+		<extras>
+			<facebook>
+				<type>photo | video | link | status | question</type>
+				<source></source>
+				<description></description>
+				<picture>Image URL</picture>
+				<link>URL</link>
+				<name>Text</name>
+				<message>Text</message>
+				<caption></caption>
+				<privacy>
+					<description></description>
+					<value></value>
+				</privacy>
+				<count>
+					<comments>1</comments>
+					<likes>1</likes>
+					<shares>1</shares>
+				</count>
+				<story></story>
+				<icon>Image URL</icon>
+				<object_id></object_id>
+				<application>
+					<name></name>
+					<id></id>
+				</application>
+				<comments></comments>
+			</facebook>
+			<twitter>
+				<retweeted>true | false</retweeted>
+				<count>
+					<retweet_count>123</retweet_count>
+					<friends_count>123</friends_count>
+					<followers_count>123</followers_count>
+					<statuses_count>123</statuses_count>
+				</count>
+				<lang>en | de | ...</lang>
+			</twitter>
+		</extras>
+	</item>
+</nss>
