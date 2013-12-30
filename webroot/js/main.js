@@ -48,6 +48,8 @@ function setAnimationVars(){
      data_track_addressbar: false,
      data_track_clickback: false
   };
+  
+  //animateElement("bounceIn","headerContainer");//animate logo
 }
 
 function flipFacebookBox(fxIn,fxOut){
