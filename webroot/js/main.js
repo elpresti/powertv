@@ -14,6 +14,16 @@ function initScripts(){
       addVideoPlayer(deviceType, deviceOs);
     }
   });
+
+  //YoutubeTV Player init
+  $(window).load(function(){
+				$('#youtubePwrPlayer').ytv({
+					user: 'radiopowertv', 
+          playlist: 'PL2QEFy5VLgyLCvYkCEnaC9yU5hJkPXgxd',
+					accent: '#d51c18'
+				});
+	});
+  
 }
 
 function setAnimationVars(){  

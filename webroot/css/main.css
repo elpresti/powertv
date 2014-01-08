@@ -271,6 +271,43 @@ h1{
   color: #333;
 }
 
+#youtubePwrPlayer,  
+.description{
+	 margin: 25px auto 60px;
+	 width: 800px;
+	 height: 400px;
+   box-shadow: #666666 10px 10px 10px;
+}
+	
+.playlists .special{
+   position: absolute;
+   top: 50px;
+   left: 50%;
+   margin-left: 420px;
+}
+
+.playlists .ytv-list-header > a{
+	 animation: pulse 2s infinite;
+}
+
+.playlists .ytv-list-header.ytv-playlist-open > a{
+	 animation: none;
+}
+
+@keyframes pulse {
+  0%   { background: rgba(255,255,255,0); }
+  50%  { background: rgba(255,255,255,0.1); }
+  100% { background: rgba(255,255,255,0); }
+}
+
+.playerTitle{
+  font-size: 26px;
+  line-height: 1.2;
+  color: #333333;
+  //text-shadow: #ffffff 2px 2px 2px;
+  text-align: center;
+}
+
 /* ==========================================================================
    Media Queries
    ========================================================================== */
