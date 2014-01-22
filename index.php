@@ -1,7 +1,7 @@
 <html>
   <head>
       <meta name="google-site-verification" content="UX_dPlVXATai6F1wD9p2vIGyCUhl_6_P_AnJnvc2UQ4" />
-      <title>Radio Power TV</title>
+      <title>Power TV</title>
       <meta name="description" content="PowerTV - Desde nuestro sitio podes miranos en HD las 24hs, videoclips, clima, móviles, bosque+playa=Pinamar!">
       <meta name="keywords" content="PowerTV,Radio Power Pinamar,Videoclips online,Musica en vivo, musica, Radio en vivo, Radio HD, Pinamar">
       <meta property="og:title" content="Radio Power Pinamar - PowerTV">

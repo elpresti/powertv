@@ -7,17 +7,17 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="google-site-verification" content="UX_dPlVXATai6F1wD9p2vIGyCUhl_6_P_AnJnvc2UQ4" />
-        <title>Power TV - Radio Power Pinamar</title>		
-        <meta name="description" content="PowerTV - Desde nuestro sitio podes miranos en HD las 24hs, videoclips, clima, móviles, bosque+playa=Pinamar!">
-        <meta name="keywords" content="PowerTV,Radio Power Pinamar,Videoclips online,Musica en vivo, musica, Radio en vivo, Radio HD, Pinamar">
+        <title>Power TV - PowerHD - Radio Power Pinamar</title>		
+        <meta name="description" content="PowerTV - PowerHD - Desde nuestro sitio podes miranos en HD las 24hs, videoclips, clima, móviles, bosque+playa=Pinamar!">
+        <meta name="keywords" content="PowerTV,PowerHD,Radio Power Pinamar,Videoclips online,Musica en vivo, musica, Radio en vivo, Radio HD, Pinamar">
         <meta name="author" content="Radio Power Pinamar">
         <meta name="viewport" content="width=device-width">
-        <meta property="og:title" content="Estoy viendo PowerTV en vivo! Imperdible: http://www.powerhd.com.ar">
+        <meta property="og:title" content="Estoy viendo PowerHD en vivo! Imperdible: http://www.powerhd.com.ar">
         <meta property="og:type" content="website">
         <meta property="og:url" content="http://www.powerhd.com.ar/">
         <meta property="og:image" content="http://radiopower.com.ar/images/facebookShareLogo.png">
         <meta property="og:description" content="Ingresa a nuestro sitio para vernos en HD las 24hs, desde Pinamar y para todo el mundo veras videoclips musicales, noticias, juegos y muy buena onda!">
-        <meta property="og:site_name" content="PowerTV Pinamar">
+        <meta property="og:site_name" content="PowerTV - PowerHD Pinamar">
         
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -59,7 +59,7 @@
           <div id='videoPlayer'>Cargando el reproductor...</div>
         </div>
         <div class="shareBarContainer">
-          <div class="addthis_toolbox addthis_default_style " addthis:url="http://powerhd.com.ar" addthis:title="PowerTV" addthis:description="Estoy viendo PowerTV en vivo! Imperdible" style="width: 840px; margin: 35px auto 0px; padding-left: 37px;">
+          <div class="addthis_toolbox addthis_default_style " addthis:url="http://powerhd.com.ar" addthis:title="PowerTV" addthis:description="Estoy viendo PowerTV en vivo! Imperdible" style="width: 880px; margin: 35px auto 0px; padding-left: 37px;">
             <a class="addthis_button_facebook_like" fb:like:layout="button_count" fb:like:action="recommend" fb:like:href="http://www.powerhd.com.ar"></a>
             <a class="addthis_button_tweet" tw:url="http://www.powerhd.com.ar" tw:text="Estoy viendo PowerTV en vivo! Imperdible: " tw:via="powerpinamar"></a>
             <a class="addthis_button_twitter_follow_native" tw:screen_name="powerpinamar"></a> 
@@ -135,12 +135,13 @@
 							file: "rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream",
 							autostart: true,
 							mute: false,
-							height: 400,
-              plugins: {
-                "jwplayer/livestream.js": {}
-              },
-							width: 640
+              height: 432,
+							width: 768
 						});
+            jwplayer().onError(function(){doActionsWhileErrorConnecting();});
+            //jwplayer().onPause(function(){doActionsWhileErrorConnecting();});
+            //jwplayer().onComplete(function(){location.reload(true);});
+            jwplayer().onIdle(function(){doActionsWhileErrorConnecting();});
 			  </script>
 
         <script type="text/javascript" src="js/vendor/prefixfree.min.js"></script>	

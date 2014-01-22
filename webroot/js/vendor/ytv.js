@@ -106,7 +106,7 @@
                     }
                 },
                 endpoints: {
-                    base: 'https://gdata.youtube.com/',
+                    base: 'http://gdata.youtube.com/',
                     userInfo: function(){
                         return utils.endpoints.base+'feeds/api/users/'+settings.user+'?v=2&alt=json';
                     },
@@ -201,7 +201,7 @@
                             list += '</div>';
                             
                             list += '<div class="ytv-list-inner"><ul>';
-                            for(i=0; i<videos.length; i++){
+                            for(i=(videos.length-1); i>=0; i--){ 
                                 if(videos[i].media$group.yt$duration){
                                     var video = {
                                         title: videos[i].title.$t,

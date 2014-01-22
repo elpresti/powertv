@@ -20,8 +20,10 @@ function initScripts(){
 				$('#youtubePwrPlayer').ytv({
 					user: 'radiopowertv', 
           playlist: 'PL2QEFy5VLgyLCvYkCEnaC9yU5hJkPXgxd',
-					accent: '#d51c18'
-				});
+					accent: '#d51c18',
+          annotations: true,
+          chainVideos: true
+				}); 
 	});
   
 }
@@ -114,5 +116,9 @@ function addVideoPlayer(deviceType, deviceOS) {
         }
     }
     $("#dynamicCodeOfVideoPlayer").append(divVideoPlayer);
+}
+
+function doActionsWhileErrorConnecting(){
+  alert("Error al intentar reproducir nuestra transmisión en vivo, te invitamos a revivir grabaciones de Momentos Power en el reproductor que está al pié de esta página e intentar nuevamente en unos minutos");
 }
 
