@@ -14,7 +14,7 @@ function initScripts(){
       addVideoPlayer(deviceType, deviceOs);
     }
   });
-
+  
   //YoutubeTV Player init
   $(window).load(function(){
 				$('#youtubePwrPlayer').ytv({
@@ -26,6 +26,17 @@ function initScripts(){
 				}); 
 	});
   
+  //PlusGallery init
+  $('#plusgallery').plusGallery();
+  
+}
+
+function autoplayMobileStream(){
+  var rta = confirm("Para ver PowerHD en vivo presione Aceptar"); 
+  if (rta==true){
+    window.open("rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream","_self"); 
+    //location.href = "rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream";
+  }
 }
 
 function setAnimationVars(){  
@@ -114,6 +125,7 @@ function addVideoPlayer(deviceType, deviceOS) {
                 divVideoPlayer += "<area shape='rect' coords='423,45,598,351' href='https://itunes.apple.com/es/app/vlc-for-ios/id650377962' target='_blank'></map></div>";
             }
         }
+        autoplayMobileStream();
     }
     $("#dynamicCodeOfVideoPlayer").append(divVideoPlayer);
 }
