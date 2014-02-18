@@ -8,7 +8,7 @@
 	color: #222;
 	position: relative;
 	z-index: 1;
-	background: url(../images/plusgallery/loading-albums.gif) no-repeat 50% 50%;
+	background: url(../img/plusgallery/loading-albums.gif) no-repeat 50% 50%;
 	text-align: left;
 }
 
@@ -63,7 +63,7 @@ background-color: #38beea;
 .spacer {
 	position: relative;
 	z-index: 1;
-	background: #fff url(../images/plusgallery/loading-albums.gif) no-repeat 50% 50%;
+	background: #fff url(../img/plusgallery/loading-albums.gif) no-repeat 50% 50%;
 }
 
 /*albums*/
@@ -155,7 +155,7 @@ background-color: #38beea;
 	top: 2.3809523809524%;/*5/210*/
 	left: 2.3809523809524%;/*5/210*/
 	z-index: 6;
-	background: rgba(0,0,0,.8) url(../images/plusgallery/loading-gallery.gif) no-repeat 50% 50%;
+	background: rgba(0,0,0,.8) url(../img/plusgallery/loading-gallery.gif) no-repeat 50% 50%;
 }
 
 .oldie .pgalbumthumb .pgloading {
@@ -260,7 +260,7 @@ background-color: #38beea;
 }
 
 .pgthumb img {
-	background: #fff url(../images/plusgallery/loading-albums.gif) no-repeat 50% 50%;
+	background: #fff url(../img/plusgallery/loading-albums.gif) no-repeat 50% 50%;
 	width: 100%;
 	border: none;
 	max-width: 130px;
@@ -286,7 +286,7 @@ background-color: #38beea;
 }
 
 .oldie #pgzoomview {
-	background: url(../images/plusgallery/80.png);
+	background: url(../img/plusgallery/80.png);
 }
 
 #pgzoomview.fixed {
@@ -325,7 +325,7 @@ background-color: #38beea;
 }
 
 .pgzoomslide.loading {
-	background-image: url(../images/plusgallery/loading-gallery.gif);
+	background-image: url(../img/plusgallery/loading-gallery.gif);
 	background-position: 50% 50%;
 	background-repeat: no-repeat;position: relative;
 }
@@ -397,7 +397,7 @@ background-color: #38beea;
 	position: fixed;
 	width: 52px;
 	height: 100px;
-	background: url(../images/plusgallery/arrows.gif) no-repeat 0 0;
+	background: url(../img/plusgallery/arrows.gif) no-repeat 0 0;
 	top: 50%;
 	margin-top: -50px;
 	overflow: hidden;
@@ -435,7 +435,7 @@ background-color: #38beea;
 
 #pgzoomclose {
 	position: absolute;
-	right: 0;
+	right: 0; 
 	top: 0;
 	-webkit-border-bottom-left-radius: 3px;
 	-moz-border-radius-bottomleft: 3px;
@@ -443,7 +443,7 @@ background-color: #38beea;
 	background-position: 100% 50%;
 	width: 52px;
 	height: 52px;
-	background-image: url(../images/plusgallery/zoom-icons.gif);
+	background-image: url(../img/plusgallery/zoom-icons.gif);
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	overflow: hidden;
