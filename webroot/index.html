@@ -3,14 +3,14 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="google-site-verification" content="UX_dPlVXATai6F1wD9p2vIGyCUhl_6_P_AnJnvc2UQ4" />
-        <title>Power TV - PowerHD - Radio Power Pinamar</title>		
-        <meta name="description" content="PowerTV - PowerHD - Desde nuestro sitio podes miranos en HD las 24hs, videoclips, clima, móviles, bosque+playa=Pinamar!">
+        <title>PowerHD - Radio Power Pinamar</title>		
+        <meta name="description" content="PowerHD - Desde nuestro sitio podes miranos en HD las 24hs, videoclips, clima, móviles, bosque+playa=Pinamar!">
         <meta name="keywords" content="PowerTV,PowerHD,Radio Power Pinamar,Videoclips online,Musica en vivo, musica, Radio en vivo, Radio HD, Pinamar">
         <meta name="author" content="Radio Power Pinamar">
         <meta name="viewport" content="width=device-width">
@@ -19,7 +19,7 @@
         <meta property="og:url" content="http://www.powerhd.com.ar/">
         <meta property="og:image" content="http://radiopower.com.ar/images/facebookShareLogo.png">
         <meta property="og:description" content="Ingresa a nuestro sitio para vernos en HD las 24hs, desde Pinamar y para todo el mundo veras videoclips musicales, noticias, juegos y muy buena onda!">
-        <meta property="og:site_name" content="PowerTV - PowerHD Pinamar">
+        <meta property="og:site_name" content="PowerHD Pinamar">
         
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -28,6 +28,8 @@
         <link href="css/jquery.neosmart.fb.wall.css" rel="stylesheet" type="text/css"/>
         <link href="css/animate.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/ytv.css" type="text/css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/plusgallery.css">
+        <link rel="icon" type="image/png" href="/webroot/favicon.ico"/>
         <script type='text/javascript' src='jwplayer/jwplayer.js'></script>
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
       	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -64,19 +66,27 @@
         </div>
         <div class="shareBarContainer">
           <div class="addthis_toolbox addthis_default_style " addthis:url="http://powerhd.com.ar" addthis:title="PowerTV" addthis:description="Estoy viendo PowerTV en vivo! Imperdible" style="width: 880px; margin: 35px auto 0px; padding-left: 37px;">
-            <a class="addthis_button_facebook_like" fb:like:layout="button_count" fb:like:action="recommend" fb:like:href="http://www.powerhd.com.ar"></a>
-            <a class="addthis_button_tweet" tw:url="http://www.powerhd.com.ar" tw:text="Estoy viendo PowerTV en vivo! Imperdible: " tw:via="powerpinamar"></a>
+            <a class="addthis_button_facebook_like" fb:like:layout="button_count" fb:like:action="like" fb:like:href="http://www.facebook.com/radiopowerpinamar"></a>
+            <a class="addthis_button_facebook_like" fb:like:layout="button_count" fb:like:action="recommend" fb:like:href="http://www.powerhd.com.ar" style="margin:0px 10px;"></a>
+            <a class="addthis_button_tweet" tw:url="http://www.powerhd.com.ar" tw:text="Estoy viendo PowerTV en vivo! Imperdible: " tw:via="powerpinamar" style="margin-right:-5px;"></a>
             <a class="addthis_button_twitter_follow_native" tw:screen_name="powerpinamar"></a> 
-            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+            <a class="addthis_button_google_plusone" g:plusone:size="medium" style="margin-right:-5px;"></a>
+            <div class="g-follow" data-annotation="bubble" data-height="20" data-href="https://plus.google.com/113185542032515700162" data-rel="publisher"></div>
 <!--
             <a class="addthis_button_google_plusone_badge" g:plusone:size="badge" g:plusone:href="https://plus.google.com/b/113185542032515700162/113185542032515700162/about/p/pub"></a>
             <a class="addthis_button_google_follow" addthis:userid="113185542032515700162"></a>
--->
-            <a class="addthis_button_linkedin_counter"></a>
             <a class="addthis_button_pinterest_pinit" pi:pinit:url="http://www.powerhd.com.ar" pi:pinit:layout="horizontal" ></a>
+            <a class="addthis_button_linkedin_counter"></a>
+            <div class="fb-like" data-href="https://facebook.com/radiopowerpinamar" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+-->
           </div>
         </div>
       </div>
+<!--
+      <div class="videoPlayerStatusContainer">
+        <a href="showPlayerStatus();">Show Player Status</a> 
+      </div>
+-->
     </div>
 
     <div class="fb-comments-mainContainer" style="width:100%;margin-bottom: 80px;margin-top: 30px;height: 450px;">
@@ -125,7 +135,10 @@
         <li>
           <div style="width:100%">
             <div class="fbPageBadgeContainer" style="margin:auto; width:170px;">
+              <div class="fb-like-box" data-href="http://www.facebook.com/radiopowerpinamar" data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="false" data-show-border="false"></div>
+<!--
                 <a href="https://www.facebook.com/radiopowerpinamar" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Power Pinamar">Power Pinamar</a><br/><a href="https://www.facebook.com/radiopowerpinamar" target="_TOP" title="Power Pinamar"><img src="https://badge.facebook.com/badge/269914633110697.962.189477268.png" style="border: 0px;" /></a><br/><a href="https://es-la.facebook.com/advertising" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Crea tu propia insignia">Promocionar tu página también</a>
+-->
             </div>
             <div class="fbPhotosContainer" style="margin:auto; width:330px;">
                 <a href="https://www.facebook.com/power.pinamar" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Power Pinamar">Power Pinamar</a><span style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; line-height: 16px; font-variant: normal; font-style: normal; font-weight: normal; color: #555555; text-decoration: none;">&nbsp;|&nbsp;</span><a href="https://www.facebook.com/badges/" target="_TOP" style="font-family: &quot;lucida grande&quot;,tahoma,verdana,arial,sans-serif; font-size: 11px; font-variant: normal; font-style: normal; font-weight: normal; color: #3B5998; text-decoration: none;" title="Crea tu propia insignia">Crea tu insignia</a><br/><a href="https://www.facebook.com/power.pinamar" target="_TOP" title="Power Pinamar"><img src="https://badge.facebook.com/badge/513792128.6925.330085094.png" style="border: 0px;" /></a>
@@ -141,9 +154,14 @@
         </li>
       </ul>
     </div>
+    
+    <div class="photoGallery">
+      <p class="playerTitle" style="padding: 50px 0px 0px 0px;">Galería fotográfica: </p>
+      <div data-image-path="/webroot/img/plusgallery" class="plusgallery" id="plusgallery" data-credit="false" data-userid="radiopowerpinamar" data-type="facebook"  data-limit="30"  data-album-limit="4" data-access-token="CAAFF4Xs8Wd0BAKXXVN3vE9ymZAfjqVlF2cUK0HShZBVF2SngkZA3Ypm8nIlGJkOnNcXF13zB2wYqZCjZAxrMcvBGkEN0mpNJLZAcc12t7vt8hNGZAiEUH3Km6ctkZCiAdZCwha8DDuGopvUd3dZCLZAsh41gpPhhiCJXK4i8XhXYzrifIyX18LLuc80"></div>
+      <div class="morePhotosBtn"><a href="https://www.facebook.com/radiopowerpinamar/photos" target="_blank" title="Ver mas fotos"><span>+</span>&nbsp;Fotos</a></div>
+    </div>
 
-    <div data-image-path="/webroot/img/plusgallery" class="plusgallery" id="plusgallery" data-userid="radiopowerpinamar" data-type="facebook"  data-limit="30"  data-album-limit="4" data-access-token="CAAFF4Xs8Wd0BAEvuudcutY4WLauzbOQZBTRxZAnsyNE99lAadYTyETvIOOPfDHzUtqbZAg0BXrNYodBS6rLrrhP74lRfmGNMNTFx7SxChVEQTnytTRpyZArrPZCNDQWqPyldQvzj9Si3FzeMMG4oZAFWlKAgeydZBY0USZAAb4cZCAsJaGFdP6ZAzSTdcKhSmidK4ZD"></div>
-    <div class="youtubeWidgetContainer">
+    <div id="youtubeWidgetContainer" class="youtubeWidgetContainer">
        <p class="playerTitle" style="padding: 50px 0px 0px 0px;">Grabaciones:</p>
        <div id="youtubePwrPlayer"></div>
     </div>
@@ -154,24 +172,32 @@
       <p align="center" class="footerLink" style="font-size:12px; margin-top:20px; margin-bottom:30px;">Designed and developed by <a href="http://www.sebapresti.com.ar/?utm_source=powerhd&utm_medium=footerLink&utm_campaign=developedby" target="_blank" class="footerLink" style="font-size:12px;">Sebastián Prestifilippo</a></p>
     </footer>
     <script type="text/javascript">
-						jwplayer("videoPlayer").setup({
-							file: "rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream",
+            var videoPlayerVar=jwplayer("videoPlayer");
+						videoPlayerVar.setup({
+              type: 'rtmp',
+              streamer: 'rtmp://wowza.telpin.com.ar:1935/live-powerTV/',
+							file: "power.stream",
 							autostart: true,
 							mute: false,
               height: 432,
 							width: 768
 						});
-            jwplayer().onError(function(){doActionsWhileErrorConnecting();});
+            jwplayer("videoPlayer").onError(function(evt){doActionsWhileErrorConnecting(evt.message);});
+            jwplayer("videoPlayer").onIdle(function(evt){doActionsWhileErrorConnecting(evt.oldstate);});
+            /*
+            //jwplayer().onReady(function(){console.log('ready the chiken');});  
             //jwplayer().onPause(function(){doActionsWhileErrorConnecting();});
-            //jwplayer().onComplete(function(){location.reload(true);});
-            jwplayer().onIdle(function(){doActionsWhileErrorConnecting();});
+            //getState()function(){location.reload(true);});
+            */
 			  </script>
-
+ 
         <script type="text/javascript" src="js/vendor/prefixfree.min.js"></script>	
 		    <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+<!--
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+-->
         <script src="js/vendor/jquery.neosmart.fb.wall.js" type="text/javascript"></script>
         <script type="text/javascript" src="js/vendor/ytv.js"></script>
         <script src="js/vendor/plusgallery.js"></script>
@@ -179,6 +205,16 @@
           initScripts();
         </script>
         <script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js"></script>
+<!--
+        <script type="text/javascript">
+          window.___gcfg = {lang: 'es-419'};
+          (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/platform.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+          })();
+        </script>
+-->
         <script type="text/javascript">
           var _gaq = _gaq || [];
           _gaq.push(['_setAccount', 'UA-13020415-1']); //Seba
