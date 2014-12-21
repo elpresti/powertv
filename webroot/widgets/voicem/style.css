@@ -1,0 +1,394 @@
+@CHARSET "UTF-8";
+body{
+    font-family: Arial,Helvetica,sans-serif;
+    overflow: hidden;
+}
+
+#recorder-app{
+    border: 1px solid #D6D6D6;
+    background-color: #EEEEEE;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 4px;
+    text-align: center;
+}
+
+#native-objects,
+#_speakpipe_flash_recorder{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+}
+
+#flashobj-page .nativeobj-container{
+    margin: 0 0 0 50px;
+    width: 230px;
+    height: 150px;
+}
+
+#-speakpipe-msg-repository{
+    display: none;
+}
+
+.widget-info-message{
+    font-size: 12px;
+    text-align: left;
+    margin: 0 auto;
+    padding: 0 8px;
+    max-width: 280px;
+}
+
+.widget-info-message a{
+    color: blue;
+    font-size: 13px !important;
+}
+
+.widget-info-message h1{
+    font-size: 14px;
+    margin: 5px 0px 5px;
+}
+
+.widget-info-message ol{
+    margin: 7px 0 0;
+}
+
+.max-duration-info{
+    font-size: 13px;
+}
+
+.main-btn{
+    /*border: 1px solid #0D2541;*/
+    border-radius: 6px;
+    background-color: #ff5500;
+    /*background-image: linear-gradient(to bottom, #FCBC74, #E07B00);*/
+    /*box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.35);*/
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    /*text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.4);*/
+    text-align: center;
+    /*text-transform: uppercase;*/
+    cursor: pointer;
+    padding: 9px 25px;
+    display: inline-block;
+}
+
+.main-btn:hover{
+    background-color: #e64d00;
+}
+
+.secondary-btn{
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    color: #111;
+    /*text-shadow: 1px 1px 0 #FFFFFF;*/
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 7px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    /*border: 1px solid #AAAAAA;*/
+    /*background-image: linear-gradient(to bottom, #FFFFFF, #D2D4D6);*/
+    /*background-color: #B8B8B8;*/
+    /*background-image: linear-gradient(to bottom, #f1f1f5, #959db7);*/
+    background-color: #b7bccd;
+}
+
+.secondary-btn:hover{
+    background-color: #b0b5c8;
+}
+
+.start-rec-btn{
+    /*background-image: url('/static/img/mobile/svg/noun_project_8999.svg');*/
+    background-image: url('img/mic-small.png');
+    background-position: 22px 6px;
+    background-repeat: no-repeat;
+    /*background-size: 30px;*/
+    padding-left: 45px;
+}
+
+.start-rec-btn{
+    font-size: 22px;
+}
+
+.mic-ready-question{
+    font-weight: bold;
+    font-size: 13px;
+    margin: 0 0 3px;
+}
+
+.powered-by,
+.powered-by a{
+    color: #333;
+    font-size: 13px !important;
+}
+
+.powered-by a{
+    color: #244B84;
+}
+
+.powered-by{
+    font-size: 13px;
+    position: absolute;
+    bottom: 2px;
+    width: 100%;
+}
+
+#mic-activity-level{
+    background-color: #ddd;
+    padding: 1px;
+    margin: 5px auto 10px;
+    width: 80%;
+}
+
+#mic-activity-level .mic-al-left,
+#mic-activity-level .mic-al-right{
+    width: 50%;
+}
+
+#mic-activity-level .mic-al-left div,
+#mic-activity-level .mic-al-right div{
+    height: 10px;
+    background-color: #ddd;
+}
+
+#mic-activity-level .mic-al-left,
+#mic-activity-level .mic-al-right div{
+    background-color: #78A0DA;
+}
+
+#mic-activity-level .mic-al-left{
+    border-right: 1px solid #666;
+}
+
+#mic-activity-level .mic-al-left div{
+    width: 100%;
+}
+
+#mic-activity-level .mic-al-right{
+    margin: -10px 0 0 50%;
+    border-left: 1px solid #666;
+}
+
+#mic-activity-level .mic-al-right div{
+    width: 0;
+}
+
+.progressbar{
+    border: 1px solid #999;
+    height: 22px;
+    background-color: #ddd;
+    width: 80%;
+    margin: 10px auto 15px;
+}
+
+.progressbar div{
+    background-color: #4382C4;
+    width: 0%;
+    height: 100%;
+}
+
+.progressbar span{
+    font-size: 13px;
+    height: auto;
+    width: auto;
+    margin: -18px 0 0;
+    display: block;
+}
+
+.app-page{
+    display: none;
+    margin: 10px 0 0;
+}
+
+.page-title{
+    font-size: 22px;
+    font-weight: bold;
+    color: #001144;
+}
+
+.recording-duration{
+    color: #001144;
+}
+
+.dlg-msg{
+    margin: 5px 10% 10px;
+    font-size: 14px;
+}
+
+#flashobj-page{
+    margin: 0;
+}
+
+#start-recording-page .page-title{
+    margin: 7px 0 5px;
+    font-size: 26px;
+    line-height: 26px;
+}
+
+#mobile-app-page,
+#launch-ios-app-page,
+#download-ios-app-page
+#send-recording-page{
+    margin: 7px 0 0;
+}
+
+#progress-page{
+    margin: 20px 0 0;
+}
+
+#recording-page .page-title{
+    font-size: 28px;
+}
+
+#play-recording-page .progressbar{
+    height: 15px;
+}
+
+#send-recording-page .main-btn{
+    padding: 7px 30px;
+}
+
+.contact-info-box{
+    text-align: left;
+    width: 70%;
+    margin: 3px auto 7px;
+    font-size: 14px;
+}
+
+.contact-info-box input{
+    margin: 0;
+}
+
+.replay-btn{
+    font-weight: bold;
+}
+
+.input-field{
+    margin: 0 0 4px;
+}
+
+.input-field input{
+    padding: 3px;
+    width: 95%;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+}
+
+#thankyou-page .dlg-msg{
+    font-size: 20px;
+}
+
+#start-recording-page{
+    display: block;
+}
+
+.workflow-hint{
+    font-size: 13px;
+    margin: 5px 0 0;
+    font-weight: bold;
+    color: #222;
+}
+
+.workflow-hint span.bullet{
+    font-size: 12px;
+    background-color: #6c7aa4;
+    padding: 0px 4px;
+    border-radius: 18px;
+    color: #fff;
+    font-weight: bold;
+}
+
+#mobile-app-page .dlg-action{
+    margin: 7px 0 0;
+}
+
+#mobile-app-page .main-btn{
+    font-size: 16px;
+}
+
+a.launch-speakpipe-app-icon {
+    background-color: #fff;
+    background-image: url("img/mobile_app_icon.png");
+    background-position: 5px 5px;
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px 5px 5px 5px;
+    color: #000000;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 14px;
+    height: 60px;
+    padding-left: 55px;
+    text-decoration: none;
+    width: 100px;
+}
+
+.launch-speakpipe-app-icon div {
+    padding: 5px 0 0;
+}
+
+a.appstore-badge {
+    background-image: url("/static/img/widget/appstore_download.svg");
+    background-size: 170px 50px;
+    color: #000000;
+    display: inline-block;
+    height: 50px;
+    text-decoration: none;
+    width: 170px;
+    margin: 0 0 -10px;
+}
+
+#recorder-error-page a{
+    color: blue;
+}
+
+.widget-aux-action{
+    text-align: center;
+    margin: 5px 0 0;
+    font-size: 13px;
+}
+
+.widget-aux-action a{
+    font-size: 13px;
+    color: blue;
+}
+
+#flashobj-page .widget-aux-action,
+#flashobj-page .widget-aux-action a{
+    color: #333;
+}
+
+#recording-warn-page .dlg-msg{
+    font-size: 12px;
+    max-width: 280px;
+    padding: 0 8px;
+    margin: 5px auto 5px;
+}
+
+#mic-extra-privacy-page .page-title{
+    font-weight: normal;
+    margin: 0 0 0px;
+}
+
+
+#send-recording-page{
+    margin: 5px 0 0;
+}
+
+#send-recording-page .page-title{
+    font-size: 16px;
+}
+
+#subscribe-email-field{
+    white-space: nowrap; 
+    font-size: 12px;
+}
