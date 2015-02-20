@@ -4,8 +4,32 @@ var deviceType="desktop";
 var connectionErrorShown=false;
 var reconnectAttempts=0;
 var connectingErrorMsg="noErrorsYet";
+var defaultConnectErrorMsg="noErrorsYet";
 var urlReconnect="/?utm_source=webapp&utm_medium=autoReconnect&utm_campaign=powertv&connectingErrorMsg="+connectingErrorMsg;
 var connectRetry = null;
+
+
+var UrlParams = function () {
+  // This function is anonymous, is executed immediately and the return value is assigned to urlParams!
+  var query_string = {};
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    	// If first entry with this name
+    if (typeof query_string[pair[0]] === "undefined") {
+      query_string[pair[0]] = pair[1];
+    	// If second entry with this name
+    } else if (typeof query_string[pair[0]] === "string") {
+      var arr = [ query_string[pair[0]], pair[1] ];
+      query_string[pair[0]] = arr;
+    	// If third or later entry with this name
+    } else {
+      query_string[pair[0]].push(pair[1]);
+    }
+  }
+  return query_string;
+} ();
 
 
 function initScripts(){
@@ -38,7 +62,7 @@ function initScripts(){
 }
 
 function autoplayMobileStream(){
-  var rta = confirm("Para ver PowerHD en vivo presione Aceptar"); 
+  var rta = confirm("Para ver PowerHD en vivo presione Aceptar, o Cancelar para instalar el reproductor necesario");
   if (rta==true){
     window.open("rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream","_self"); 
     //location.href = "rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream";
@@ -79,7 +103,7 @@ function setAnimationVars(){
   };
   
   //animateElement("bounceIn","headerContainer");//animate logo
-  //personalizeFbWall();
+
 }
 
 function flipFacebookBox(fxIn,fxOut){
@@ -210,6 +234,7 @@ function showConnectionProblemsMsg(){
    divVideoPlayer += "<a href='"+getUrlReconnect()+"'><img src='img/imgConnectionProblems.png' alt='Click aquí para recargar la página ahora' width='120' height='119' border='0' /></a>";
    divVideoPlayer += "<p>No se pudo conectar al servidor de PowerHD.<br> <a href='"+getUrlReconnect()+"'>Vuelve a intentarlo en unos minutos</a> ó utiliza nuestro <a target='_blank' href='http://www.radiopower.com.ar/audioplayer/index.php?alternativo=1&utm_source=webapp&utm_medium=errorConnect&utm_campaign=powertv&connectingErrorMsg="+connectingErrorMsg+"'>reproductor de audio</a>.<br><a href='#youtubeWidgetContainer'>Ver Grabaciones</a></p></div>";
    $("#dynamicCodeOfVideoPlayer").append(divVideoPlayer);
+   notificateConnectionProblems();
    alert("Error al intentar reproducir nuestra transmisión en vivo, te invitamos a revivir grabaciones de Momentos Power en el reproductor que está al pié de esta página e intentar nuevamente en unos minutos");
 }
 
@@ -226,20 +251,29 @@ function doActionsOnPlay(){
 }
 
 function personalizeFbWall(){
-  //var element = document.getElementById('my-fb-like-box').getElementsByTagName("iframe")[0];
-  //document.getElementById('my-fb-like-box').getElementsByTagName("iframe")[0].style.height = '430px';
   $('#my-fb-like-box').children().children().css('height',$('#my-fb-like-box').children().children().height()-20);
-  //element.style.height = element.style.height - '20px';
-  //element = element.getElementsByTagName("span"); //element.$('span').get();
-  //element = element.getElementsByTagName("iframe"); //element.$('iframe').get();
-  //element.style.height = element.style.height-20; //$(element).css('height',element.style.height-20);
-  console.log("Se ejecuto la personalización del Muro Power");
+}
+
+function notificateConnectionProblems(){
+    if (connectingErrorMsg != null && connectingErrorMsg.length > 3){
+      $.ajax({
+        url : "http://radiopower.com.ar/varios/notificateConnectionProblems.php?connectingErrorMsg="+connectingErrorMsg+"&defaultConnectErrorMsg="+defaultConnectErrorMsg,
+        dataType : "json",
+        success : 
+          function (data){
+            console.log("emailsSent: "+data.emailsSent);
+            console.log("csvLog: "+data.csvLog);
+          }
+      });
+    }
 }
 
 
 
+/*
 $(document).ready(function(){
   //console.log(videoPlayerVar.getState());
-  personalizeFbWall();
+  //personalizeFbWall();
   }
 )
+*/

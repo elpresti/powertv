@@ -1,5 +1,7 @@
-
+<!DOCTYPE html>
+<html>
   <head>
+      <meta charset="utf-8">
       <meta name="google-site-verification" content="UX_dPlVXATai6F1wD9p2vIGyCUhl_6_P_AnJnvc2UQ4" />
       <title>Power TV</title>
       <meta name="description" content="PowerTV - Desde nuestro sitio podes miranos en HD las 24hs, videoclips, clima, móviles, bosque+playa=Pinamar!">
