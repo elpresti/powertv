@@ -1,4 +1,5 @@
 var fbFlipped=false;
+var showLivePlayer=true;
 var deviceOs="desktop";
 var deviceType="desktop";
 var connectionErrorShown=false;
@@ -53,21 +54,34 @@ function initScripts(){
 				$('#youtubePwrPlayer').ytv({
 					user: 'radiopowertv', 
           playlist: 'PL2QEFy5VLgyLCvYkCEnaC9yU5hJkPXgxd',
-					accent: '#d51c18',
+					accent: '#d51c18'
+,
           annotations: true,
           chainVideos: true
-				}); 
+				});
+ 
 	});
    
 }
 
+function showPlayer(showIt){
+  if (showIt){
+    $("#dynamicCodeOfVideoPlayer").show();
+  }else{
+    $("#dynamicCodeOfVideoPlayer").hide();
+  }
+}
+
 function autoplayMobileStream(){
-  var rta = confirm("Para ver PowerHD en vivo presione Aceptar, o Cancelar para instalar el reproductor necesario");
+  var rta = confirm("Para ver PowerHD en vivo presione Aceptar, o Cancelar para instalar el reproductor necesario o en caso de no poder vernos");
   if (rta==true){
     window.open("rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream","_self"); 
     //location.href = "rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream";
+  }else{
+    showLivePlayer=false;
   }
 }
+
 
 function setAnimationVars(){  
   $(document).ready(function(){
@@ -82,6 +96,7 @@ function setAnimationVars(){
       autoDelay:5000,
       autoControls: true
     });
+    showPlayer(showLivePlayer);
   });
 
   $(function(){
@@ -102,7 +117,8 @@ function setAnimationVars(){
      data_track_clickback: false
   };
   
-  //animateElement("bounceIn","headerContainer");//animate logo
+  //animateElement("bounceIn","headerContainer");
+//animate logo
 
 }
 
@@ -158,7 +174,8 @@ function addVideoPlayer(deviceType, deviceOS) {
         }
         $("#dynamicCodeOfVideoPlayer").append(divVideoPlayer);
         autoplayMobileStream();
-    }else {
+    }
+else {
       checkBrowserFlashReady();
     }
 }
@@ -268,7 +285,12 @@ function notificateConnectionProblems(){
     }
 }
 
-
+function addCssFixes(){
+  if ($('.pgalbumthumb').size()==4){
+    $('.pgalbumthumb').first().css('margin-left','40px');
+  	 $('.pgalbumthumb').css('width','21%');
+  }
+}
 
 /*
 $(document).ready(function(){

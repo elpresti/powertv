@@ -1,1 +1,1 @@
-{"runners":{"configs":{"system:/php/web/php56_apache2":{"ram":0,"variables":{},"options":{}}},"default":"system:/php/web/php56_apache2"},"type":"php","attributes":{}}
+{"mixinTypes":["contribution"],"runners":{"configs":{"system:/php/web/php56_apache2":{"ram":0,"variables":{},"options":{}}},"default":"system:/php/web/php56_apache2"},"builders":{"configs":{}},"type":"php","attributes":{"language":["php"],"contribute_branch":["master"],"contribute_mode":["contribute"]}}

@@ -397,8 +397,8 @@ SLIDEFADE
                 galleryImage = 'http://graph.facebook.com/' + obj.id + '/picture?type=album';
                 pg.loadAlbums(galleryTitle,galleryImage,galleryJSON);
               }
-              
             });
+            addCssFixes();
           }
           else {
             alert('There are either no results for albums with this user ID or there was an error loading the data. \n' + albumURL);
@@ -678,7 +678,7 @@ SLIDEFADE
               imgTitle = obj.name;
               imgSrc = obj.images[1].source;
               imgTh = pg.imagePath + '/square.png';
-              imgBg = ' style="background: url(' + obj.images[3].source + ') no-repeat 50% 50%; background-size: cover;"';
+              imgBg = ' style="background: url(' + obj.images[obj.images.length-1].source + ') no-repeat 50% 50%; background-size: cover;"';
               break;
             case 'instagram':
               if(obj.caption !== null){

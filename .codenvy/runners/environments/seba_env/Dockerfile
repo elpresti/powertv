@@ -4,7 +4,7 @@
 # You can browse our images in Docker Hub or at
 # github.com/codenvy/dockerfiles. The shellinabox image
 # provides core Linux utilities and terminal access to runner.
-FROM codenvy/shellinabox
+# FROM codenvy/shellinabox
 
 # Codenvy uses this port to map IDE clients to the output of
 # your application executing within the Runner. Set these
@@ -58,4 +58,25 @@ FROM codenvy/shellinabox
 # your Dockerfile launches a server or daemon, like Tomcat,
 # you do not need to set this value as Docker will not
 # terminate until that process has finished.
-CMD sleep 365d
+# CMD sleep 365d
+
+# FIX
+FROM codenvy/ruby210
+RUN sudo apt-get -y install rubygems ruby-dev && sudo gem install af
+ADD $src$ /home/user/$src$
+RUN sudo chown -R user:user /home/user
+CMD sleep 356d
+
+# EOF
+
+
+# FROM codenvy/ruby210
+# RUN sudo apt-get -y install rubygems
+# RUN sudo gem install af
+# ADD $app$ /home/user/$app$
+# RUN sudo chown -R user:user /home/user
+# CMD while true;do true; done
+
+#how to update AppFog app:
+# af login elp...@.. 
+# af update <appname> [--path]     (appname=powerhd)
