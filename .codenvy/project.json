@@ -1,1 +1,1 @@
-{"mixinTypes":["contribution"],"runners":{"configs":{"system:/php/web/php56_apache2":{"ram":0,"variables":{},"options":{}}},"default":"system:/php/web/php56_apache2"},"builders":{"configs":{}},"type":"php","attributes":{"language":["php"],"contribute_branch":["master"],"contribute_mode":["contribute"]}}
+{"builders":{"configs":{}},"mixinTypes":[],"runners":{"configs":{"system:/php/web/php56_apache2":{"ram":0,"variables":{},"options":{}}},"default":"project:/seba_env"},"type":"php","attributes":{"language":["php"]}}
