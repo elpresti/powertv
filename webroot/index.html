@@ -27,7 +27,7 @@
         <link href="css/jquery.bxslider.css" rel="stylesheet" />
         <link href="css/jquery.neosmart.fb.wall.css" rel="stylesheet" type="text/css"/>
         <link href="css/animate.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/ytv.css" type="text/css" rel="stylesheet" />
+<!--        <link href="css/ytv.css" type="text/css" rel="stylesheet" />  -->
         <link rel="stylesheet" href="css/plusgallery.css">
         <link rel="icon" type="image/png" href="/webroot/favicon.ico"/>
         <script type='text/javascript' src='jwplayer/jwplayer.js'></script>
@@ -118,14 +118,16 @@ margin-top: 30px;
     <div class="photoGallery">
       <p class="playerTitle" style="padding: 50px 0px 0px 0px;
 ">Galería fotográfica</p>
-      <div data-image-path="/webroot/img/plusgallery" class="plusgallery" id="plusgallery" data-credit="false" data-userid="radiopowerpinamar" data-type="facebook"  data-limit="30"  data-album-limit="6" data-exclude="302621303173363,269945099774317" data-access-token="CAAWN8apLaFgBAPZCiPpUV6IoefV1Lmj7q9nCf2bKOB8pgsSDCKPm7LrIZCVvyDKqHcO2gR8iAZA9cu8554L5TlPe1pLAdpMDgmKv3f1ZAHiv9UBQ64tIRDKITNGAZBBvoWTDTlcRDbqFeDHLXP9ZAruKhs18l2LLDyeQZBwSmtaLRZBJlMIq3BnTj0jJYGtpa7PShywVbRixaC1P8LSzfqTb"></div>
+      <div data-image-path="/webroot/img/plusgallery" class="plusgallery" id="plusgallery" data-credit="false" data-userid="radiopowerpinamar" data-type="facebook"  data-limit="50"  data-album-limit="6" data-exclude="302621303173363,269945099774317" data-access-token="CAAWN8apLaFgBAPZCiPpUV6IoefV1Lmj7q9nCf2bKOB8pgsSDCKPm7LrIZCVvyDKqHcO2gR8iAZA9cu8554L5TlPe1pLAdpMDgmKv3f1ZAHiv9UBQ64tIRDKITNGAZBBvoWTDTlcRDbqFeDHLXP9ZAruKhs18l2LLDyeQZBwSmtaLRZBJlMIq3BnTj0jJYGtpa7PShywVbRixaC1P8LSzfqTb"></div>
       <div class="morePhotosBtn"><a href="https://www.facebook.com/radiopowerpinamar/photos" target="_blank" title="Ver mas fotos"><span>+</span>&nbsp;Fotos</a></div>
     </div>
 
     <div id="youtubeWidgetContainer" class="youtubeWidgetContainer">
        <p class="playerTitle" style="padding: 50px 0px 0px 0px;
 ">Grabaciones</p>
-       <div id="youtubePwrPlayer"></div>
+      <div id="youtubePwrPlayer">
+      	<iframe width="800" height="450" src="https://www.youtube.com/embed/videoseries?list=PL2QEFy5VLgyLCvYkCEnaC9yU5hJkPXgxd" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
 
     <div class="socialMediaButtonsMainContainer">
@@ -176,7 +178,7 @@ evt){ console.log(
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
         <script src="js/vendor/jquery.neosmart.fb.wall.js" type="text/javascript"></script>
-        <script type="text/javascript" src="js/vendor/ytv.js"></script>
+<!--        <script type="text/javascript" src="js/vendor/ytv.js"></script>  -->
         <script src="js/vendor/plusgallery.js"></script>
         <script>
           initScripts();
@@ -209,6 +211,17 @@ evt){ console.log(
             //ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
             
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+        </script>
+        <script type="text/javascript">
+          var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+          (function(){
+          var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+          s1.async=true;
+          s1.src='https://embed.tawk.to/560d88c6e9a531ae2cd36bf3/default';
+          s1.charset='UTF-8';
+          s1.setAttribute('crossorigin','*');
+          s0.parentNode.insertBefore(s1,s0);
           })();
         </script>
     </body>

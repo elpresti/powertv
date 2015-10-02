@@ -106,10 +106,7 @@
                     }
                 },
                 endpoints: {
-                     
-                /*  https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=PL2QEFy5VLgyLCvYkCEnaC9yU5hJkPXgxd&key=AIzaSyCm3SrtjN1dvk_M-5RoONonvwxgLA9HwA4  */
-                /*    base: '//gdata.youtube.com/', */
-                    base: '//www.googleapis.com/',
+                    base: '//gdata.youtube.com/',
                     userInfo: function(){
                         return utils.endpoints.base+'feeds/api/users/'+settings.user+'?v=2&alt=json';
                     },
@@ -117,12 +114,10 @@
                         return utils.endpoints.base+'feeds/api/users/'+settings.user+'/uploads/?v=2&alt=json&format=5&max-results=50';
                     },
                     userPlaylists: function(){
-                    /*    return utils.endpoints.base+'feeds/api/users/'+settings.user+'/playlists/?v=2&alt=json&format=5&max-results=50';  */
-                      	return 'snippets/getyoutubedata.php';
+                        return utils.endpoints.base+'feeds/api/users/'+settings.user+'/playlists/?v=2&alt=json&format=5&max-results=50';
                     },
                     playlistVids: function(){
-                    /* return utils.endpoints.base+'feeds/api/playlists/'+(settings.playlist)+'?v=2&alt=json&format=5&max-results=50'; */
-                      	return 'snippets/getyoutubedata.php';
+                        return utils.endpoints.base+'feeds/api/playlists/'+(settings.playlist)+'?v=2&alt=json&format=5&max-results=50';
                     }
                 },
                 deepExtend: function(destination, source) {
@@ -145,9 +140,6 @@
                     var firstScriptTag = doc.getElementsByTagName('script')[0];
                     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
                     win.onYouTubeIframeAPIReady = fn;
-                    if (win.onYouTubeIframeAPIReady) {
-						onYouTubeIframeAPIReady();
-					}
                 },
                 build: function(){
                     settings.element.className = "ytv-canvas";
@@ -209,7 +201,7 @@
                             list += '</div>';
                             
                             list += '<div class="ytv-list-inner"><ul>';
-                            for(i=0; i<videos.length; i++){
+                            for(i=(videos.length-1); i>=0; i--){ 
                                 if(videos[i].media$group.yt$duration){
                                     var video = {
                                         title: videos[i].title.$t,
@@ -238,7 +230,7 @@
                                     list += '<div class="ytv-content"><b>'+(video.title)+'</b>';
                                     if (video.stats)
                                     {
-                                        list+='</b><span class="ytv-views">'+utils.addCommas(video.stats.viewCount)+' Views</span>';
+                                        list+'</b><span class="ytv-views">'+utils.addCommas(video.stats.viewCount)+' Views</span>';
                                     }
                                     list += '</div></a></li>';
                                 }

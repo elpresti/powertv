@@ -167,11 +167,12 @@ h1{
 }
 
 .fbWallContainer{
-  background: url(../img/fbWallBg.png) no-repeat center top;
+/*  background: url(../img/fbWallBg.png) no-repeat center top; */
   float: left;
   height: 450px;
   overflow: hidden;
-  padding: 58px 10px 37px;
+/*  padding: 58px 10px 37px; */
+  padding: 0px 10px 37px;
   width: 500px;
   margin-right:20px;
 }
@@ -302,7 +303,7 @@ footer{
 .description{
 	 margin: 25px auto 60px;
 	 width: 800px;
-	 height: 400px;
+	 height: 450px;
    box-shadow: #666666 10px 10px 10px;
 }
 	
@@ -463,9 +464,9 @@ footer{
 .pwr-fb-like-box{
   width: 490px;
   height: 375px;
-  top: -71px;
+/*  top: -71px; */
   z-index: 0;
-  left: -9px;
+/*  left: -9px; */
 }
 
 

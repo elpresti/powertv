@@ -1,0 +1,114 @@
+@CHARSET "UTF-8";
+.mainContainer{
+    height:178px;
+    width:1280px;
+    /* border:#AAAAAA solid 2px; */
+}
+.headerContainer{
+    width:100%;
+    height:14%;
+    margin-bottom: 1px;
+    /* background-color:#EEEEEE; */
+}
+.centerContainer{
+    height:80%;
+    width:100%;
+    background-color:#CCD6CC;
+}
+.footerContainer{
+    width:100%;
+    height:6%;
+}
+.votationName{
+    margin-left:16%;
+}
+.votationName, .votationType, .examinedStationsContainer{
+    height:100%;
+}
+.votationName p, .votationType p, .examinedStationsContainer p{
+    padding: 6px 12px;
+    width:auto !important;
+}
+.examinedStationsContainer{
+    background-color:#CCD6CC;
+    margin-left: 10%;
+}
+.examinedStationsContainer p{
+    width: 100% !important;
+}
+.votationType{
+    
+}
+#examinedStations{
+    color:#D91832;
+}
+.examinedStationsContainer{
+    width:24%;
+}
+.examinedStationsContainer p{
+    /* width:auto !important;
+     font-size:14px; */
+}
+.footerContainer, .votationName, .groupChiefSurname{
+    background-color:#D91832;
+    color:#FFFFFF;
+}
+.votationType, .politicalGroupName, .groupPercentAmount{
+    background-color:#000000;
+    color:#FFFFFF;
+}
+.politicalGroupName{
+    height:16%;
+    width:100%;
+}
+.politicalGroupName p{
+    line-height:1.5;
+}
+.groupChiefImage{
+    height:44%;
+    width:100%;
+}
+.groupChiefImage img{
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+.groupChiefSurname{
+    height:14%;
+    width:100%;
+}
+.groupChiefSurname p{
+    line-height:1.4;
+}
+.groupPercentAmount{
+    height:26%;
+    width:100%
+}
+.groupPercentAmount p{
+    line-height: 1.1;
+    font-size: 36px;
+}
+.centerContainer, .politicalGroupName, .groupChiefImage, .groupPercentAmount, .groupChiefSurname, .headerContainer, .footerContainer, .votationName, .votationType, .candidateInfoContainer, .examinedStationsContainer, .pgmLogo, p{
+    float:left;
+}
+.candidateInfoContainer{
+    width:10%;
+    /* height:80%; */
+    height:99%;
+    margin-right: 2.0%;
+}
+.pgmLogo{
+    width:16%;
+    height:100%;
+}
+p{
+    text-transform: uppercase;
+    line-height: 1;
+    font-size: 16px;
+    font-family: Arial;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+}
