@@ -26,9 +26,23 @@ function getSpreadSheetDataIntoArray($ssUrl){
   return $ssDataArray;
 }
 
-function getOrderedCandidatesByWinner(){
-  
+function getOrderedCandidatesByWinner($ssDataArray){
+  //echo '<br>-------ORDEN ENTRADA---------<br><pre>' . var_export($ssDataArray,true).'</pre><br>--------- FIN ORDEN ENTRADA ---------<br>';
+   $sortArray = array(); 
+   foreach($ssDataArray as $ssDataItem){ 
+      foreach($ssDataItem as $key=>$value){ 
+          if(!isset($sortArray[$key])){ 
+              $sortArray[$key] = array(); 
+          } 
+          $sortArray[$key][] = $value; 
+      } 
+   }
+	$orderby = "porcentaje_parcial"; //change this to whatever key you want from the array 
+	array_multisort($sortArray[$orderby],SORT_DESC,$ssDataArray); 
+  //echo '<br>-------ORDEN SALIDA---------<br><pre>' . var_export($ssDataArray,true).'</pre><br>--------- FIN ORDEN SALIDA ---------<br>';
+  return $ssDataArray;
 }
+
 
 function img_data_uri($file,$mime=null) {  
   if ($file == null){

@@ -34,7 +34,7 @@
     margin-left: 10%;
 }
 .examinedStationsContainer p{
-    width: 100% !important;
+    /* width: 100% !important; */
 }
 .votationType{
     
@@ -43,7 +43,7 @@
     color:#D91832;
 }
 .examinedStationsContainer{
-    width:24%;
+    width:26%;
 }
 .examinedStationsContainer p{
     /* width:auto !important;

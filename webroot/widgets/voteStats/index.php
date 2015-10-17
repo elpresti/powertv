@@ -1,9 +1,18 @@
 <?php
 	include('util.php');
 	parse_str($_SERVER['QUERY_STRING'], $params);
-	//$spreadSheetUrl = 'https://spreadsheets.google.com/feeds/list/1eaobB4Tiqzx206P2-wtgB4EcuIiPweTGzig-L_HStAU/1/public/values?alt=json-in-script';//Hoja 1: MUNI-RESUMEN
-	$spreadSheetUrl = 'https://spreadsheets.google.com/feeds/list/1eaobB4Tiqzx206P2-wtgB4EcuIiPweTGzig-L_HStAU/3/public/values?alt=json-in-script';//Hoja 3: PROV-RESUMEN
+	if ($params['provincia']=='true'){
+     $spreadSheetUrl = 'https://spreadsheets.google.com/feeds/list/1eaobB4Tiqzx206P2-wtgB4EcuIiPweTGzig-L_HStAU/3/public/values?alt=json-in-script';//Hoja 3: PROV-RESUMEN
+   }else{
+     $spreadSheetUrl = 'https://spreadsheets.google.com/feeds/list/1eaobB4Tiqzx206P2-wtgB4EcuIiPweTGzig-L_HStAU/1/public/values?alt=json-in-script';//Hoja 1: MUNI-RESUMEN
+   }
+	if ( is_numeric($params['maxCandidatesToShow']) ){
+     $maxCandidatesToShow = $params['maxCandidatesToShow'];
+   }else{
+     $maxCandidatesToShow = 3;
+   }
 	$ssDataObj = getSpreadSheetDataIntoArray($spreadSheetUrl);
+	$ssDataObj = getOrderedCandidatesByWinner($ssDataObj);
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,54 +54,38 @@
             <div class="pgmLogo">
                 
             </div>
-            <div id="candidateBox1" class="candidateInfoContainer">
-                <div class="politicalGroupName">
-                    <p><?php echo $ssDataObj['partido1']['nombre_partido']; ?></p>
-                </div>
-                <div class="groupChiefImage">
-                    <img src="<?php echo img_data_uri($ssDataObj['partido1']['URL_imagen']); ?>" />  
-                </div>
-                <div class="groupChiefSurname">
-                    <p><?php echo $ssDataObj['partido1']['apellido_lider'] ?></p>
-                </div>
-                <div class="groupPercentAmount">
-                    <p><?php echo $ssDataObj['partido1']['porcentaje_parcial'] ?></p>
-                </div>
-            </div>
-            <div id="candidateBox2" class="candidateInfoContainer">
-                <div class="politicalGroupName">
-                    <p><?php echo $ssDataObj['partido2']['nombre_partido'] ?></p>
-                </div>
-                <div class="groupChiefImage">
-                    <img src="<?php echo img_data_uri($ssDataObj['partido2']['URL_imagen']); ?>" />  
-                </div>
-                <div class="groupChiefSurname">
-                    <p><?php echo $ssDataObj['partido2']['apellido_lider'] ?></p>
-                </div>
-                <div class="groupPercentAmount">
-                    <p><?php echo $ssDataObj['partido2']['porcentaje_parcial'] ?></p>
-                </div>
-            </div>
-            <div id="candidateBox3" class="candidateInfoContainer">
-                <div class="politicalGroupName">
-                    <p><?php echo $ssDataObj['partido3']['nombre_partido'] ?></p>
-                </div>
-                <div class="groupChiefImage">
-                    <img src="<?php echo img_data_uri($ssDataObj['partido3']['URL_imagen']); ?>" />  
-                </div>
-                <div class="groupChiefSurname">
-                    <p><?php echo $ssDataObj['partido3']['apellido_lider'] ?></p>
-                </div>
-                <div class="groupPercentAmount">
-                    <p><?php echo $ssDataObj['partido3']['porcentaje_parcial'] ?></p>
-                </div>
-            </div>
+            <?php
+            	$i=0;
+            	foreach($ssDataObj as $ssDataItem){
+                 $i++;
+                 if ($i>$maxCandidatesToShow){
+                   break;
+                 }
+                 $htmlBox='
+                 		<div id="candidateBox" class="candidateInfoContainer">
+                        <div class="politicalGroupName">
+                            <p>'.$ssDataItem['nombre_partido'].'</p>
+                        </div>
+                        <div class="groupChiefImage">
+                            <img src="'.img_data_uri($ssDataItem['URL_imagen']).'" />  
+                        </div>
+                        <div class="groupChiefSurname">
+                            <p>'.$ssDataItem['apellido_lider'].'</p>
+                        </div>
+                        <div class="groupPercentAmount">
+                            <p>'.$ssDataItem['porcentaje_parcial'].'</p>
+                        </div>
+                     </div>
+                 ';
+                 echo $htmlBox;
+               }
+            ?>
         </div>
         <div class="footerContainer">
         </div>
     <div>
 	   <?php 
-        if ($params['alaire']=='true'){
+        if (isset($params['alaire'])  &&  $params['alaire']=='true'){
            $url = "http://31.220.50.30:37021/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=voteStatsWidget";
            echo add_ajax_request_response_widget($url);
         }
