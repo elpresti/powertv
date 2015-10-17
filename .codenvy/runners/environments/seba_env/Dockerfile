@@ -61,11 +61,14 @@
 # CMD sleep 365d
 
 # FIX
- FROM codenvy/ruby210
- RUN sudo apt-get -y install rubygems ruby-dev && sudo gem install af
- ADD $src$ /home/user/$src$
- RUN sudo chown -R user:user /home/user
- CMD sleep 356d
+
+  FROM codenvy/ruby210
+ # RUN sudo apt-get -y install rubygems ruby-dev && sudo gem install af
+  RUN sudo apt-get update && \
+  	  sudo apt-get -y install rubygems ruby-dev && sudo gem install af
+  ADD $src$ /home/user/$src$
+  RUN sudo chown -R user:user /home/user
+  CMD sleep 356d
 
 # EOF
 
