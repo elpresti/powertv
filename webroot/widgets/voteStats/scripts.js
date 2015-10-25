@@ -1,3 +1,4 @@
+/*
 jQuery(document).ready(function() {
 $.getJSON("https://spreadsheets.google.com/feeds/list/1eaobB4Tiqzx206P2-wtgB4EcuIiPweTGzig-L_HStAU/od6/public/values?alt=json-in-script&callback=?",function(data){
 	console.log(data);
@@ -35,6 +36,58 @@ $.getJSON("https://spreadsheets.google.com/feeds/list/1eaobB4Tiqzx206P2-wtgB4Ecu
 	}else{
 		$('#box_calendar_comuna2').css("visibility","hidden");
 	}
-    */
+    */ /*
 })
 })
+*/
+
+var showRequestInfoVar=false;
+
+var showResponseInfoVar=false;
+
+jQuery(document).ready(function() {
+	initVisualElements();
+});
+
+function updateWidgetNation(){
+  //console.log('Se presionó updateWidgetNacion!');
+  document.getElementById('countryCode').value = 'http://31.220.50.30:37021/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=voteStatsWidgetNacion&url=http%3A%2F%2Fpowerhd.aws.af.cm%2Fwebroot%2Fwidgets%2FvoteStats%2F%3Fprovincia%3Dfalse%26nacion%3Dtrue%26maxCandidatesToShow%3D4';
+  $( "#myButton" ).click();
+}
+
+function updateWidgetProvince(){
+  //console.log('Se presionó updateWidgetProvince!');
+  document.getElementById('countryCode').value = 'http://31.220.50.30:37021/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=voteStatsWidgetProvincia&url=http%3A%2F%2Fpowerhd.aws.af.cm%2Fwebroot%2Fwidgets%2FvoteStats%2F%3Fprovincia%3Dtrue%26maxCandidatesToShow%3D4';
+  $( "#myButton" ).click();
+}
+
+function showRequestInfo(){
+  if (showRequestInfoVar){
+    $( "#myAjaxRequestForm" ).css('display','');
+    showRequestInfoVar=false;
+  }else{
+    $( "#myAjaxRequestForm" ).css('display','none');
+    showRequestInfoVar=true;
+  }
+}
+
+function showResponseInfo(){
+  if (showResponseInfoVar){
+    $( "#anotherSection" ).css('display','');
+    showResponseInfoVar=false;
+  }else{
+    $( "#anotherSection" ).css('display','none');
+    showResponseInfoVar=true;
+  }
+}
+
+function updateWidgetPinamar(){
+  //console.log('Se presionó updateWidgetPinamar!');
+  document.getElementById('countryCode').value = 'http://31.220.50.30:37021/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=voteStatsWidgetMunicipal&url=http%3A%2F%2Fpowerhd.aws.af.cm%2Fwebroot%2Fwidgets%2FvoteStats%2F%3Fprovincia%3Dfalse%26maxCandidatesToShow%3D4';
+  $( "#myButton" ).click();
+}
+
+function initVisualElements(){
+  showRequestInfo();
+  showResponseInfo();
+}

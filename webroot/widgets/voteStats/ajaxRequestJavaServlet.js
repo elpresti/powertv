@@ -64,6 +64,7 @@ $(document).ready(function() {
                     settings.data += "&dummyData=whatever";
                     //disable the button until we get the response
                     $('#myButton').attr("disabled", true);
+                    $('#statusMsg').text("Cargando, aguarde...");
                 },
                 
                 //this is called after the response or error functions are finsihed
@@ -71,8 +72,9 @@ $(document).ready(function() {
                 complete: function(jqXHR, textStatus){
                     //enable the button 
                     $('#myButton').attr("disabled", false);
+                    $('#statusMsg').text("LISTO");
                 }
-      
+
             });        
     });
  

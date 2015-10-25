@@ -81,19 +81,27 @@ function add_ajax_request_response_widget($url){
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" type="text/javascript"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
   	 <script type="text/javascript" src="ajaxRequestJavaServlet.js"></script>
-    <form id="myAjaxRequestForm">
+    <div id="updateButtonsContainer" class="updateButtonsContainer">
+      <button id="btnUpdateNation" type="button" onclick="updateWidgetNation()">Update Nacion</button>
+      <button id="btnUpdateProvincia" type="button" onclick="updateWidgetProvince()">Update ProvinciaBA</button>
+      <button id="btnUpdatePinamar" type="button" onclick="updateWidgetPinamar()">Update Pinamar</button>
+      <p style="margin: 40px;">Status: <span id="statusMsg">LISTO</span></p>
+      <button id="btnShowRequestInfo" class="btnShowRequestInfo" type="button" onclick="showRequestInfo()" >Ver info de envio</button>
+      <button id="btnShowResponseInfo" class="btnShowResponseInfo" type="button" onclick="showResponseInfo()" >Ver info de Respuesta</button>
+    </div>
+    <form id="myAjaxRequestForm" class="myAjaxRequestForm">
           <fieldset>
               <legend>jQuery Ajax Form data Submit Request</legend>
                   <p>
                       <label for="countryCode">URL to do request:</label>
-                      <input id="countryCode" type="text" name="countryCode" value="'.$url.'" />
+                      <input id="countryCode" type="text" name="countryCode" style="width:100%" value="'.$url.'" />
                   </p>
                   <p>
                       <input id="myButton" type="button" value="Submit" />
                   </p>
           </fieldset>
       </form>
-      <div id="anotherSection">
+      <div id="anotherSection" class="anotherSection">
           <fieldset>
               <legend>Response from jQuery Ajax Request</legend>
                    <div id="ajaxResponse"></div>

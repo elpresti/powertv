@@ -6,10 +6,13 @@
    }else{
      $spreadSheetUrl = 'https://spreadsheets.google.com/feeds/list/1eaobB4Tiqzx206P2-wtgB4EcuIiPweTGzig-L_HStAU/1/public/values?alt=json-in-script';//Hoja 1: MUNI-RESUMEN
    }
+	if ($params['nacion']=='true'){
+     $spreadSheetUrl = 'https://spreadsheets.google.com/feeds/list/1eaobB4Tiqzx206P2-wtgB4EcuIiPweTGzig-L_HStAU/4/public/values?alt=json-in-script';//Hoja 4: NACION-RESUMEN
+   }
 	if ( is_numeric($params['maxCandidatesToShow']) ){
      $maxCandidatesToShow = $params['maxCandidatesToShow'];
    }else{
-     $maxCandidatesToShow = 3;
+     $maxCandidatesToShow = 4;
    }
 	$ssDataObj = getSpreadSheetDataIntoArray($spreadSheetUrl);
 	$ssDataObj = getOrderedCandidatesByWinner($ssDataObj);
@@ -20,7 +23,7 @@
     <title></title>
   	 <link rel="stylesheet" href="styles.css">
   	 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.js"></script>
-  	 <!-- <script type='text/javascript' src='scripts.js'></script> -->
+  	 <script type='text/javascript' src='scripts.js'></script>
 </head>
 <body>
   <?php
@@ -41,18 +44,18 @@
     <div class="mainContainer">
         <div class="headerContainer">
             <div class="votationName">
-                <p>JEFE DE GOBIERNO</p>
+                <p><?php echo $ssDataObj['txttipoeleccion']['nombre_partido'] ?></p>
             </div>
             <div class="votationType">
-                <p>PASO 2015</p>
+                <p>ELECCIONES 2015</p>
             </div>
             <div class="examinedStationsContainer">
-                <p>ESCRUTADO: <span id="examinedStations"><?php echo $ssDataObj['totalescrutado']['nombre_partido'] ?>%</span> | INFO: <?php date_default_timezone_set('America/Argentina/Buenos_Aires'); echo date('H:i:s', time()); ?>&nbsp;HS</p>
+                <p>ESCRUTADO: <span id="examinedStations"><?php echo $ssDataObj['totalescrutado']['nombre_partido'] ?>%</span> | INFO: <?php date_default_timezone_set('America/Argentina/Buenos_Aires'); echo date('H:i', time()); ?>&nbsp;HS</p>
             </div>
         </div>
         <div class="centerContainer">
             <div class="pgmLogo">
-                
+                <img class="imgLogoPgm" src="http://radiopower.com.ar/seba/pwrLogoElecciones2015.png" border="0" width="190" height="110">
             </div>
             <?php
             	$i=0;
@@ -80,15 +83,23 @@
                  echo $htmlBox;
                }
             ?>
+            <div class="widgetMainTextContainer"><span class="widgetMainText">RESULTADOS<br>PARCIALES</span>
+            </div>
         </div>
         <div class="footerContainer">
         </div>
     <div>
 	   <?php 
         if (isset($params['alaire'])  &&  $params['alaire']=='true'){
-           $url = "http://31.220.50.30:37021/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=voteStatsWidget";
+           $baseUrl = "http://powerhd.aws.af.cm/webroot/widgets/voteStats/";
+           //$baseUrl = "http://runnerp12.codenvycorp.com:53658/webroot/widgets/voteStats/";
+           $urlParam = urlencode($baseUrl."?provincia=true&maxCandidatesToShow=4");// URL of website to capture image
+			  $crops = null;
+			  $outfilenameParam = "voteStatsWidgetProvincia";
+			  $scaleoutParam = null;
+           $url = "http://31.220.50.30:37021/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=".$outfilenameParam."&url=".$urlParam;
            echo add_ajax_request_response_widget($url);
         }
-		?>
+?>
 </body>
 </html>
