@@ -1,3 +1,11 @@
+<?php 
+	if (strlen($_SERVER['QUERY_STRING'])>0){
+		header("Location: webroot/index.html?".$_SERVER['QUERY_STRING']);
+	}else{
+		header("Location: webroot/index.html");
+	}
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,13 +22,6 @@
       <meta property="og:site_name" content="PowerTV">
   </head>
   <body>
-     <?php 
-        echo '<p>Redireccionando al reproductor de PowerTV</p>';
-        if (strlen($_SERVER['QUERY_STRING'])>0){
-          header("Location: webroot/index.html?".$_SERVER['QUERY_STRING']);
-        }else{
-          header("Location: webroot/index.html");
-        }
-     ?>
+	<p>Redireccionando al reproductor de PowerTV</p>
   </body>
 </html>
