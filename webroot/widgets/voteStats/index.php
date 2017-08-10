@@ -91,7 +91,8 @@
     <div>
 	   <?php 
         if (isset($params['alaire'])  &&  $params['alaire']=='true'){
-           $baseUrl = "http://powerhd.aws.af.cm/webroot/widgets/voteStats/";
+           $baseUrl = "http://radiopower.com.ar/powerhd/webroot/widgets/voteStats/";
+	   //$baseUrl = "http://powerhd.aws.af.cm/webroot/widgets/voteStats/";
            //$baseUrl = "http://runnerp12.codenvycorp.com:53658/webroot/widgets/voteStats/";
            $urlParam = urlencode($baseUrl."?provincia=true&maxCandidatesToShow=4");// URL of website to capture image
 			  $crops = null;
