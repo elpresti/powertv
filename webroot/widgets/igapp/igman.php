@@ -3,14 +3,14 @@
 set_time_limit(0);
 date_default_timezone_set('UTC');
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/vendor/autoload.php';
 
 // "C:\Software\wamp64\bin\php\php7.0.23\php.exe" -e "C:\Software\wamp64\www\igapp\igman.php" -u usename -p pass --videofilename "C:\Temp\video.mp4" --captiontext "#Text of my post at @myaccount"
 
 /////// CONFIG ///////
 
 $shortparams="u:p:";
-$longparams=array("videofilename:","captiontext:");
+$longparams=array("ffprobepath:","ffmpegpath:","videofilename:","captiontext:");
 $opts = getopt($shortparams,$longparams);
 //var_dump($opts);
 
@@ -42,6 +42,20 @@ if (array_key_exists('captiontext',$opts) &&  !empty($opts['captiontext'])){
 	die();
 }
 
+if (array_key_exists('ffprobepath',$opts) &&  !empty($opts['ffprobepath'])){
+	$ffprobepath=$opts['ffprobepath'];
+}else{
+	echo "ERROR--EMPTY_FFPROBE_PATH Field name: ffprobepath";
+	die();
+}
+
+if (array_key_exists('ffmpegpath',$opts) &&  !empty($opts['ffmpegpath'])){
+	$ffmpegpath=$opts['ffmpegpath'];
+}else{
+	echo "ERROR--EMPTY_FFMPEG_PATH Field name: ffmpegpath";
+	die();
+}
+
 //$username = '';
 //$password = '';
 $debug = true;
@@ -54,6 +68,9 @@ $truncatedDebug = false;
 //////////////////////
 
 $ig = new \InstagramAPI\Instagram($debug, $truncatedDebug);
+
+\InstagramAPI\Utils::$ffprobeBin = $ffprobepath;
+\InstagramAPI\Utils::$ffmpegBin = $ffmpegpath;
 
 try {
     $ig->login($username, $password);
