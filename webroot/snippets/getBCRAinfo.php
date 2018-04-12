@@ -34,12 +34,16 @@
 		$dateToFormated = DateTime::createFromFormat('Ymd',$dateTo);
 		$dateToFormated = $dateToFormated->format('d/m/Y');
 		//echo " <br> dateTo=".$dateTo." <br> dateToFormated=".$dateToFormated." <br> dateFrom=".$dateFrom." <br> dateFromFormated=".$dateFromFormated." <br> ";
-		$params = "?desde=".$dateFromFormated."&hasta=".$dateToFormated."&descri=21&primeravez=1&alerta=5";
+		$params = "?desde=".$dateFromFormated."&hasta=".$dateToFormated."&primeravez=1&alerta=5";
 		if ($varToGet == "CER"){
 			$params .="&fecha=Fecha_Cer&campo=Cer";
 		}else{
 			if ($varToGet == "UVA"){
 				$params .="&fecha=Fecha_Cvs&campo=Cvs";
+			}else{
+				if ($varToGet == "USDARS"){
+					$params .="&fecha=Fecha_Ref&campo=Tip_Camb_Ref";
+				}
 			}
 		}
 		//$fullUrlEncoded="http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp".urlencode($params);
@@ -130,7 +134,7 @@
 				$outMsg="Many null items, something went wrong";
 			}
 		}else{
-			$outMsg='getCurrentWeatherData() returned null';
+			$outMsg='getVarOfPeriod() returned null';
 		}
 		//echo json_encode($outData);die();
 		printResultInJson();
