@@ -29,44 +29,51 @@
 		//dateFrom and dateTo input format: YYYYMMDD
 		//dateFrom and dateTo required format: DD/MM/YYYY
 		//$dateFromFormated = date("d/m/Y",$
-		$dateFromFormated = DateTime::createFromFormat('Ymd',$dateFrom);
-		$dateFromFormated = $dateFromFormated->format('d/m/Y');
-		$dateToFormated = DateTime::createFromFormat('Ymd',$dateTo);
-		$dateToFormated = $dateToFormated->format('d/m/Y');
-		//echo " <br> dateTo=".$dateTo." <br> dateToFormated=".$dateToFormated." <br> dateFrom=".$dateFrom." <br> dateFromFormated=".$dateFromFormated." <br> ";
-		$params = "?desde=".$dateFromFormated."&hasta=".$dateToFormated."&primeravez=1&alerta=5";
-		if ($varToGet == "CER"){
-			$params .="&fecha=Fecha_Cer&campo=Cer";
-		}else{
-			if ($varToGet == "UVA"){
-				$params .="&fecha=Fecha_Cvs&campo=Cvs";
+		try{
+			$out = array(
+				'requestedUrl' => null,
+				'values' => array(),
+				'errorMsg' => null
+			);
+			$dateFromFormated = DateTime::createFromFormat('Ymd',$dateFrom);
+			$dateFromFormated = $dateFromFormated->format('d/m/Y');
+			$dateToFormated = DateTime::createFromFormat('Ymd',$dateTo);
+			$dateToFormated = $dateToFormated->format('d/m/Y');
+			//echo " <br> dateTo=".$dateTo." <br> dateToFormated=".$dateToFormated." <br> dateFrom=".$dateFrom." <br> dateFromFormated=".$dateFromFormated." <br> ";
+			$params = "?desde=".$dateFromFormated."&hasta=".$dateToFormated."&primeravez=1&alerta=5";
+			if ($varToGet == "CER"){
+				$params .="&fecha=Fecha_Cer&campo=Cer";
 			}else{
-				if ($varToGet == "USDARS"){
-					$params .="&fecha=Fecha_Ref&campo=Tip_Camb_Ref";
+				if ($varToGet == "UVA"){
+					$params .="&fecha=Fecha_Cvs&campo=Cvs";
+				}else{
+					if ($varToGet == "USDARS"){
+						$params .="&fecha=Fecha_Ref&campo=Tip_Camb_Ref";
+					}
 				}
 			}
+			//$fullUrlEncoded="http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp".urlencode($params);
+			$fullUrlNotEncoded="http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp".$params;
+			//echo " <br> fullUrlEncoded=".$fullUrlEncoded." <br> fullUrlNotEncoded=".$fullUrlNotEncoded." <br> ";
+			$out['requestedUrl'] = $fullUrlNotEncoded;
+			$htmlCode = file_get_html($fullUrlNotEncoded);
+			$htmlMainTable = $htmlCode->find('table[id=tabla]', 0);
+			$tableValues = array();
+			$i=0;
+			foreach($htmlMainTable->find('td') as $element) {
+				$tableValues[$i] = $element->plaintext;
+				$i++;
+			}
+			$tableValues = array_reverse($tableValues);
+			$i=0;
+			while ($i < sizeof($tableValues)){
+				$out['values'][$tableValues[$i+1]] = $tableValues[$i];
+				$i=$i+2;
+			}
+			//printHtmlRelevantData($htmlCode);die();
+		}catch(Exception $e){
+			$out['errorMsg'] = "ERROR! Exception msg:".(string)$e;
 		}
-		//$fullUrlEncoded="http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp".urlencode($params);
-		$fullUrlNotEncoded="http://www.bcra.gov.ar/PublicacionesEstadisticas/Principales_variables_datos.asp".$params;
-		//echo " <br> fullUrlEncoded=".$fullUrlEncoded." <br> fullUrlNotEncoded=".$fullUrlNotEncoded." <br> ";
-
-		$htmlCode = file_get_html($fullUrlNotEncoded);
-		$htmlMainTable = $htmlCode->find('table[id=tabla]', 0);
-		$tableValues = array();
-		$i=0;
-		foreach($htmlMainTable->find('td') as $element) {
-			$tableValues[$i] = $element->plaintext;
-			$i++;
-		}
-		$tableValues = array_reverse($tableValues);
-		$i=0;
-		$out = array();
-		while ($i < sizeof($tableValues)){
-			$out[$tableValues[$i+1]] = $tableValues[$i];
-			$i=$i+2;
-		}
-		//printHtmlRelevantData($htmlCode);die();
-		
 		return $out;
 	}
 	
@@ -119,8 +126,9 @@
 	$varToGet = $_GET['varToGet'];
 	
 	if ($action=='getvarvalues'  &&  !empty($dateFrom)  &&  !empty($dateTo) ) {
-		$outData = getVarOfPeriod($varToGet,$dateFrom,$dateTo);
-		if ($outData){
+		$functionResult = getVarOfPeriod($varToGet,$dateFrom,$dateTo);
+		$outData = $functionResult['values'];
+		if (!empty($outData)){
 			$nullItems=0;
 			foreach($outData as $item){
 				if ($item==null){
@@ -134,7 +142,7 @@
 				$outMsg="Many null items, something went wrong";
 			}
 		}else{
-			$outMsg='getVarOfPeriod() returned null';
+			$outMsg='getVarOfPeriod() returned empty. requestedUrl='.print_r($functionResult['requestedUrl'],true);
 		}
 		//echo json_encode($outData);die();
 		printResultInJson();
