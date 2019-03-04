@@ -477,14 +477,14 @@ footer{
   margin: 0px auto 150px;
 }
 .socialMediaButtonsContainer{
-  width: 540px;
+  width: 630px;
   height: 100px;
   margin: auto;
 }
 .socialMediaButtons{
-  width: 540px;
+  width: 630px;
 	padding: 0px;
-  margin-left:35px;
+  /* margin-left:35px; */
 }
 .socialMediaButtons a {
   text-decoration: none;
@@ -647,6 +647,40 @@ footer{
 	content: "H";
 }
 
+.instagram {
+    /*General*/
+    display: block; 
+    text-decoration: none;
+    
+    /*Text*/
+    font-family: 'SocialGlyphs';
+    text-align: center;
+    font-size:35px;
+    line-height:1.2em;
+    text-indent: 2px;
+    color: white;
+    text-shadow:0px -1px 0px rgba(0,0,0,0.20);
+    
+    
+    /*Background*/
+    width: 44px;
+    height: 44px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #49709b;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    background-image: -webkit-linear-gradient(bottom, #49709b, #6387af);
+    background-image: -moz-linear-gradient(bottom, #49709b, #6387af);
+    background-image: -o-linear-gradient(bottom, #49709b, #6387af);
+    background-image: linear-gradient(to top, #49709b, #6387af);
+}
+
+.instagram:after {
+    content: "E";
+}
 
 /* ==========================================================================
    Media Queries

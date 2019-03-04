@@ -51,13 +51,13 @@ jQuery(document).ready(function() {
 
 function updateWidgetNation(){
   //console.log('Se presionó updateWidgetNacion!');
-  document.getElementById('countryCode').value = 'http://31.220.50.30:37021/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=voteStatsWidgetNacion&url=http%3A%2F%2Fpowerhd.aws.af.cm%2Fwebroot%2Fwidgets%2FvoteStats%2F%3Fprovincia%3Dfalse%26nacion%3Dtrue%26maxCandidatesToShow%3D4';
+  document.getElementById('countryCode').value = 'http://201.219.68.21:5280/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=voteStatsWidgetNacion&url=http%3A%2F%2Fradiopower.com.ar%2Fpowerhd%2Fwebroot%2Fwidgets%2FvoteStats%2F%3Fprovincia%3Dfalse%26nacion%3Dtrue%26maxCandidatesToShow%3D4';
   $( "#myButton" ).click();
 }
 
 function updateWidgetProvince(){
   //console.log('Se presionó updateWidgetProvince!');
-  document.getElementById('countryCode').value = 'http://31.220.50.30:37021/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=voteStatsWidgetProvincia&url=http%3A%2F%2Fpowerhd.aws.af.cm%2Fwebroot%2Fwidgets%2FvoteStats%2F%3Fprovincia%3Dtrue%26maxCandidatesToShow%3D4';
+  document.getElementById('countryCode').value = 'http://201.219.68.21:5280/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=voteStatsWidgetProvincia&url=http%3A%2F%2Fradiopower.com.ar%2Fpowerhd%2Fwebroot%2Fwidgets%2FvoteStats%2F%3Fprovincia%3Dtrue%26maxCandidatesToShow%3D4';
   $( "#myButton" ).click();
 }
 
@@ -83,7 +83,7 @@ function showResponseInfo(){
 
 function updateWidgetPinamar(){
   //console.log('Se presionó updateWidgetPinamar!');
-  document.getElementById('countryCode').value = 'http://31.220.50.30:37021/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=voteStatsWidgetMunicipal&url=http%3A%2F%2Fpowerhd.aws.af.cm%2Fwebroot%2Fwidgets%2FvoteStats%2F%3Fprovincia%3Dfalse%26maxCandidatesToShow%3D4';
+  document.getElementById('countryCode').value = 'http://201.219.68.21:5280/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=voteStatsWidgetMunicipal&url=http%3A%2F%2Fradiopower.com.ar%2Fpowerhd%2Fwebroot%2Fwidgets%2FvoteStats%2F%3Fprovincia%3Dfalse%26maxCandidatesToShow%3D4';
   $( "#myButton" ).click();
 }
 

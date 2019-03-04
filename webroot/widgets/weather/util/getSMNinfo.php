@@ -15,7 +15,8 @@
 	$outMsg="NO MESSAGE";
 	$outStatusCode=500;
 	$outData=null;
-	$dayWeekNames = array('Domingo','Lunes','Martes',utf8_encode('Miércoles'),'Jueves','Viernes',utf8_encode('Sábado'));
+	//$dayWeekNames = array('Domingo','Lunes','Martes',utf8_encode('Miércoles'),'Jueves','Viernes',utf8_encode('Sábado'));
+	$dayWeekNames = array('Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado');
 	$monthsNames = array( 'Enero' => 1, 'Febrero' => 2, 'Marzo' => 3, 'Abril' => 4, 'Mayo' => 5, 'Junio' => 6, 'Julio' => 7,
 						'Agosto' => 8, 'Septiembre' => 9, 'Octubre' => 10, 'Noviembre' => 11, 'Diciembre' => 12 );
 	$todayForecastTable=null;
@@ -139,11 +140,11 @@
 		
 		$html = $htmlCodeMainDiv->find('table',1);
 		//$i=0;
-		$cityToFind=utf8_encode(strtolower($cityName));
+		$cityToFind=mb_strtolower($cityName, 'UTF-8');
 		$cityFound=false;
 		foreach($html->find('tr') as $element) {
 			//echo '<br><strong>tr '.$i.':</strong><br>'.$element->plaintext . '<br><br>';
-			if (strlen($element->plaintext)<100  &&  strpos(utf8_encode(strtolower($element->plaintext)),$cityToFind)!==false){
+			if (strlen($element->plaintext)<100  &&  strpos(mb_strtolower($element->plaintext,'UTF-8'),$cityToFind)!==false){
 				$cityFound=true;
 				break;
 			}
@@ -245,10 +246,11 @@
 		$i=0;
 		foreach($html->find('table') as $element) {
 			$elemText = $element->plaintext;
-			$elemText = strtolower($elemText);
-			$elemText = mb_convert_encoding($elemText, "UTF-8", "auto");
+			//$elemText = strtolower($elemText);
+			//$elemText = mb_convert_encoding($elemText, "UTF-8", "auto");
+			$elemText = mb_strtolower($elemText, 'UTF-8');
 			if ( strlen($elemText)>1  &&  
-				(strpos($elemText,"hoy")!==false  ||  strpos($elemText,mb_convert_encoding(strtolower(getWeekdayName()), "UTF-8", "auto"))!==false )  && 
+				(strpos($elemText,"hoy")!==false  ||  strpos($elemText,mb_strtolower(getWeekdayName(), "UTF-8"))!==false )  && 
 				(strpos($elemText,"tarde/noche")!==false )
 			){
 				$out=$element;
@@ -266,28 +268,29 @@
 		$i=0;
 		foreach($html->find('table') as $element) {
 			$elemText = $element->plaintext;
-			$elemText = strtolower($elemText);
-			$elemText = mb_convert_encoding($elemText, "UTF-8", "auto");
+			//$elemText = strtolower($elemText);
+			$elemText = mb_strtolower($elemText, 'UTF-8');
+			//$elemText = mb_convert_encoding($elemText, "UTF-8", "auto");
 			if ($todayMode){
 				if (hoyIsToday()){
 					if (strlen($elemText)>1  &&  
-						( strpos($elemText,mb_convert_encoding(strtolower(getWeekdayName(2)), "UTF-8", "auto"))!==false  &&  
-						strpos($elemText,mb_convert_encoding(strtolower(getWeekdayName(3)), "UTF-8", "auto"))!==false  &&  
-						strpos($elemText,mb_convert_encoding(strtolower(getWeekdayName(4)), "UTF-8", "auto"))!==false ) ){
+						( strpos($elemText,mb_strtolower(getWeekdayName(2), "UTF-8"))!==false  &&  
+						strpos($elemText,mb_strtolower(getWeekdayName(3), "UTF-8"))!==false  &&  
+						strpos($elemText,mb_strtolower(getWeekdayName(4), "UTF-8"))!==false ) ){
 							$out=$element;
 					}
 				}else{
 					if (strlen($elemText)>1  &&  
-						( strpos($elemText,mb_convert_encoding(strtolower(getWeekdayName(1)), "UTF-8", "auto"))!==false  &&  
-						strpos($elemText,mb_convert_encoding(strtolower(getWeekdayName(2)), "UTF-8", "auto"))!==false  &&  
-						strpos($elemText,mb_convert_encoding(strtolower(getWeekdayName(3)), "UTF-8", "auto"))!==false ) ){
+						( strpos($elemText,mb_strtolower(getWeekdayName(1), "UTF-8"))!==false  &&  
+						strpos($elemText,mb_strtolower(getWeekdayName(2), "UTF-8"))!==false  &&  
+						strpos($elemText,mb_strtolower(getWeekdayName(3), "UTF-8"))!==false ) ){
 							$out=$element;
 					}
 				}
 			}else{
-				$daynamePlus1=mb_convert_encoding(strtolower(getWeekdayName(1)), "UTF-8", "auto");
-				$daynamePlus2=mb_convert_encoding(strtolower(getWeekdayName(2)), "UTF-8", "auto");
-				$daynamePlus3=mb_convert_encoding(strtolower(getWeekdayName(3)), "UTF-8", "auto");
+				$daynamePlus1=mb_strtolower(getWeekdayName(1), "UTF-8");
+				$daynamePlus2=mb_strtolower(getWeekdayName(2), "UTF-8");
+				$daynamePlus3=mb_strtolower(getWeekdayName(3), "UTF-8");
 				if (strlen($elemText)>1  &&  
 					( strpos($elemText,$daynamePlus1)!==false  &&  
 					strpos($elemText,$daynamePlus2)!==false  &&  
@@ -342,7 +345,7 @@
 		$out = array('dayName' => $str, 'dayNumber' => null);
 		$i=0;
 		foreach($dayWeekNames as $dayName){
-			if (strpos(strtolower($str),strtolower($dayName)) !== false) {
+			if (strpos(mb_strtolower($str,'UTF-8'),mb_strtolower($dayName,'UTF-8')) !== false) {
 				$out['dayweekName'] = $dayName;
 				$out['dayweekNumber'] = $i;
 				break;
@@ -539,8 +542,9 @@
 	$stationId=$_GET['stationId'];
 	$prov="Buenos%20Aires";
 	$city=$_GET['city'];
-	$city="Pinamar";
 	$action="getforecast";
+	$city="Pinamar";
+	
 	//$action='getcurrentweather';
 	//$stationId="87663";
 	

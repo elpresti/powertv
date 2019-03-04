@@ -18,9 +18,40 @@
 
 	parse_str($_SERVER['QUERY_STRING'], $params);
 
-	function getForecastRawData($sc){
-			$fullUrl="http://www.windguru.cz/es/index.php?sc=".$sc;
-		    $htmlCode = file_get_html($fullUrl);
+	function getForecastRawData($idSpot){		
+//			$fullUrl="http://www.windguru.cz/es/index.php?sc=".$idSpot; //8158
+			$fullUrl="https://www.windguru.cz/int/iapi.php?q=forecast_spot&id_spot=".$idSpot."&_mha=85ee0451";
+//		    $htmlCode = file_get_html($fullUrl);
+			$opts = array(
+					'http'=>array(
+							'header'=>"User-Agent:Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53\r\nReferer:https://www.windguru.cz/".$idSpot."\r\n"
+					)
+			);
+			$context = stream_context_create($opts);
+			$forecastSpotModelsData = file_get_html($fullUrl, false, $context);
+
+			$dataObj = json_decode($forecastSpotModelsData);
+			$dataItems = (array)$dataObj->{'tabs'};
+			$conectionData=null;
+			foreach ($dataItems as $dataItem){
+				$weatherVarsOfModel = $dataItem->{'options'}->{'params'};
+				if (in_array('WINDSPD',$weatherVarsOfModel)){
+					$conectionData=$dataItem->{'id_model_arr'}[0];
+					break;
+				}
+			}
+			
+			if (!is_null($conectionData)){
+				$fullUrl = "https://www.windguru.net/int/iapi.php?q=forecast&id_model=".$conectionData->id_model."&initstr=".$conectionData->initstr."&id_spot=".$idSpot."&WGCACHEABLE=21600&cachefix=".$conectionData->cachefix."&_mha=d735afbd";
+				$guruForecastData = file_get_html($fullUrl, false, $context);
+
+				$dataObj = json_decode($guruForecastData);
+				$dataItems = (array)$dataObj->{'fcst'};
+				return $dataItems;
+			}else{
+				return false;
+			}
+			/*
 			$data=null;
 			$dataFound=false;
 			$pos1=strpos($htmlCode,"wg_fcst_tab_data_1");
@@ -39,13 +70,13 @@
 				return $data;
 			}else{
 				return false;
-			}
+			}*/
 		    //return mb_convert_encoding($htmlCode, "iso-8859-1", "UTF-8");
 	}
 	
-	function getRelevantData($rawData){
-		$dataObj = json_decode($rawData);
-		$dataItems = (array)$dataObj->{'fcst'}->{'3'};
+	function getRelevantData($dataItems){
+		//$dataObj = json_decode($rawData);
+		//$dataItems = (array)$dataObj->{'fcst'}->{'3'};
 		$forecastData = array();
 		$dayNum=1;
 		$arrayItemId=0;
@@ -100,6 +131,7 @@
 	}
 	
 	$sc=$_GET['sc'];
+	$sc = "8158";
 	if (isset($sc)  &&  strlen($sc)>0  &&  is_numeric($sc) ) {
 		$rawData=getForecastRawData($sc);
 		if ($rawData){

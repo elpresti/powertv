@@ -47,7 +47,7 @@
                 <p><?php echo $ssDataObj['txttipoeleccion']['nombre_partido'] ?></p>
             </div>
             <div class="votationType">
-                <p>ELECCIONES 2015</p>
+                <p><?php echo $ssDataObj['txttituloeleccion']['nombre_partido'] ?></p>
             </div>
             <div class="examinedStationsContainer">
                 <p>ESCRUTADO: <span id="examinedStations"><?php echo $ssDataObj['totalescrutado']['nombre_partido'] ?>%</span> | INFO: <?php date_default_timezone_set('America/Argentina/Buenos_Aires'); echo date('H:i', time()); ?>&nbsp;HS</p>
@@ -92,13 +92,13 @@
 	   <?php 
         if (isset($params['alaire'])  &&  $params['alaire']=='true'){
            $baseUrl = "http://radiopower.com.ar/powerhd/webroot/widgets/voteStats/";
-	   //$baseUrl = "http://powerhd.aws.af.cm/webroot/widgets/voteStats/";
+		   //$baseUrl = "http://radiopower.com.ar/powerhd/webroot/widgets/voteStats/";
            //$baseUrl = "http://runnerp12.codenvycorp.com:53658/webroot/widgets/voteStats/";
            $urlParam = urlencode($baseUrl."?provincia=true&maxCandidatesToShow=4");// URL of website to capture image
 			  $crops = null;
 			  $outfilenameParam = "voteStatsWidgetProvincia";
 			  $scaleoutParam = null;
-           $url = "http://31.220.50.30:37021/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=".$outfilenameParam."&url=".$urlParam;
+           $url = "http://201.219.68.21:5280/mediamsg/mediaMsgController.php?action=getanduploadurlimage&outfilename=".$outfilenameParam."&url=".$urlParam;
            echo add_ajax_request_response_widget($url);
         }
 ?>

@@ -1,8 +1,8 @@
 <?php 
 	if (strlen($_SERVER['QUERY_STRING'])>0){
-		header("Location: webroot/index.html?".$_SERVER['QUERY_STRING']);
+		header("Location: webroot/index.php?altvideoplayer=1&".$_SERVER['QUERY_STRING']);
 	}else{
-		header("Location: webroot/index.html");
+		header("Location: webroot/index.php?altvideoplayer=1");
 	}
 ?>
 
