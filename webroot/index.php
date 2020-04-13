@@ -90,9 +90,40 @@
         </div>
       </div>
 	  
-	  <div class="socialMediaButtonsMainContainer" style="height:80px !important; margin: 0px auto 40px !important;">
-		 <a href="index.php<?php if (empty($_GET['altvideoplayer'])){ echo "?altvideoplayer=1"; }?>" class="playerTitle" style="display:block;padding: 0px 0px 40px 0px;text-decoration:none;">&iquest;Problemas para vernos? Prueba con este reproductor alternativo</a>
+	  <div class="socialMediaButtonsMainContainer" style="height:80px !important; margin: 0px auto 0px !important;">
+		 <a href="index.php?<?php if ($_GET['altvideosource']==1){ echo "&altvideosource=0"; }else{ echo "&altvideosource=1"; } if (!empty($_GET['altvideoplayer'])){ echo "&altvideoplayer=".$_GET['altvideoplayer']; }?>" class="playerTitle" style="display:block;padding: 0px 0px 0px 0px;text-decoration:none;">&iquest;Problemas para vernos? Alternativa 1 (otro servidor)</a>
 	  </div>
+	  
+	  <div class="socialMediaButtonsMainContainer" style="height:80px !important; margin: 0px auto 40px !important;">
+		 <a href="index.php?<?php if (!empty($_GET['altvideosource'])){ echo "&altvideosource=".$_GET['altvideosource']; } if ($_GET['altvideoplayer']==1){ echo "&altvideoplayer=0"; }else{ echo "&altvideoplayer=1"; } ?>" class="playerTitle" style="display:block;padding: 0px 0px 40px 0px;text-decoration:none;">&iquest;Problemas para vernos? Alternativa 2 (otro reproductor)</a>
+	  </div>
+	  
+	  <div id="audioPlayerMainContainer" style="text-align:center; margin-bottom: 60px;">
+			<h1>Reproductor de Streaming de Audio</h1>
+			<div id='MediaPlayerOverview'>
+				<script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
+				<script type="text/javascript">
+					MRP.insert({
+						'url':'http://audio.telpin.com.ar/power',
+						'codec':'mpga',
+						'volume':100,
+						'autoplay':false,
+						'buffering':5,
+						'title':'Radio Power Pinamar - Audio',
+						'welcome':'Radio Power Pinamar en vivo! Solo Audio',
+						'bgcolor':'#FFFFFF',
+						'skin':'simple-gray',
+						'width': 300,
+						'height': 122,
+						'jsevents': true,
+						'querymetadata.': 'shoutcast',
+						'interval': 25,
+						'class':'myClass3'
+					});
+				</script>
+			</div>
+		</div>
+	  
     </div>
 
     <div class="fbWidgetContainer" style="  margin-bottom: 80px;
@@ -202,10 +233,18 @@ evt){ console.log(
 		<? 
 $forceAltVideoPlayer=$_REQUEST['altvideoplayer']==1;
 if ($forceAltVideoPlayer){
-	echo 'var altvideoplayer=true; initScripts(altvideoplayer);';
+	echo 'var altvideoplayer=true;';
 }else{
-	echo 'var altvideoplayer=false; initScripts(altvideoplayer);';
+	echo 'var altvideoplayer=false;';
 }
+$altVideoSource=$_REQUEST['altvideosource']==1;
+if ($altVideoSource){
+	echo 'var altvideosource=1;';
+}else{
+	echo 'var altvideosource=0;';
+}
+echo 'initScripts(altvideoplayer,altvideosource);';
+
 ?>
           
         </script>

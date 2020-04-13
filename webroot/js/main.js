@@ -8,7 +8,7 @@ var connectingErrorMsg="noErrorsYet";
 var defaultConnectErrorMsg="noErrorsYet";
 var urlReconnect="/?utm_source=webapp&utm_medium=autoReconnect&utm_campaign=powertv&connectingErrorMsg="+connectingErrorMsg;
 var connectRetry = null;
-
+var videosourceurl="https://live2.tensila.com/1-1-1.power-tv/hls/master.m3u8";//default videosource    
 
 var UrlParams = function () {
   // This function is anonymous, is executed immediately and the return value is assigned to urlParams!
@@ -33,12 +33,12 @@ var UrlParams = function () {
 } ();
 
 
-function initScripts(altvideoplayer=false){
+function initScripts(altvideoplayer=false,altvideosource){
   setAnimationVars();
   if (altvideoplayer){
 	  deviceType = "mobile";
 	  deviceOs = null;
-	  addVideoPlayer(deviceType, deviceOs);
+	  addVideoPlayer(deviceType, deviceOs,altvideosource);
   }else{
 	  $.ajax({
 		url : "snippets/browserDetection.php",
@@ -47,7 +47,7 @@ function initScripts(altvideoplayer=false){
 		function (data){
 		  deviceType=data.device;
 		  deviceOs=data.os;
-		  addVideoPlayer(deviceType, deviceOs);
+		  addVideoPlayer(deviceType, deviceOs,altvideosource);
 		}
 	  });
   }
@@ -69,8 +69,8 @@ function autoplayMobileStream(){
 	/*
   var rta = confirm("Para ver PowerHD en vivo presione Aceptar, o Cancelar para instalar el reproductor necesario o en caso de no poder vernos");
   if (rta==true){
-    window.open("rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream","_self"); 
-    //location.href = "rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream";
+    window.open("rtmp://wowza.telpin.com.ar:1936/live-powerTV/power.stream","_self"); 
+    //location.href = "rtmp://wowza.telpin.com.ar:1936/live-powerTV/power.stream";
   }else{
     showLivePlayer=false;
   }
@@ -152,25 +152,29 @@ function animateElement(fxName,divId) {
 		}); 
 }
 
-function addVideoPlayer(deviceType, deviceOS) {
+function addVideoPlayer(deviceType, deviceOS, altvideosource) {
     var divVideoPlayer = "";
+	if (altvideosource == 1){
+		videosourceurl = "http://wowza.telpin.com.ar:1936/live-powerTV/power.stream/playlist.m3u8";
+	}
+	console.log('will use: '+videosourceurl);
     if (deviceType === "mobile") {
         if (deviceOS === "android") {
             $('#videoPlayer').css('display','none');
           	$('#videoPlayer_wrapper').css('display','none');
             divVideoPlayer = "<h3>Otra alternativa:</h3><div id='mobile_player_info' style='padding-top: 25px; padding-bottom: 25px;'>";
-            divVideoPlayer += "<img src='img/powerHDandroidOS_exp.jpg' alt='Click aquí para vernos en vivo!' width='640' height='400' border='0' usemap='#Map' /><map name='Map'><area shape='rect' coords='18,14,341,385' href='rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream' alt='Click aquí para vernos en vivo!' target='_blank'>";
+            divVideoPlayer += "<img src='img/powerHDandroidOS_exp.jpg' alt='Click aquí para vernos en vivo!' width='640' height='400' border='0' usemap='#Map' /><map name='Map'><area shape='rect' coords='18,14,341,385' href='rtmp://wowza.telpin.com.ar:1936/live-powerTV/power.stream' alt='Click aquí para vernos en vivo!' target='_blank'>";
             divVideoPlayer += "<area shape='rect' coords='423,45,598,351' href='https://play.google.com/store/apps/details?id=org.videolan.vlc.betav7neon' target='_blank'></map></div>";
         } else {
             if (deviceOS === "ios") {
                 $('#videoPlayer').css('display','none');
               	 $('#videoPlayer_wrapper').css('display','none');
                 divVideoPlayer = "<h3>Otra alternativa:</h3><div id='mobile_player_info' style='padding-top: 25px; padding-bottom: 25px;'>";
-                divVideoPlayer += "<img src='img/powerHDiOS_exp.jpg' alt='Click aquí para vernos en vivo!' width='640' height='400' border='0' usemap='#Map' /><map name='Map'><area shape='rect' coords='18,14,341,385' href='rtmp://wowza.telpin.com.ar:1935/live-powerTV/power.stream' alt='Click aquí para vernos en vivo!' target='_blank'>";
+                divVideoPlayer += "<img src='img/powerHDiOS_exp.jpg' alt='Click aquí para vernos en vivo!' width='640' height='400' border='0' usemap='#Map' /><map name='Map'><area shape='rect' coords='18,14,341,385' href='rtmp://wowza.telpin.com.ar:1936/live-powerTV/power.stream' alt='Click aquí para vernos en vivo!' target='_blank'>";
                 divVideoPlayer += "<area shape='rect' coords='423,45,598,351' href='https://itunes.apple.com/es/app/vlc-for-ios/id650377962' target='_blank'></map></div>";
             }
         }
-divAltVideoPlayer = "<table width='100%'><tr><td align='center' width='100%'><video-js id='my_video_1' class='vjs-default-skin' controls preload='auto' autoplay='true' width='768' height='432' style='box-shadow: #666666 10px 10px 10px;'><source src='http://wowza.telpin.com.ar:1935/live-powerTV/power.stream/playlist.m3u8' type='application/x-mpegURL'></video-js>  <script> var player = videojs('my_video_1', { autoplay: true, poster:'http://radiopower.com.ar/powerhd/webroot/img/pwrHDclickToPlay.png' });	player.on('error', function(e) {       var error = player.error();	   console.log('error.code='+error.code+', error.type='+error.type+', error.message='+error.message);	   if (error.code){		   showCantConnectErrorUI();	   }	}); player.play();</script></td></tr></table>";
+divAltVideoPlayer = "<table width='100%'><tr><td align='center' width='100%'><video-js id='my_video_1' class='vjs-default-skin' controls preload='auto' autoplay='true' width='768' height='432' style='box-shadow: #666666 10px 10px 10px;'><source src='"+videosourceurl+"' type='application/x-mpegURL'></video-js>  <script> var player = videojs('my_video_1', { autoplay: true, poster:'http://radiopower.com.ar/powerhd/webroot/img/pwrHDclickToPlay.png' });	player.on('error', function(e) {       var error = player.error();	   console.log('error.code='+error.code+', error.type='+error.type+', error.message='+error.message);	   if (error.code){		   showCantConnectErrorUI();	   }	}); player.play();</script></td></tr></table>";
 		$( divAltVideoPlayer ).insertBefore( "#dynamicCodeOfVideoPlayer" );
 		
 		$( divVideoPlayer ).insertBefore( "#dynamicCodeOfVideoPlayer" );
