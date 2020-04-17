@@ -90,16 +90,20 @@
         </div>
       </div>
 	  
-	  <div class="socialMediaButtonsMainContainer" style="height:80px !important; margin: 0px auto 0px !important;">
-		 <a href="index.php?<?php if ($_GET['altvideosource']==1){ echo "&altvideosource=0"; }else{ echo "&altvideosource=1"; } if (!empty($_GET['altvideoplayer'])){ echo "&altvideoplayer=".$_GET['altvideoplayer']; }?>" class="playerTitle" style="display:block;padding: 0px 0px 0px 0px;text-decoration:none;">&iquest;Problemas para vernos? Alternativa 1 (otro servidor)</a>
+	  <div class="socialMediaButtonsMainContainer" style="height:50px !important; margin: 0px auto 0px !important;">
+		 <p class="playerTitle">Utilizando Reproductor <?php if ($_GET['altvideoplayer']==1){ echo "A"; }else{ echo "B"; }?> + Servidor <?php if ($_GET['altvideosource']==1){ echo "Telpin"; }else{ if (empty($_GET['altvideoplayer'])){ echo "Telpin"; } else {echo "Tensila"; } }?></p>
 	  </div>
 	  
-	  <div class="socialMediaButtonsMainContainer" style="height:80px !important; margin: 0px auto 40px !important;">
-		 <a href="index.php?<?php if (!empty($_GET['altvideosource'])){ echo "&altvideosource=".$_GET['altvideosource']; } if ($_GET['altvideoplayer']==1){ echo "&altvideoplayer=0"; }else{ echo "&altvideoplayer=1"; } ?>" class="playerTitle" style="display:block;padding: 0px 0px 40px 0px;text-decoration:none;">&iquest;Problemas para vernos? Alternativa 2 (otro reproductor)</a>
+	  <div class="socialMediaButtonsMainContainer" style="height:50px !important; margin: 0px auto 0px !important;">
+		 <a href="index.php?<?php if ($_GET['altvideosource']==1){ echo "&altvideosource=0"; }else{ echo "&altvideosource=1"; } if (!empty($_GET['altvideoplayer'])){ echo "&altvideoplayer=".$_GET['altvideoplayer']; }?>" class="playerTitle" style="display:block;padding: 0px 0px 0px 0px;text-decoration:none;font-style: italic;font-size:20px;">&iquest;Problemas para vernos? Click aqu&iacute; para probar con Reproductor <?php if ($_GET['altvideoplayer']==1){ echo "A"; }else{ echo "B"; }?> + Servidor <?php if ($_GET['altvideosource']==1){ echo "Tensila"; }else{ echo "Telpin"; }?></a>
 	  </div>
 	  
-	  <div id="audioPlayerMainContainer" style="text-align:center; margin-bottom: 60px;">
-			<h1>Reproductor de Streaming de Audio</h1>
+	  <div class="socialMediaButtonsMainContainer" style="height:70px !important; margin: 0px auto 40px !important;">
+		 <a href="index.php?<?php if (!empty($_GET['altvideosource'])){ echo "&altvideosource=".$_GET['altvideosource']; } if ($_GET['altvideoplayer']==1){ echo "&altvideoplayer=0"; }else{ echo "&altvideoplayer=1"; } ?>" class="playerTitle" style="display:block;padding: 0px 0px 40px 0px;text-decoration:none;font-style: italic;font-size:20px;">&iquest;Problemas para vernos? Click aqu&iacute; para probar con Reproductor <?php if ($_GET['altvideoplayer']==1){ echo "B + Telpin"; }else{ echo "A"; }?></a>
+	  </div>
+	  
+	  <div id="audioPlayerMainContainer" style="text-align:center; margin-bottom: 90px;">
+			<p class="playerTitle">Reproductor de Streaming de Audio</p>
 			<div id='MediaPlayerOverview'>
 				<script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
 				<script type="text/javascript">
@@ -162,8 +166,7 @@ margin-top: 30px;
     </div>
     
     <div class="photoGallery">
-      <p class="playerTitle" style="padding: 50px 0px 0px 0px;
-">Galería fotográfica</p>
+      <p class="playerTitle" style="padding: 50px 0px 0px 0px;">Galería fotográfica</p>
       <div data-image-path="img/plusgallery" class="plusgallery" id="plusgallery" data-credit="false" data-userid="radiopowerpinamar" data-type="facebook"  data-limit="50"  data-album-limit="6" data-exclude="302621303173363,269945099774317" data-access-token="CAAWN8apLaFgBACMT1UnNI9Fus4lWMTR8mhvuXH378gOUK7OlaHr3jabhA6PeT7B09iYqVm6DRnrSqz2v4W0AlCdsu1Ecwl9C1JFyoxOmMRYFYvVZCcZCTus8kgLbZAGBkPhWfpmwBKw6KZCqUPcgN4A2OJxPh5lfn2xIFKm8mGPKiLdMAMWVsNYOYdpBmswZD"></div>
       <div class="morePhotosBtn"><a href="https://www.facebook.com/radiopowerpinamar/photos" target="_blank" title="Ver mas fotos"><span>+</span>&nbsp;Fotos</a></div>
     </div>
@@ -201,7 +204,7 @@ margin-top: 30px;
             var videoPlayerVar=jwplayer("videoPlayer");
 						videoPlayerVar.setup({
               type: 'rtmp',
-              streamer: 'rtmp://wowza.telpin.com.ar:1935/live-powerTV/',
+              streamer: 'rtmp://wowza.telpin.com.ar:1936/live-powerTV/',
 							file: "power.stream",
 							autostart: true,
 							mute: false,
