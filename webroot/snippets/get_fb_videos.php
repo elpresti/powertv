@@ -35,7 +35,7 @@
 	$urlBase = "https://facebook.com";
 	foreach($fbsources as $fbsource){
 		//build target URL
-		$urlTarget="https://graph.facebook.com/v2.11/";
+		$urlTarget="https://graph.facebook.com/v7.0/";
 		$urlTarget.=$fbsource;
 		$urlTarget.="/videos?";
 		if (!empty($datefrom)){
