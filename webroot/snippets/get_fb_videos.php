@@ -49,7 +49,8 @@
 		}
 		$urlTarget.="&filter=stream";
 		$urlTarget.="&access_token=".$accesstoken;
-		$urlTarget.="&fields=length%2Ctitle%2Cdescription%2Cpermalink_url%2Ccomments.limit(0).summary(1)%2Clikes.limit(0).summary(1)%2Creactions.limit(0).summary(1)%2Ccreated_time";
+		//$urlTarget.="&fields=length%2Ctitle%2Cdescription%2Cpermalink_url%2Ccomments.limit(0).summary(1)%2Clikes.limit(0).summary(1)%2Creactions.limit(0).summary(1)%2Ccreated_time";
+		$urlTarget.="&fields=length%2Ctitle%2Cdescription%2Cpermalink_url%2Ccomments.limit(0).summary(1)%2Clikes.limit(0).summary(1)%2Ccreated_time";
 		$data = file_get_contents($urlTarget);
 		$data = json_decode($data, true);
 		if (!empty($data) && array_key_exists('data', $data) && !empty($data['data'])){
