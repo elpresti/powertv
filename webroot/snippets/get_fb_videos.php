@@ -4,17 +4,16 @@
 	header('Content-Type: text/html; charset=utf-8');
 	header("Access-Control-Allow-Origin: *");
 	
+	//$_SERVER['QUERY_STRING'] = "&fbsources=Pinamar24,powerpinamar&maxvideosbysource=10&datefrom=2020-10-22&dateto=2020-10-23&accesstoken=[VER_DOC_DATOS_PWR]";
+
 	parse_str($_SERVER['QUERY_STRING'], $params);
-	
-	//&fbsources=Pinamar24,radiopowerpinamar&maxvideosbysource=10&datefrom=2018-01-16&dateto=2018-01-18&accesstoken=CAAWN8apLaFgBACMT1UnNI9Fus4lWMTR8mhvuXH378gOUK7OlaHr3jabhA6PeT7B09iYqVm6DRnrSqz2v4W0AlCdsu1Ecwl9C1JFyoxOmMRYFYvVZCcZCTus8kgLbZAGBkPhWfpmwBKw6KZCqUPcgN4A2OJxPh5lfn2xIFKm8mGPKiLdMAMWVsNYOYdpBmswZD
-	
-	
-	$fbsources=$_GET['fbsources'];
-	$maxvideosbysource=$_GET['maxvideosbysource'];
-	$datefrom=$_GET['datefrom'];
-	$dateto=$_GET['dateto'];
-	$accesstoken=$_GET['accesstoken'];
+	$fbsources= isset($_GET['fbsources']) ? $_GET['fbsources'] : $params['fbsources'];
+	$maxvideosbysource = isset($_GET['maxvideosbysource']) ? $_GET['maxvideosbysource'] : $params['maxvideosbysource'];
+	$datefrom = isset($_GET['datefrom']) ? $_GET['datefrom'] : $params['datefrom'];
+	$dateto = isset($_GET['dateto']) ? $_GET['dateto'] : $params['dateto'];
+	$accesstoken = isset($_GET['accesstoken']) ? $_GET['accesstoken'] : $params['accesstoken'];
 	$out="";
+	$videoUrlsArray = [];
 	if (empty($fbsources)) {
 		echo "ERROR--EMPTY_SOURCE_1";
 		die();
@@ -55,10 +54,13 @@
 		$data = json_decode($data, true);
 		if (!empty($data) && array_key_exists('data', $data) && !empty($data['data'])){
 			foreach ($data['data'] as $item){
-				$out.=$urlBase.$item['permalink_url']."\n";
+				if (!in_array($urlBase.$item['permalink_url'], $videoUrlsArray)) {
+					$videoUrlsArray[] = $urlBase.$item['permalink_url'];
+				}
 			}
 		}
 	}
+	$out = implode("\n", $videoUrlsArray);
 	echo $out;
 	
 	
