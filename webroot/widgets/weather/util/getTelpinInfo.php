@@ -28,8 +28,8 @@
 	
 	function getCurrentWeatherData(){
 		$fullUrl="http://eltiempo.telpin.com.ar/infocel.htm";
-		$htmlCode = file_get_html($fullUrl);
-		$htmlCode = $htmlCode->find('table', 1);
+		$fullHtmlCode = file_get_html($fullUrl);
+		$htmlCode = $fullHtmlCode->find('table', 1);
 		
 		//printHtmlRelevantData($htmlCode);die();
 		
@@ -40,7 +40,7 @@
 			'realfeel' => getRealFeel($htmlCode),
 			'windDirection' => getWindDirection($htmlCode),
 			'windSpeed' => getWindSpeed($htmlCode),
-			'fallenRain' => getFallenRain($htmlCode),
+			'fallenRain' => getFallenRain($fullHtmlCode),
 			'pressure' => getPressure($htmlCode)
 		);
 		return $out;
@@ -124,13 +124,18 @@
 	
 	function getFallenRain($html){
 		$out = null;
-		$strTmp = $html->find('span',5)->plaintext;
-		$strTmp = str_replace($html->find('b',4)->plaintext,"",$strTmp);
-		if (!empty($strTmp)  &&  strlen($strTmp)>0){
-			$out = getOnlyNumbers(trim(str_replace(",",".",$strTmp)));
-			if (empty($out)  ||  strlen($out)==0){
-				$out = 0;
+		try{
+			$strTmp = $html->find('script',0)->innertext;
+			$strTmp = preg_replace("/\s+/", "", $strTmp); //remove all kind of spaces
+			$fallenRain = get_string_between($strTmp, 'rfallY=', ';');
+			if (!empty($fallenRain)  &&  strlen($fallenRain)>0){
+				$out = getOnlyNumbers(trim(str_replace(",",".",$fallenRain)));
+				if (empty($out)  ||  strlen($out)==0){
+					$out = 0.2;
+				}
 			}
+		}catch(Exception $e){
+			$out = 0.1;
 		}
 		return $out;
 	}
@@ -185,7 +190,15 @@
 		foreach($htmlCodeMainDiv->find('font') as $element) {
 			echo '<br><strong>font element '.$i.':</strong><br>'.$element->plaintext.'<br><br>';
 			$i++;
-		}		
+		}
+		foreach($htmlCodeMainDiv->find('head') as $element) {
+			echo '<br><strong>head element '.$i.':</strong><br>'.$element->plaintext.'<br><br>';
+			$i++;
+		}
+		foreach($htmlCodeMainDiv->find('script') as $element) {
+			echo '<br><strong>script element '.$i.':</strong><br>'.$element->innertext.'<br><br>';
+			$i++;
+		}
 	}
 	
 	function getOnlyNumbers($str){
@@ -195,8 +208,17 @@
 		return $str;
 	}
 	
-	$action=$_GET['action'];
+	function get_string_between($string, $start, $end){
+		$string = ' ' . $string;
+		$ini = strpos($string, $start);
+		if ($ini == 0) return '';
+		$ini += strlen($start);
+		$len = strpos($string, $end, $ini) - $ini;
+		return substr($string, $ini, $len);
+	}
 	
+	$action=$_GET['action'];
+	$action = 'getcurrentweather';//QUITAR esto!
 	if ($action=='getcurrentweather' ) {
 		$outData = getCurrentWeatherData();
 		if ($outData){
