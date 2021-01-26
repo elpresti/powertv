@@ -127,7 +127,7 @@
 		try{
 			$strTmp = $html->find('script',0)->innertext;
 			$strTmp = preg_replace("/\s+/", "", $strTmp); //remove all kind of spaces
-			$fallenRain = get_string_between($strTmp, 'rfallY=', ';');
+			$fallenRain = get_string_between($strTmp, 'rfall=', ';');
 			if (!empty($fallenRain)  &&  strlen($fallenRain)>0){
 				$out = getOnlyNumbers(trim(str_replace(",",".",$fallenRain)));
 				if (empty($out)  ||  strlen($out)==0){
