@@ -1,13 +1,13 @@
 <?php
-//$spreadsheetData = file_get_contents('https://spreadsheets.google.com/feeds/list/19-uxl3ziCXZ5QfSth3OG6NnuAnpfRvMesLQPaHXZ924/1/public/values?alt=json-in-script');
-//echo "spreadsheetData: <br>".$spreadsheetData;
+//$spreadsheetData = file_get_contents('https://script.google.com/macros/s/AKfycbw9_xKBnH8kOmexyvmo4kXNIOYnPCKtuisTgJ7VkFYyCaRWQGf1XqiFFF6FIqaxHQwv/exec');
+//echo "spreadsheetData: <br>".$spreadsheetData; die();
 
 	date_default_timezone_set('America/Argentina/Buenos_Aires');
-	
+
 	$outMsg="NO MESSAGE";
 	$outStatusCode=500;
 	$outData=null;
-	
+
 	function printResultInJson2(){
 		global $outMsg, $outStatusCode, $outData;
 		$arr = array('statusCode' => $outStatusCode, 'msg' => utf8_encode($outMsg), 'outData' => json_encode($outData)); //json_encode() will convert to null any non-utf8 String
@@ -26,7 +26,7 @@
 				}
 			}
 			if ($nullItems<3){
-				$outStatusCode="200"; 
+				$outStatusCode="200";
 				$outMsg="DONE!";
 			}else{
 				$outMsg="Many null items, something went wrong";
@@ -47,24 +47,10 @@ $monthsNames = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","A
 function getSpreadSheetDataIntoArray($ssUrl){
   $ssDataArray = array();
   $spreadsheetData = file_get_contents($ssUrl);
-  $spreadsheetData = substr($spreadsheetData, strpos($spreadsheetData, '{')); //remove no-json data
-  $spreadsheetData = substr($spreadsheetData, 0, -2); //remove no-json data
   $ssDataObj = json_decode($spreadsheetData);
-  $entries = $ssDataObj->{'feed'}->{'entry'};
+  $entries = $ssDataObj->{'GoogleSheetData'};
   foreach($entries as $entry){
-     $rowData=array();
-     $i=1;
-     foreach ($entry as $key => $value){
-       if ($i>6){ //skip irrelevant data
-         if ($i==7){
-            $nombreParam = $value->{'$t'}; //save first column value to use as index
-         }else{
-         	$keyName = substr($key,strrpos($key, "$")+1);
-            $ssDataArray[$keyName][$nombreParam]=$value->{'$t'};
-         }
-       }
-       $i++;
-     }
+     $ssDataArray[$entry[0]] = $entry[1];
   }
   //echo '-------PRIMERO---------<pre>' . var_export($ssDataArray,true).'</pre>--------- FIN PRIMERO ---------';
   return $ssDataArray;
@@ -72,23 +58,23 @@ function getSpreadSheetDataIntoArray($ssUrl){
 
 function getOrderedCandidatesByWinner($ssDataArray){
   //echo '<br>-------ORDEN ENTRADA---------<br><pre>' . var_export($ssDataArray,true).'</pre><br>--------- FIN ORDEN ENTRADA ---------<br>';
-   $sortArray = array(); 
-   foreach($ssDataArray as $ssDataItem){ 
-      foreach($ssDataItem as $key=>$value){ 
-          if(!isset($sortArray[$key])){ 
-              $sortArray[$key] = array(); 
-          } 
-          $sortArray[$key][] = $value; 
-      } 
+   $sortArray = array();
+   foreach($ssDataArray as $ssDataItem){
+      foreach($ssDataItem as $key=>$value){
+          if(!isset($sortArray[$key])){
+              $sortArray[$key] = array();
+          }
+          $sortArray[$key][] = $value;
+      }
    }
-	$orderby = "porcentaje_parcial"; //change this to whatever key you want from the array 
-	array_multisort($sortArray[$orderby],SORT_DESC,$ssDataArray); 
+	$orderby = "porcentaje_parcial"; //change this to whatever key you want from the array
+	array_multisort($sortArray[$orderby],SORT_DESC,$ssDataArray);
   //echo '<br>-------ORDEN SALIDA---------<br><pre>' . var_export($ssDataArray,true).'</pre><br>--------- FIN ORDEN SALIDA ---------<br>';
   return $ssDataArray;
 }
 
 
-function img_data_uri($file,$mime=null) {  
+function img_data_uri($file,$mime=null) {
   if ($file == null){
     return null;
   }
@@ -103,7 +89,7 @@ function img_data_uri($file,$mime=null) {
     $mime = 'image/'.strtolower($fileExtension);
   }
   $contents = file_get_contents($file);
-  $base64   = base64_encode($contents); 
+  $base64   = base64_encode($contents);
   return ('data:' . $mime . ';base64,' . $base64);
 }
 
@@ -163,7 +149,7 @@ function getFilledWeatherDataObject(){
 	setlocale(LC_ALL,"es_ES");
 	$data = array(
 			'currentDataBgImg' => 'http://remtsoy.com/experiments/weather_widget/img/paris-sm.jpg',
-			'cityName' => 'Pinamar', 
+			'cityName' => 'Pinamar',
 			'nowDatetime' => $dayWeekNames[date('w')]." ".date('d')." de ".$monthsNames[date('n')-1]. " del ".date('Y').", ".strftime("%H:%M")." HS", //'Domingo, 27 de Julio, 18:30',
 			'currentTemp' => '+25',
 			'currentRealFeel' => '+20 Sensación',
@@ -329,7 +315,7 @@ function getFilledWeatherDataObject(){
 		$data['forecastByDay'][$index]['dayMaxTemp'] = ($virtualDay['maxTemp']>0) ? "+".round($virtualDay['maxTemp']) : round($virtualDay['maxTemp']);
 		$data['forecastByDay'][$index]['dayMinTemp'] = ($virtualDay['minTemp']>0) ? "+".round($virtualDay['minTemp']) : round($virtualDay['minTemp']);
 		$data['forecastByDay'][$index]['dayIcon'] = getWeatherIcon(null);
-		
+
 		$index++;
 	}
 
@@ -408,16 +394,16 @@ function getWeatherIcon($iconUrlPath,$currentConditions=false){
 	}
 	/*
 	 gifs/header/iconos/chicos/tormenta.jpg
-	 
+
 	 */
 	//TODO
 	return $out;
 }
 
 function getWindData(){
-	
+
 	$ssWINDGURUdataObj = getSpreadSheetDataIntoArray('https://spreadsheets.google.com/feeds/list/19-uxl3ziCXZ5QfSth3OG6NnuAnpfRvMesLQPaHXZ924/1/public/values?alt=json-in-script');
-	
+
 /*
 	$index = 0;
 	foreach($data['windForecastByHour'] as  &$windForecastItem){
@@ -439,6 +425,6 @@ function getWindData(){
 	$out = $ssWINDGURUdataObj;
 	return $out;
 }
-	
+
 
 ?>
