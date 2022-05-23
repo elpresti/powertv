@@ -28,7 +28,13 @@
 	
 	function getCurrentWeatherData(){
 		$fullUrl="http://eltiempo.telpin.com.ar/infocel.htm";
-		$fullHtmlCode = file_get_html($fullUrl);
+		$arrContextOptions=array(
+			"ssl"=>array(
+				"verify_peer"=>false,
+				"verify_peer_name"=>false,
+			),
+		); 
+		$fullHtmlCode = file_get_html($fullUrl, false, stream_context_create($arrContextOptions));
 		$htmlCode = $fullHtmlCode->find('table', 1);
 		
 		//printHtmlRelevantData($htmlCode);die();
