@@ -1,37 +1,11 @@
 <?php
 //"D:\Software\RoboTask\Tasks\apps\php-7.4.32-nts-Win32-vc15-x64\php.exe" -c "D:\Software\RoboTask\Tasks\apps\php-7.4.32-nts-Win32-vc15-x64\php.ini" -e "D:\Software\RoboTask\Tasks\apps\notiFlashIA\getNewsVideoCmd.php"
-//--ffmpegpath="D:\Software\ffmpeg\ffmpeg-2023-07-19-git-efa6cec759-full_build\bin\ffmpeg.exe"
-//--backgroundvideofile="D:\Software\trash\newsbackgroundvideo.mp4" --maintextcontainerbgcolor="#DDDBDD" --maintextcolor="#3A1E04" --alltextcontainerspositionx="380"
-// --minitextcontainergbcolor="#00223F" --videowidth="1920" --videoheight="1080" --maintextcontainerwidth="990" --maintextcontainerpositiony="700" --minititlecontainerpositiony="620"
-// --fontsdir="D\\:\\\\Software\\\\trash\\\\fonts\\\\"  --minititlefontsize="30" --titlefontsize="36" --newsbodyfontsize="48" --outvideofile="output_scrolling.mp4"
-// --ffmpegfinalcmdfilename="ffmpegfinalcmd.bat" --outputlength="10" --resultantfileslocation="D:\Software\trash\"
-// --newscontentminititle="38,7% EN EL PRIMER TRIMESTRE" --newscontenttitle="18 MILLONES DE PERSONAS SON POBRES"
-// --newscontentbody="EL ANUNCIO DE SERGIO MASSA DE UNA SUMA FIJA ABRE UN FRENTE DE CONFLICTO CON GOBERNADORES E INTENDENTES. ES PORQUE LOS MUNICIPALES Y EL PERSONAL DE ALGUNAS PROVINCIAS COBRAN LOS SUELDOS MÁS BAJOS, POR LO QUE DEBERÍAN ASUMIR UN MILLONARIO COSTO FISCAL PARA IMPLEMENTAR LA MEDIDA. LA APUESTA DEL MINISTRO-CANDIDATO POR FIJAR UN PISO SALARIAL EQUIVALENTE A LA CANASTA DE POBREZA."
-
-
-/*
-D:\Software\ffmpeg\ffmpeg-2023-07-19-git-efa6cec759-full_build\bin\ffmpeg.exe -i "D:\Software\trash\newsbackgroundvideo.mp4" -f lavfi -i color=#DDDBDD:size=990x250 -f lavfi -i color=#00223F:size=495x60 -f lavfi -i "color=color=black@0.0:size=1920x1080,format=rgba" -filter_complex "
-[1]format=yuva420p,geq=lum='p(X,Y)':a='if(gt(abs(W/2-X),W/2-26)*gt(abs(H/2-Y),H/2-26),if(lte(hypot(26-(W/2-abs(W/2-X)),26-(H/2-abs(H/2-Y))),26),255,0),255)'[newsbodycontainer];
-[2]format=yuva420p,geq=lum='p(X,Y)':a='if(gt(abs(W/2-X),W/2-18)*gt(abs(H/2-Y),H/2-18),if(lte(hypot(18-(W/2-abs(W/2-X)),18-(H/2-abs(H/2-Y))),18),255,0),255)'[minititlecontainer];
-color=c=#00223F@1:s=450x50:duration=30,subtitles=news-mini-title.ass:fontsdir=fonts/[newsminititle];
-color=c=#DDDBDD@1:s=950x60:duration=30,subtitles=news-content-title.ass:fontsdir=fonts/[newstitle];
-color=c=#DDDBDD@1:s=950x150:duration=30,subtitles=news-content-body.ass:fontsdir=fonts/[newsbody];
-[minititlecontainer][newsminititle]overlay=eval=init:x=20:y=05[newsminititlefull];
-[newsminititlefull]crop=495:60:0:0[newsminititlefull];
-[newsbodycontainer][newsbody]overlay=eval=init:x=20:y=80[newsbodyfull];
-[newsbodyfull][newstitle]overlay=eval=init:x=20:y=10[newstitleandbodywithcontainer];
-[newstitleandbodywithcontainer]crop=990:250:0:0[newstitleandbodywithcontainer];
-[newsminititlefull]format=yuva420p,fade=t=in:st=4:d=1:alpha=1,fade=t=out:st=25:d=1:alpha=1[newsminititlefullwithfx];
-[3][newsminititlefullwithfx]overlay=eval=init:x=380:y=620[textsmaincontainer];
-[textsmaincontainer][newstitleandbodywithcontainer]overlay=eval=init:x=380:y=700[textsmaincontainer];
-[textsmaincontainer]format=yuva420p,fade=t=in:st=3:d=1:alpha=1,fade=t=out:st=27:d=1:alpha=1[textsmaincontainerwithfx];
-[0][textsmaincontainerwithfx]overlay=eval=init:x=0:y=0[out];
-" -map [out] -c:v libx264 -y -preset ultrafast -t 10 output_scrolling.mp4
-
-start /low /MIN cmd /c {FFMPEG_APP_PATH} -y -threads 1 -ss {VIDEO_HALF_DURATION} -i "{CURRENT_VIDEOFILE}" -t {VIDEOS_LENGTH}
- -vf scale=1280:720  "{CURRENT_VIDEOFILE}___TEMP___.mp4" ^1^> {RESUME_VIDEO_PATH}\ffmpegStdout.log ^2^>^&^1
-
-*/
+//--ffmpegpath="D:\Software\ffmpeg\ffmpeg-2023-07-19-git-efa6cec759-full_build\bin\ffmpeg.exe" --backgroundvideofile="D:\Software\trash\newsbackgroundvideo.mp4"
+//--maintextcontainerbgcolor="#DDDBDD" --maintextcolor="#3A1E04" --alltextcontainerspositionx="150" --minitextcontainergbcolor="#00223F" --minitextcolor="#FFFFFF" --videowidth="1920"
+//--videoheight="1080" --maintextcontainerwidth="1600" --maintextcontainerpositiony="700" --minititlecontainerpositiony="620" --fontsdir="D\\:\\\\Software\\\\trash\\\\fonts\\\\"
+//--minititlefontsize="30" --titlefontsize="36" --bodyfontsize="48" --outvideofile="output_scrolling.mp4" --ffmpegfinalcmdfilename="ffmpegfinalcmd.bat" --outputlength="40"
+//--resultantfileslocation="D:\\Software\\trash\\" --newscontentminititle="ECOLOGÍA EN PINAMAR" --newscontenttitle="TRATAMIENTO DE LA FAUNA MARINA EN PINAMAR"
+//--newscontentbody="LA FUNDACIÓN ECOLÓGICA PINAMAR SE REUNIÓ CON CONCEJALES PARA TRATAR EL TEMA DEL TRATAMIENTO DE LA FAUNA MARINA. LOS REPRESENTANTES DE LA FUNDACIÓN COMENTARON QUE DESDE HACE 20 AÑOS HAY UN CONVENIO CON FUNDACIÓN MUNDO MARINO PARA EL RESCATE DE LOS ANIMALES, PERO QUE MUCHAS VECES NO TIENEN CAMIONETAS DISPONIBLES. SE PROPUSO GENERAR UNA REUNIÓN CON EL DEPARTAMENTO DE ECOLOGÍA, PREFECTURA, SEGURIDAD EN PLAYA Y FUNDACIÓN ECOLÓGICA PARA TRANSFORMAR LO DIALOGADO EN UNA NORMATIVA O EN UN PROGRAMA. LA REUNIÓN SE LLEVARÁ A CABO EL MARTES 18 DE JULIO A LAS 11 DE LA MAÑANA."
 
 function getAssFileContent($textToShow, $fontSize, $fontName, $fontColor, $totalTime, $textContainerWidth, $textContainerHeight) {
     //$textToShow = iconv(mb_detect_encoding($textToShow, mb_detect_order(), true), "UTF-8", $textToShow);
@@ -56,13 +30,13 @@ Style: Default, ".$fontName.", ".$fontSize.", &H00".$fontColor.", &HFF000000, &H
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n";
     if (strlen($textToShow) > $minCharsToScroll) {
         //if the text is too long, add two Dialogue layers, the first static, and the second one should be the same but with the move-FX to scroll the text
-        $scrollingTextDuration = $totalTime - $staticTextDuration;
         $avgFontWidth = round($fontSize / 2);
         $avgCharsPerTextLine = round(($textContainerWidth / $avgFontWidth), 0, PHP_ROUND_HALF_UP);
         $amountOfTextLines = round((strlen($textToShow) / $avgCharsPerTextLine), 0, PHP_ROUND_HALF_UP); //$amountOfTextLines should be 9, for fontSize=48 and textContainerWidth=440
-        $textTotalHeight = $fontSize * $amountOfTextLines;
+        $textTotalHeight = ($fontSize * $amountOfTextLines)-9;
+        $fadeOutAt = $totalTime - 5;
         $assFileContent .= 'Dialogue: 0,0:00:00.00,0:00:'.$staticTextDuration.'.00,Default,,0,0,0,,{\an1}{\t(0,'.$staticTextDuration.'000,\fad(1000,0)\move(0,'.$textTotalHeight.',0,'.$textTotalHeight.'))}'.$textToShow."\n";//432 para fontsize=48
-        $assFileContent .= 'Dialogue: 0,0:00:'.$staticTextDuration.'.00,0:00:'.$totalTime.'.00,Default,,0,0,0,,{\an1}{\\t(0,'.$scrollingTextDuration.'000,\move(0,'.$textTotalHeight.',0,0)\\fad(0,1000))}'.$textToShow."\n";
+        $assFileContent .= 'Dialogue: 0,0:00:'.$staticTextDuration.'.00,0:00:'.$totalTime.'.00,Default,,0,0,0,,{\an1}{\\t(0,'.$fadeOutAt.'000,\move(0,'.$textTotalHeight.',0,0)\\fad(0,1000))}'.$textToShow."\n";
 //        $assFileContent .= 'Dialogue: 0,0:00:00.00,0:00:'.$totalTime.'.00,Default,,0,0,0,Scroll up;-150;0;50;fadeawayheight,{\an1}'.$textToShow."\n";
     } else {
         $lineHeight = round(($textContainerHeight + $fontSize) / 2);
@@ -94,7 +68,8 @@ $options = getopt("", [
     "newscontentbody::",
     "ffmpegfinalcmdfilename::",
     "outputlength::",
-    "resultantfileslocation::"
+    "resultantfileslocation::",
+    "minitextcolor::"
 ]);
 
 $requiredParams = [
@@ -117,8 +92,8 @@ foreach ($requiredParams as $param) {
 $defaultValues = [
     "maintextcontainerbgcolor" => "#DDDBDD",
     "maintextcolor" => "#3A1E04",
+    "minitextcolor" => "#FFFFFF",
     "minitextcontainergbcolor" => "#00223F",
-    "alltextcontainerspositionx" => '380',
     "alltextcontainerspositionx" => '380',
     "maintextcontainerwidth" => '990',
     "maintextcontainerpositiony" => '700',
@@ -145,19 +120,20 @@ $params = $options; //array_merge($defaultValues, $options);
 $miniTitleFileName = "news-mini-title.ass";
 $miniTitleSubtitleFilePath = $params['resultantfileslocation'] . $miniTitleFileName;
 $minititleFontName = "Rockford Sans Light";
-$minititleFontColor = "#FFFFFF";
+$minititleFontColor = $params['minitextcolor'];
 //$minititleSubtitleTotalTime = 30;
 $minititleSubtitleTotalTime = $params['outputlength'];
 //$minitextBgWidth = "440";
-$minitextBgWidth = round((round($params['minititlefontsize'] / 2) * strlen($params['newscontentminititle'])) * 1.06);
+$minitextBgWidth = round((round($params['minititlefontsize'] / 2) * strlen($params['newscontentminititle'])) * 1.20);
 $minitextContainerWidth = round($minitextBgWidth * 1.10);
 
 // Create news Mini-title text layer
 $minitextBgHeight = round($params['minititlefontsize'] * 1.3);
 $minitextSubtitleHeight = round($minitextBgHeight * 1.3);
 $minitextSubtitleWidth = $minitextBgWidth + 10;
+$minitextContainerHeight = $minitextSubtitleHeight + 10;
 
-$assFileContent =  getAssFileContent(
+$assFileContent = getAssFileContent(
     $params['newscontentminititle'],
     $params['minititlefontsize'],
     $minititleFontName,
@@ -172,7 +148,7 @@ echo "File $miniTitleSubtitleFilePath created successfully.\n";
 // 2) Build title subtitle file
 $titleSubtitleFileName = $params['resultantfileslocation']."news-content-title.ass";
 $titleFontName = "Galano Grotesque Alt SemiBold";
-$titleFontColor = "#3A1E04";
+$titleFontColor = $params['maintextcolor'];
 //$titleSubtitleTotalTime = 30;
 $titleSubtitleTotalTime = $params['outputlength'];
 $titleSubtitlePaddingTop = 10;
@@ -198,7 +174,7 @@ echo "File $titleSubtitleFileName created successfully.\n";
 // 3) Build news body text subtitle file
 $newsBodySubtitleFileName = $params['resultantfileslocation']."news-content-body.ass";
 $newsBodyFontName = "Rockford Sans Light";
-$newsBodyFontColor = "#3A1E04";
+$newsBodyFontColor = $params['maintextcolor'];
 //$newsBodySubtitleTotalTime = 30;
 $newsBodySubtitleTotalTime = $params['outputlength'];
 $bodyTextSubtitleHeight = 150;//height of the box in which the body text will scroll
@@ -240,7 +216,7 @@ $filterComplex .= " color=c={$params['maintextcontainerbgcolor']}@1:s={$titleAnd
 $filterComplex .= " [minititlecontainer][newsminititle]overlay=eval=init:x=20:y=05[newsminititlefull];";
 
 // Crops the final mini-title layer to isolate it from its background
-$filterComplex .= " [newsminititlefull]crop={$minitextContainerWidth}:60:0:0[newsminititlefull];";
+$filterComplex .= " [newsminititlefull]crop={$minitextContainerWidth}:{$minitextContainerHeight}:0:0[newsminititlefull];";
 
 // Overlaps the news body text layer over the main-text container
 $bodyTextLayerPositionY = $titleSubtitlePaddingTop + $titleLayerHeight + $bodySubtitlePaddingTop;
@@ -256,13 +232,17 @@ $filterComplex .= " [newstitleandbodywithcontainer]crop={$params['maintextcontai
 $filterComplex .= " [newsminititlefull]format=yuva420p,fade=t=in:st=4:d=1:alpha=1,fade=t=out:st=25:d=1:alpha=1[newsminititlefullwithfx];";
 
 // Show and then hide the main-text layer, using fade FX
-$filterComplex .= " [newstitleandbodywithcontainer]format=yuva420p,fade=t=in:st=3:d=1:alpha=1,fade=t=out:st=27:d=1:alpha=1[newstitleandbodywithcontainerwithfx];";
+$fadeInAt = 3;
+$fadeOutAt = $params['outputlength'] - 5;
+$filterComplex .= " [newstitleandbodywithcontainer]format=yuva420p,fade=t=in:st={$fadeInAt}:d=1:alpha=1,fade=t=out:st={$fadeOutAt}:d=1:alpha=1[newstitleandbodywithcontainerwithfx];";
 
 // Use a new empty and transparent full screen layer, to add there there texts with its FXs. Start it by overlaping to it the final mini-title layer
-$filterComplex .= " [3][newsminititlefullwithfx]overlay=eval=init:x=380:y=620[textsmaincontainer];";
+$minititleDistanceOverMainText = 15;
+$miniTitlePositionY = $params['maintextcontainerpositiony'] - $minitextContainerHeight - $minititleDistanceOverMainText;
+$filterComplex .= " [3][newsminititlefullwithfx]overlay=eval=init:x={$params['alltextcontainerspositionx']}:y={$miniTitlePositionY}[textsmaincontainer];";
 
 // Now overlap to it the final main-text layer
-$filterComplex .= " [textsmaincontainer][newstitleandbodywithcontainerwithfx]overlay=eval=init:x=380:y=700[textsmaincontainer];";
+$filterComplex .= " [textsmaincontainer][newstitleandbodywithcontainerwithfx]overlay=eval=init:x={$params['alltextcontainerspositionx']}:y={$params['maintextcontainerpositiony']}[textsmaincontainer];";
 
 // Now overlap the full-texts layer to the input video
 $filterComplex .= " [0][textsmaincontainer]overlay=eval=init:x=0:y=0[out];";
@@ -270,7 +250,7 @@ $filterComplex .= " [0][textsmaincontainer]overlay=eval=init:x=0:y=0[out];";
 $full_ffmpeg_cmd = "{$params['ffmpegpath']} -y -threads 1 ";
 $full_ffmpeg_cmd .= " -i \"{$params['backgroundvideofile']}\" ";
 $full_ffmpeg_cmd .= " -f lavfi -i color={$params['maintextcontainerbgcolor']}:size={$params['maintextcontainerwidth']}x250 ";
-$full_ffmpeg_cmd .= " -f lavfi -i color={$params['minitextcontainergbcolor']}:size={$minitextContainerWidth}x60 ";
+$full_ffmpeg_cmd .= " -f lavfi -i color={$params['minitextcontainergbcolor']}:size={$minitextContainerWidth}x{$minitextContainerHeight} ";
 $full_ffmpeg_cmd .= " -f lavfi -i \"color=color=black@0.0:size={$params['videowidth']}x{$params['videoheight']},format=rgba\" ";
 
 $full_ffmpeg_cmd .= "  -filter_complex \"{$filterComplex}\" ";
