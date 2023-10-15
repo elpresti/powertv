@@ -126,7 +126,7 @@ function getFfmpegCmdToGenerateMainVideo($params, $outCmdExecutableFilename, $de
 
     $full_ffmpeg_cmd .= "-filter_complex \"$filter_complex$xfade_commands\" ";
     $full_ffmpeg_cmd .= "-map [f" . (count($mediaInputFiles) - 1) . "] -t " . ((count($mediaInputFiles) * $eachInputDuration) - 1)
-        . " -c:v libx264 -pix_fmt yuv420p -y " . substr($outCmdExecutableFilename, 0, -3) . "mp4";
+        . " -c:v libx264 -pix_fmt yuv420p " . substr($outCmdExecutableFilename, 0, -3) . "mp4";
 
     $ffmpegLogFilename = substr($outCmdExecutableFilename, 0, -3) . "log";
     $full_ffmpeg_cmd .= " ^1^> {$ffmpegLogFilename} ^2^>^&^1";
@@ -148,8 +148,9 @@ function getFfmpegCmdToAddAudioToVideo($params, $outCmdExecutableFilename) {
     return $ffmpegCmd;
 }
 
-function getFfmpegCmdToAddTextsToVideo($params, $outCmdExecutableFilename) {
-    $textsTotalTime = $params['mainvideototaltime'] - 4;
+function getFfmpegCmdToAddTextsAndAudioToVideo($params, $outCmdExecutableFilename) {
+    //$textsTotalTime = $params['mainvideototaltime'] - 4;
+    $textsTotalTime = $params['mainvideototaltime'];
 
     // Build given texts into subtitle files
     // 1) Build minititle subtitle file. //TODO: make this optional, to only build it if mini-title text is present
@@ -269,7 +270,7 @@ function getFfmpegCmdToAddTextsToVideo($params, $outCmdExecutableFilename) {
 
     // Show and then hide the main-text layer, using fade FX
     $fadeInAt = 3;
-    $fadeOutAt = $textsTotalTime - 5;
+    $fadeOutAt = $textsTotalTime - $params['audiooutrolength'];
     $filterComplex .= " [newstitleandbodywithcontainer]format=yuva420p,fade=t=in:st={$fadeInAt}:d=1:alpha=1,fade=t=out:st={$fadeOutAt}:d=1:alpha=1[newstitleandbodywithcontainerwithfx];";
 
     // Use a new empty and transparent full screen layer, to add there there texts with its FXs. Start it by overlaping to it the final mini-title layer
@@ -281,15 +282,33 @@ function getFfmpegCmdToAddTextsToVideo($params, $outCmdExecutableFilename) {
     $filterComplex .= " [textsmaincontainer][newstitleandbodywithcontainerwithfx]overlay=eval=init:x={$params['alltextcontainerspositionx']}:y={$params['maintextcontainerpositiony']}[textsmaincontainer];";
 
     // Now overlap the full-texts layer to the input video
-    $filterComplex .= " [0][textsmaincontainer]overlay=eval=init:x=0:y=0[out];";
+    $filterComplex .= " [0][textsmaincontainer]overlay=eval=init:x=0:y=0[videoout];";
+
+    //4) if audio is present, add the filters to the audio input
+    if (!empty($params['audiofile'])) {
+        $filterComplex .= " [4]adelay=3000|3000,dynaudnorm[audioout];";
+    }
 
     $full_ffmpeg_cmd = "{$params['ffmpegpath']} -y -threads 1 ";
     $full_ffmpeg_cmd .= " -i \"{$params['backgroundvideofile']}\" ";
     $full_ffmpeg_cmd .= " -f lavfi -i color={$params['maintextcontainerbgcolor']}:size={$params['maintextcontainerwidth']}x250 ";
     $full_ffmpeg_cmd .= " -f lavfi -i color={$params['minitextcontainergbcolor']}:size={$minitextContainerWidth}x{$minitextContainerHeight} ";
     $full_ffmpeg_cmd .= " -f lavfi -i \"color=color=black@0.0:size={$params['videowidth']}x{$params['videoheight']},format=rgba\" ";
+
+    //4) if audio is present, add the input audio file
+    if (!empty($params['audiofile'])) {
+        $full_ffmpeg_cmd .= "-i " . $params['audiofile'] . " ";
+    }
+
     $full_ffmpeg_cmd .= "  -filter_complex \"{$filterComplex}\" ";
-    $full_ffmpeg_cmd .= " -map [out] -c:v libx264 -y -preset ultrafast -t {$textsTotalTime} {$params['videowithtextsfilename']} ";
+    $full_ffmpeg_cmd .= " -c:v libx264 -map [videoout] "; //-b:v 5M
+
+    //4) if audio is present, add the mapping from the audio filters to the audio output
+    if (!empty($params['audiofile'])) {
+        $full_ffmpeg_cmd .= " -map [audioout] -c:a aac -strict experimental "; //-b:a 128k
+    }
+
+    $full_ffmpeg_cmd .= " -preset ultrafast -t {$textsTotalTime} {$params['videowithtextsfilename']} ";
     $ffmpegLogFilename = substr($outCmdExecutableFilename, 0, -3) . "log";
     $full_ffmpeg_cmd .= " ^1^> {$ffmpegLogFilename} ^2^>^&^1";
     $ffmpegCmd = "start /low /MIN cmd /c {$full_ffmpeg_cmd} ";
@@ -413,7 +432,7 @@ file_put_contents($execFileWithFfmpegCmdToGenerateMainVideo, $ffmpegCmdToGenerat
 echo "\n File '".$execFileWithFfmpegCmdToGenerateMainVideo."' successfully generated. File content: ".$ffmpegCmdToGenerateMainVideo."\n";
 
 //step 3: add texts to the video
-$ffmpegCmdForAddingTexts = getFfmpegCmdToAddTextsToVideo($params, $execFileWithFfmpegCmdForAddingTexts);
+$ffmpegCmdForAddingTexts = getFfmpegCmdToAddTextsAndAudioToVideo($params, $execFileWithFfmpegCmdForAddingTexts);
 file_put_contents($execFileWithFfmpegCmdForAddingTexts, $ffmpegCmdForAddingTexts);
 echo "\n File '" . $execFileWithFfmpegCmdForAddingTexts . "' successfully generated. File content: " . $ffmpegCmdForAddingTexts . "\n";
 
