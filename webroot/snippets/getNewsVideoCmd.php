@@ -8,6 +8,11 @@
 //--newscontentminititle="ECOLOGÍA EN PINAMAR" --newscontenttitle="TRATAMIENTO DE LA FAUNA MARINA EN PINAMAR"
 //--newscontentbody="LA FUNDACIÓN ECOLÓGICA PINAMAR SE REUNIÓ CON CONCEJALES PARA TRATAR EL TEMA DEL TRATAMIENTO DE LA FAUNA MARINA. LOS REPRESENTANTES DE LA FUNDACIÓN COMENTARON QUE DESDE HACE 20 AÑOS HAY UN CONVENIO CON FUNDACIÓN MUNDO MARINO PARA EL RESCATE DE LOS ANIMALES, PERO QUE MUCHAS VECES NO TIENEN CAMIONETAS DISPONIBLES. SE PROPUSO GENERAR UNA REUNIÓN CON EL DEPARTAMENTO DE ECOLOGÍA, PREFECTURA, SEGURIDAD EN PLAYA Y FUNDACIÓN ECOLÓGICA PARA TRANSFORMAR LO DIALOGADO EN UNA NORMATIVA O EN UN PROGRAMA. LA REUNIÓN SE LLEVARÁ A CABO EL MARTES 18 DE JULIO A LAS 11 DE LA MAÑANA."
 
+/* EXAMPLE 2: WIth less params, using many default values:
+"D:\Software\RoboTask\Tasks\apps\php-7.4.32-nts-Win32-vc15-x64\php.exe" -c "D:\Software\RoboTask\Tasks\apps\php-7.4.32-nts-Win32-vc15-x64\php.ini" -e "D:\Software\MarIA\getNewsVideoCmd.php" --ffmpegpath="D:\Software\ffmpeg\ffmpeg-2023-07-19-git-efa6cec759-full_build\bin\ffmpeg.exe" --mediainputfiles="D:\Software\trash\img_1.jpg,D:\Software\trash\img_2.png,D:\Software\trash\img_3.jpg" --audiofile="D:\Software\trash\flash17notiMensajero.mp3" --mainvideototaltime="46" --eachmediainputtime="6" --resultantfileslocation="D:\\Software\\trash\\" --fontsdir="D\\:\\\\Software\\\\trash\\\\fonts\\\\" --ffmpegfinalcmdfilename="ffmpegfinalcmd.bat" --newscontentminititle="ECOLOGÍA EN PINAMAR" --newscontenttitle="TRATAMIENTO DE LA FAUNA MARINA EN PINAMAR" --newscontentbody="LA FUNDACIÓN ECOLÓGICA PINAMAR SE REUNIÓ CON CONCEJALES PARA TRATAR EL TEMA DEL TRATAMIENTO DE LA FAUNA MARINA. LOS REPRESENTANTES DE LA FUNDACIÓN COMENTARON QUE DESDE HACE 20 AÑOS HAY UN CONVENIO CON FUNDACIÓN MUNDO MARINO PARA EL RESCATE DE LOS ANIMALES, PERO QUE MUCHAS VECES NO TIENEN CAMIONETAS DISPONIBLES. SE PROPUSO GENERAR UNA REUNIÓN CON EL DEPARTAMENTO DE ECOLOGÍA, PREFECTURA, SEGURIDAD EN PLAYA Y FUNDACIÓN ECOLÓGICA PARA TRANSFORMAR LO DIALOGADO EN UNA NORMATIVA O EN UN PROGRAMA. LA REUNIÓN SE LLEVARÁ A CABO EL MARTES 18 DE JULIO A LAS 11 DE LA MAÑANA."
+
+*/
+
 function getAssFileContent($textToShow, $fontSize, $fontName, $fontColor, $totalTime, $textContainerWidth, $textContainerHeight) {
     //$textToShow = iconv(mb_detect_encoding($textToShow, mb_detect_order(), true), "UTF-8", $textToShow);
     $textToShow = iconv("UTF-8", "Windows-1252", $textToShow);
@@ -70,7 +75,7 @@ function getFfmpegCmdToGenerateMainVideo($params, $outCmdExecutableFilename) {
 }
 */
 
-function getFfmpegCmdToGenerateMainVideo($params, $outCmdExecutableFilename, $defaultValues) {
+function getFfmpegCmdToGenerateMainVideo($params, $outputVideoFilename, $defaultValues) {
     $defaultFramerate = $defaultValues['videoframerate'];
     $mediaInputFiles = explode(',', $params['mediainputfiles']);
 
@@ -126,29 +131,65 @@ function getFfmpegCmdToGenerateMainVideo($params, $outCmdExecutableFilename, $de
 
     $full_ffmpeg_cmd .= "-filter_complex \"$filter_complex$xfade_commands\" ";
     $full_ffmpeg_cmd .= "-map [f" . (count($mediaInputFiles) - 1) . "] -t " . ((count($mediaInputFiles) * $eachInputDuration) - 1)
-        . " -c:v libx264 -pix_fmt yuv420p " . substr($outCmdExecutableFilename, 0, -3) . "mp4";
-
+        . " -c:v libx264 -pix_fmt yuv420p " . substr($outputVideoFilename, 0, -3) . "mp4";
+    return $full_ffmpeg_cmd;
+/*
     $ffmpegLogFilename = substr($outCmdExecutableFilename, 0, -3) . "log";
     $full_ffmpeg_cmd .= " ^1^> {$ffmpegLogFilename} ^2^>^&^1";
     $ffmpegCmd = "start /low /MIN cmd /c {$full_ffmpeg_cmd} ";
     return $ffmpegCmd;
+*/
 }
 
-function getFfmpegCmdToAddAudioToVideo($params, $outCmdExecutableFilename) {
+function getCmdToExecuteAllFfmpegCmds($params, $ffmpegCmds, $batchFilename) {
+	$executionLogFilename = substr($batchFilename, 0, -3) . "log";
+	$ffmpegCmdsString = "";
+    foreach ($ffmpegCmds as $index => $ffmpegCmd) {
+		$ffmpegCmdsString .= 'echo. ' . ' >> "' . $executionLogFilename . '"'. PHP_EOL;
+		$ffmpegCmdsString .= 'for /F "usebackq tokens=1,2,3,4,5,6 delims=/: " %%i in (`echo %DATE% %TIME%`) do set CURRENT_DATETIME=[%%k-%%j-%%i %%l:%%m:%%n]'. PHP_EOL;
+		$ffmpegCmdsString .= 'echo %CURRENT_DATETIME% - Starting execution of the next command: >> "' . $executionLogFilename . '"'. PHP_EOL;
+		$ffmpegCmdsString .= 'echo. ' . ' >> "' . $executionLogFilename . '"'. PHP_EOL;
+		$ffmpegCmdsString .= 'echo ' . $ffmpegCmd . ' >> "' . $executionLogFilename . '"'. PHP_EOL;
+		$ffmpegCmdsString .= 'echo. ' . ' >> "' . $executionLogFilename . '"'. PHP_EOL;
+		//$ffmpegCmdsString .= 'call ' . $ffmpegCmd . ' >> "' . $executionLogFilename . '" 2>&1';
+		$ffmpegCmdsString .= 'wmic process where name="ffmpeg.exe" CALL setpriority "below normal" >nul & ' . $ffmpegCmd . ' >> "' . $executionLogFilename . '" 2>&1';
+
+		//$ffmpegCmdsString .= 'start /low ' . $ffmpegCmd . ' >> "' . $executionLogFilename . '" 2>&1';
+		//$ffmpegCmdsString .= 'start /low /MIN cmd /c ' . $ffmpegCmd . " ^1^> {$executionLogFilename} ^2^>^&^1";
+
+		//if it is not the last one, add "&"
+		if ($index < count($ffmpegCmds) - 1) {
+            $ffmpegCmdsString .= " & ";
+        }
+    }
+
+	// Construir el contenido del archivo BAT
+    $batchFileContent = '@echo off' . PHP_EOL;
+    $batchFileContent .= 'type nul > "' . $executionLogFilename . '"'. PHP_EOL; // Limpiar el archivo de log antes de comenzar la ejecución
+    $batchFileContent .= 'echo Ejecutando comandos de FFmpeg...  >> "' . $executionLogFilename . '"'. PHP_EOL;
+    $batchFileContent .= 'echo. ' . ' >> "' . $executionLogFilename . '"'. PHP_EOL;
+	$batchFileContent .= $ffmpegCmdsString . PHP_EOL;
+    $batchFileContent .= 'echo Completado. ' . ' >> "' . $executionLogFilename . '"'. PHP_EOL;
+
+    return $batchFileContent;
+}
+
+function getFfmpegCmdToAddAudioToVideo($params, $outputVideoFilename) {
     //ffmpeg -i myVideo.mp4 --normalization-type peak --target-level 0  -c:a aac -b:a 192k -ext mp4
     $full_ffmpeg_cmd = "{$params['ffmpegpath']} -y -threads 1 ";
     $full_ffmpeg_cmd .= "-i " . $params['videowithtextsfilename'] . " ";
     $full_ffmpeg_cmd .= "-i " . $params['audiofile'] . " ";
     $full_ffmpeg_cmd .= "-c:v copy -c:a aac -strict experimental -map 0 -map 1 -shortest ";
     $full_ffmpeg_cmd .= "-af \"adelay=" . $params['audiointrolength'] . "000|" . $params['audiointrolength'] . "000,dynaudnorm\" ";
-    $full_ffmpeg_cmd .= substr($outCmdExecutableFilename, 0, -3) . "mp4";
-    $ffmpegLogFilename = substr($outCmdExecutableFilename, 0, -3) . "log";
-    $full_ffmpeg_cmd .= " ^1^> {$ffmpegLogFilename} ^2^>^&^1";
-    $ffmpegCmd = "start /low /MIN cmd /c {$full_ffmpeg_cmd} ";
-    return $ffmpegCmd;
+    $full_ffmpeg_cmd .= substr($outputVideoFilename, 0, -3) . "mp4";
+    return $full_ffmpeg_cmd;
+ //   $ffmpegLogFilename = substr($outCmdExecutableFilename, 0, -3) . "log";
+ //   $full_ffmpeg_cmd .= " ^1^> {$ffmpegLogFilename} ^2^>^&^1";
+ //   $ffmpegCmd = "start /low /MIN cmd /c {$full_ffmpeg_cmd} ";
+ //   return $ffmpegCmd;
 }
 
-function getFfmpegCmdToAddTextsAndAudioToVideo($params, $outCmdExecutableFilename) {
+function getFfmpegCmdToAddTextsAndAudioToVideo($params, $outputVideoFilename) {
     //$textsTotalTime = $params['mainvideototaltime'] - 4;
     $textsTotalTime = $params['mainvideototaltime'];
 
@@ -309,10 +350,11 @@ function getFfmpegCmdToAddTextsAndAudioToVideo($params, $outCmdExecutableFilenam
     }
 
     $full_ffmpeg_cmd .= " -preset ultrafast -t {$textsTotalTime} {$params['videowithtextsfilename']} ";
-    $ffmpegLogFilename = substr($outCmdExecutableFilename, 0, -3) . "log";
-    $full_ffmpeg_cmd .= " ^1^> {$ffmpegLogFilename} ^2^>^&^1";
-    $ffmpegCmd = "start /low /MIN cmd /c {$full_ffmpeg_cmd} ";
-    return $ffmpegCmd;
+	return $full_ffmpeg_cmd;
+    //$ffmpegLogFilename = substr($outCmdExecutableFilename, 0, -3) . "log";
+    //$full_ffmpeg_cmd .= " ^1^> {$ffmpegLogFilename} ^2^>^&^1";
+    //$ffmpegCmd = "start /low /MIN cmd /c {$full_ffmpeg_cmd} ";
+    //return $ffmpegCmd;
 }
 
 /**
@@ -388,9 +430,6 @@ $defaultValues = [
     "maintextcolor" => "#3A1E04",
     "minitextcolor" => "#FFFFFF",
     "minitextcontainergbcolor" => "#00223F",
-    "alltextcontainerspositionx" => '380',
-    "maintextcontainerwidth" => '990',
-    "maintextcontainerpositiony" => '700',
     "ffmpegfinalcmdfilename" => "ffmpegfinalcmd.bat",
     "minititlefontsize" => 30,
     "newsbodyfontsize" => 48,
@@ -399,18 +438,25 @@ $defaultValues = [
     "eachmediainputtime" => 10,
     "videoframerate" => 25,
     "audiointrolength" => 3,
-    "audiooutrolength" => 4
+    "audiooutrolength" => 4,
+	"videowidth" => '1920',
+	"videoheight" => '1080'
 ];
+$defaultValues["maintextcontainerwidth"] = round($defaultValues['videowidth'] * 0.83);
+$defaultValues["maintextcontainerpositiony"] = round($defaultValues['videoheight'] * 0.65);
+$defaultValues["alltextcontainerspositionx"] = round($defaultValues['videowidth'] * 0.078);
+$defaultValues["minititlecontainerpositiony"] = round($defaultValues['videoheight'] * 0.574);
 
+//TODO improve esto porque no se entiende nada. como execFileWithFfmpegCmdToGenerateMainVideo no se usara mas, deberia ser suficiente con usar ffmpegfinalcmdfilenamePart1 para armar el filename de cada mp4
 $ffmpegfinalcmdfilenameExtensionChars = 4;
 $ffmpegfinalcmdfilenamePart1 = substr($params['ffmpegfinalcmdfilename'], 0, -$ffmpegfinalcmdfilenameExtensionChars);
 $ffmpegfinalcmdfilenamePart2 = substr($params['ffmpegfinalcmdfilename'], -$ffmpegfinalcmdfilenameExtensionChars);
 $execFileWithFfmpegCmdToGenerateMainVideo = $params['resultantfileslocation'] . $ffmpegfinalcmdfilenamePart1 . "1" . $ffmpegfinalcmdfilenamePart2;
-$execFileWithFfmpegCmdForAddingTexts = $params['resultantfileslocation'] . $ffmpegfinalcmdfilenamePart1 . "2" . $ffmpegfinalcmdfilenamePart2;
-$execFileWithFfmpegCmdForAddingAudio = $params['resultantfileslocation'] . $ffmpegfinalcmdfilenamePart1 . "3" . $ffmpegfinalcmdfilenamePart2;
+$execFileWithFfmpegCmdForAddingTextsAndAudio = $params['resultantfileslocation'] . $ffmpegfinalcmdfilenamePart1 . "2" . $ffmpegfinalcmdfilenamePart2;
+//$execFileWithFfmpegCmdForAddingAudio = $params['resultantfileslocation'] . $ffmpegfinalcmdfilenamePart1 . "3" . $ffmpegfinalcmdfilenamePart2;
 
 $defaultValues["backgroundvideofile"] = substr($execFileWithFfmpegCmdToGenerateMainVideo, 0, -3) . "mp4";
-$defaultValues["videowithtextsfilename"] = substr($execFileWithFfmpegCmdForAddingTexts, 0, -3) . "mp4";
+$defaultValues["videowithtextsfilename"] = substr($execFileWithFfmpegCmdForAddingTextsAndAudio, 0, -3) . "mp4";
 
 // Fill empty params with their default values
 foreach ($defaultValues as $paramName => $paramDefaultValue) {
@@ -428,19 +474,29 @@ if (!empty($params['audiofile'])) {
 
 //step 2: generate video
 $ffmpegCmdToGenerateMainVideo = getFfmpegCmdToGenerateMainVideo($params, $execFileWithFfmpegCmdToGenerateMainVideo, $defaultValues);
-file_put_contents($execFileWithFfmpegCmdToGenerateMainVideo, $ffmpegCmdToGenerateMainVideo);
-echo "\n File '".$execFileWithFfmpegCmdToGenerateMainVideo."' successfully generated. File content: ".$ffmpegCmdToGenerateMainVideo."\n";
+//file_put_contents($execFileWithFfmpegCmdToGenerateMainVideo, $ffmpegCmdToGenerateMainVideo);
+//echo "\n File '".$execFileWithFfmpegCmdToGenerateMainVideo."' successfully generated. File content: ".$ffmpegCmdToGenerateMainVideo."\n";
 
-//step 3: add texts to the video
-$ffmpegCmdForAddingTexts = getFfmpegCmdToAddTextsAndAudioToVideo($params, $execFileWithFfmpegCmdForAddingTexts);
-file_put_contents($execFileWithFfmpegCmdForAddingTexts, $ffmpegCmdForAddingTexts);
-echo "\n File '" . $execFileWithFfmpegCmdForAddingTexts . "' successfully generated. File content: " . $ffmpegCmdForAddingTexts . "\n";
+//step 3: add texts and audio to the video
+$ffmpegCmdForAddingTexts = getFfmpegCmdToAddTextsAndAudioToVideo($params, $execFileWithFfmpegCmdForAddingTextsAndAudio);
+//file_put_contents($execFileWithFfmpegCmdForAddingTextsAndAudio, $ffmpegCmdForAddingTexts);
+//echo "\n File '" . $execFileWithFfmpegCmdForAddingTextsAndAudio . "' successfully generated. File content: " . $ffmpegCmdForAddingTexts . "\n";
 
+//step 4: generate the BAT file which will execute all FFMPEG commands sequencelly
+$ffmpegCmds = array($ffmpegCmdToGenerateMainVideo,$ffmpegCmdForAddingTexts);
+$batchFilename = $params['resultantfileslocation'] . $params['ffmpegfinalcmdfilename'];
+$batchFileContent = getCmdToExecuteAllFfmpegCmds($params, $ffmpegCmds, $batchFilename);
+file_put_contents($batchFilename, $batchFileContent);
+echo "\n File '".$batchFilename."' successfully generated. File content: ".$batchFileContent."\n";
+
+//TODO verify that step 4 is not neccessary and remove it.
 //step 4: if audio was provided, add normalized audio to final video
+/*
 if (!empty($params['audiofile'])) {
     $ffmpegCmdForAddingAudio = getFfmpegCmdToAddAudioToVideo($params, $execFileWithFfmpegCmdForAddingAudio);
     file_put_contents($execFileWithFfmpegCmdForAddingAudio, $ffmpegCmdForAddingAudio);
     echo "\n File '" . $execFileWithFfmpegCmdForAddingAudio . "' successfully generated. File content: " . $ffmpegCmdForAddingAudio . "\n";
 }
+*/
 
 ?>
