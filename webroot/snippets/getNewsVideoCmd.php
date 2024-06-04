@@ -1,4 +1,5 @@
 <?php
+/* CMD EXAMPLE 1:
 //"D:\Software\RoboTask\Tasks\apps\php-7.4.32-nts-Win32-vc15-x64\php.exe" -c "D:\Software\RoboTask\Tasks\apps\php-7.4.32-nts-Win32-vc15-x64\php.ini" -e "D:\Software\RoboTask\Tasks\apps\notiFlashIA\getNewsVideoCmd.php"
 //--ffmpegpath="D:\Software\ffmpeg\ffmpeg-2023-07-19-git-efa6cec759-full_build\bin\ffmpeg.exe" --mediainputfiles="D:\Software\trash\img_1.jpg,D:\Software\trash\img_2.png,D:\Software\trash\img_3.jpg"
 //--audiofile="D:\Software\trash\flash17notiMensajero.mp3" --mainvideototaltime="46" --eachmediainputtime="6" --resultantfileslocation="D:\\Software\\trash\\"
@@ -8,15 +9,82 @@
 //--newscontentminititle="ECOLOGÍA EN PINAMAR" --newscontenttitle="TRATAMIENTO DE LA FAUNA MARINA EN PINAMAR"
 //--newscontentbody="LA FUNDACIÓN ECOLÓGICA PINAMAR SE REUNIÓ CON CONCEJALES PARA TRATAR EL TEMA DEL TRATAMIENTO DE LA FAUNA MARINA. LOS REPRESENTANTES DE LA FUNDACIÓN COMENTARON QUE DESDE HACE 20 AÑOS HAY UN CONVENIO CON FUNDACIÓN MUNDO MARINO PARA EL RESCATE DE LOS ANIMALES, PERO QUE MUCHAS VECES NO TIENEN CAMIONETAS DISPONIBLES. SE PROPUSO GENERAR UNA REUNIÓN CON EL DEPARTAMENTO DE ECOLOGÍA, PREFECTURA, SEGURIDAD EN PLAYA Y FUNDACIÓN ECOLÓGICA PARA TRANSFORMAR LO DIALOGADO EN UNA NORMATIVA O EN UN PROGRAMA. LA REUNIÓN SE LLEVARÁ A CABO EL MARTES 18 DE JULIO A LAS 11 DE LA MAÑANA."
 
-/* EXAMPLE 2: WIth less params, using many default values:
-"D:\Software\RoboTask\Tasks\apps\php-7.4.32-nts-Win32-vc15-x64\php.exe" -c "D:\Software\RoboTask\Tasks\apps\php-7.4.32-nts-Win32-vc15-x64\php.ini" -e "D:\Software\MarIA\getNewsVideoCmd.php" --ffmpegpath="D:\Software\ffmpeg\ffmpeg-2023-07-19-git-efa6cec759-full_build\bin\ffmpeg.exe" --mediainputfiles="D:\Software\trash\img_1.jpg,D:\Software\trash\img_2.png,D:\Software\trash\img_3.jpg" --audiofile="D:\Software\trash\flash17notiMensajero.mp3" --mainvideototaltime="46" --eachmediainputtime="6" --resultantfileslocation="D:\\Software\\trash\\" --fontsdir="D\\:\\\\Software\\\\trash\\\\fonts\\\\" --ffmpegfinalcmdfilename="ffmpegfinalcmd.bat" --newscontentminititle="ECOLOGÍA EN PINAMAR" --newscontenttitle="TRATAMIENTO DE LA FAUNA MARINA EN PINAMAR" --newscontentbody="LA FUNDACIÓN ECOLÓGICA PINAMAR SE REUNIÓ CON CONCEJALES PARA TRATAR EL TEMA DEL TRATAMIENTO DE LA FAUNA MARINA. LOS REPRESENTANTES DE LA FUNDACIÓN COMENTARON QUE DESDE HACE 20 AÑOS HAY UN CONVENIO CON FUNDACIÓN MUNDO MARINO PARA EL RESCATE DE LOS ANIMALES, PERO QUE MUCHAS VECES NO TIENEN CAMIONETAS DISPONIBLES. SE PROPUSO GENERAR UNA REUNIÓN CON EL DEPARTAMENTO DE ECOLOGÍA, PREFECTURA, SEGURIDAD EN PLAYA Y FUNDACIÓN ECOLÓGICA PARA TRANSFORMAR LO DIALOGADO EN UNA NORMATIVA O EN UN PROGRAMA. LA REUNIÓN SE LLEVARÁ A CABO EL MARTES 18 DE JULIO A LAS 11 DE LA MAÑANA."
+/* EXAMPLE 2 (RECEPCION): WIth less params, using many default values:
+"D:\Software\RoboTask\Tasks\apps\php-7.4.32-nts-Win32-vc15-x64\php.exe" -c  "D:\Software\RoboTask\Tasks\apps\php-7.4.32-nts-Win32-vc15-x64\php.ini" -e "D:\Software\MarIA\getNewsVideoCmd.php"  --ffmpegpath="D:\Software\ffmpeg\ffmpeg-2023-07-19-git-efa6cec759-full_build\bin\ffmpeg.exe"  --mediainputfiles="D:\Software\trash\img_1.jpg,D:\Software\trash\img_2.png,D:\Software\trash\img_3.jpg" --audiofile="D:\Software\trash\flash17notiMensajero.mp3" --mainvideototaltime="46" --eachmediainputtime="6" --resultantfileslocation="D:\Software\trash" --fontsdir="D:\Software\trash\fonts" --ffmpegfinalcmdfilename="ffmpegfinalcmd.bat" --newscontentminititle="ECOLOGÍA EN PINAMAR" --newscontenttitle="TRATAMIENTO DE LA FAUNA MARINA EN PINAMAR" --newscontentbody="LA FUNDACIÓN ECOLÓGICA PINAMAR SE REUNIÓ CON CONCEJALES PARA TRATAR EL TEMA DEL TRATAMIENTO DE LA FAUNA MARINA.LOS REPRESENTANTES DE LA FUNDACIÓN COMENTARON QUE DESDE HACE 20 AÑOS HAY UN CONVENIO CON FUNDACIÓN MUNDO MARINO PARA EL RESCATE DE LOS ANIMALES, PERO QUE MUCHAS VECES NO TIENEN CAMIONETAS DISPONIBLES. SE PROPUSO GENERAR UNA REUNIÓN CON EL DEPARTAMENTO DE ECOLOGÍA, PREFECTURA, SEGURIDAD EN PLAYA Y FUNDACIÓN ECOLÓGICA PARA TRANSFORMAR LO DIALOGADO EN UNA NORMATIVA O EN UN PROGRAMA. LA REUNIÓN SE LLEVARÁ A CABO EL MARTES 18 DE JULIO A LAS 11 DE LA MAÑANA."
+
+EXAMPLE 3 (AIRE): "D:\Software\RoboTask\Tasks\apps\php-7.4.32-nts-Win32-vc15-x64\php.exe" -c  "D:\Software\RoboTask\Tasks\apps\php-7.4.32-nts-Win32-vc15-x64\php.ini" -e "D:\Software\RoboTask\Tasks\apps\notiFlashIA\getNewsVideoCmd.php"  --ffmpegpath="D:\Software\ffmpeg\ffmpeg-2023-07-19-git-efa6cec759-full_build\bin\ffmpeg.exe"  --mediainputfiles="D:\InsoftRadio\media\V-WEBCONT\flashiaContent\flash1_notiEconoPolitica-news_images_img1.jpg,D:\InsoftRadio\media\V-WEBCONT\flashiaContent\flash1_notiEconoPolitica-news_images_img2.jpg,D:\InsoftRadio\media\V-WEBCONT\flashiaContent\flash1_notiEconoPolitica-news_images_img3.jpg" --audiofile="D:\InsoftRadio\media\V-WEBCONT\flashiaContent\output1.mp3" --eachmediainputtime="6" --resultantfileslocation="D:\InsoftRadio\media\V-WEBCONT\flashiaContent" --fontsdir="D:\Software\RoboTask\Tasks\apps\notiFlashIA\videoFonts" --ffmpegfinalcmdfilename="ffmpegfinalcmd.bat" --newscontentminititle="ECOLOGÍA EN PINAMAR" --newscontenttitle="TRATAMIENTO DE LA FAUNA MARINA EN PINAMAR" --newscontentbody="LA FUNDACIÓN ECOLÓGICA PINAMAR SE REUNIÓ CON CONCEJALES PARA TRATAR EL TEMA DEL TRATAMIENTO DE LA FAUNA MARINA.LOS REPRESENTANTES DE LA FUNDACIÓN COMENTARON QUE DESDE HACE 20 AÑOS HAY UN CONVENIO CON FUNDACIÓN MUNDO MARINO PARA EL RESCATE DE LOS ANIMALES, PERO QUE MUCHAS VECES NO TIENEN CAMIONETAS DISPONIBLES. SE PROPUSO GENERAR UNA REUNIÓN CON EL DEPARTAMENTO DE ECOLOGÍA, PREFECTURA, SEGURIDAD EN PLAYA Y FUNDACIÓN ECOLÓGICA PARA TRANSFORMAR LO DIALOGADO EN UNA NORMATIVA O EN UN PROGRAMA. LA REUNIÓN SE LLEVARÁ A CABO EL MARTES 18 DE JULIO A LAS 11 DE LA MAÑANA."
+D:\Software\RoboTask\Tasks\apps\notiFlashIA\execBatWithLowPriority.exe D:\InsoftRadio\media\V-WEBCONT\flashiaContent\flash1_infobaeDeportes_ffmpegcmd.bat
 
 */
 
-function getAssFileContent($textToShow, $fontSize, $fontName, $fontColor, $totalTime, $textContainerWidth, $textContainerHeight) {
+function getTextWidthPx($text, $fontFilePath, $fontSize) {
+    // Obtener las dimensiones del texto
+	//echo "\n fontFilePath=" . $fontFilePath . ", fontSize=" . $fontSize . "\n" . " text=" . $text . "\n";
+    $bbox = imagettfbbox($fontSize, 0, $fontFilePath, $text);
+    
+    // Calcular el ancho del texto en píxeles
+    $width = $bbox[2] - $bbox[0];
+	//echo "\n width=" . $width . "px \n";
+    
+    // Devolver el ancho del texto en píxeles
+    return $width;
+}
+
+function makeTextBlock($text, $fontfile, $fontsize, $width) {    
+    $fixedFontSize = round(($fontsize * 0.56), 0, PHP_ROUND_HALF_UP);
+	$words = explode(' ', $text);
+    $lines = array($words[0]);
+    $currentLine = 0;
+    for($i = 1; $i < count($words); $i++) {
+        $lineSize = imagettfbbox($fixedFontSize, 0, $fontfile, $lines[$currentLine] . ' ' . $words[$i]);
+        if($lineSize[2] - $lineSize[0] < $width) {
+            $lines[$currentLine] .= ' ' . $words[$i];
+        } else {
+            $currentLine++;
+            $lines[$currentLine] = $words[$i];
+        }
+    }
+    return implode("\n", $lines);
+}
+
+function getTextHeightPx($text, $fontFilePath, $fontSize, $textContainerWidth) {
+    $textLineHeight = round($fontSize * 1.25);
+	//Alternative 1 to calculate text height:
+	//$avgFontWidth = round(($fontSize / 2) * 0.8);
+	$avgFontWidth = round(($fontSize / 2));
+	$avgCharsPerTextLine = round(($textContainerWidth / $avgFontWidth), 0, PHP_ROUND_HALF_UP);
+	$amountOfTextLines = round((strlen($text) / $avgCharsPerTextLine), 0, PHP_ROUND_HALF_UP); //$amountOfTextLines should be 9, for fontSize=48 and textContainerWidth=440
+	$textTotalHeight = ($fontSize * $amountOfTextLines)-9;
+	
+	//Alternative 2 to calculate text height:
+	$multilineText = makeTextBlock($text, $fontFilePath, $fontSize, $textContainerWidth);
+	echo "\n  fontFilePath=" . $fontFilePath . ", fontSize=" . $fontSize . "\n" . " \n textContainerWidth=" . $textContainerWidth . " \n textLineHeight=" . $textLineHeight . "\n text=" . $text . "\n multilineText=" . $multilineText . "\n";
+
+	// Crear una imagen en blanco
+    //$img = imagecreatetruecolor($textContainerWidth, 1);
+
+    // Obtener las dimensiones del texto
+    $bbox = imagettfbbox($fontSize, 0, $fontFilePath, $multilineText);
+	//$bbox = imagettfbbox($fontSize, 0, $fontFilePath, $text);
+    
+    // Calcular el alto total del texto
+    $textHeight = $bbox[1] - $bbox[7] + $textLineHeight;
+
+    // Liberar la memoria
+    //imagedestroy($img);
+    
+	echo "\n textHeight1=" . $textTotalHeight . ", textHeight2=" . $textHeight . "px \n";
+    
+	// Devolver el alto total del texto
+    return $textHeight;
+	//return $textTotalHeight;
+}
+
+function getAssFileContent($textToShow, $fontSize, $fontName, $fontColor, $totalTime, $textContainerWidth, $textContainerHeight, $textFontFilePath = null) {
     //$textToShow = iconv(mb_detect_encoding($textToShow, mb_detect_order(), true), "UTF-8", $textToShow);
     $textToShow = iconv("UTF-8", "Windows-1252", $textToShow);
-
+    $textLineHeight = round(($textContainerHeight + $fontSize) / 2);
+   
     $fontColor = substr($fontColor, 1);//remove first char "#"
     $minCharsToScroll = 200;
     $staticTextDuration = 10;
@@ -36,17 +104,16 @@ Style: Default, ".$fontName.", ".$fontSize.", &H00".$fontColor.", &HFF000000, &H
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n";
     if (strlen($textToShow) > $minCharsToScroll) {
         //if the text is too long, add two Dialogue layers, the first static, and the second one should be the same but with the move-FX to scroll the text
-        $avgFontWidth = round($fontSize / 2);
-        $avgCharsPerTextLine = round(($textContainerWidth / $avgFontWidth), 0, PHP_ROUND_HALF_UP);
-        $amountOfTextLines = round((strlen($textToShow) / $avgCharsPerTextLine), 0, PHP_ROUND_HALF_UP); //$amountOfTextLines should be 9, for fontSize=48 and textContainerWidth=440
-        $textTotalHeight = ($fontSize * $amountOfTextLines)-9;
-        $fadeOutAt = $totalTime - 5;
-        $assFileContent .= 'Dialogue: 0,0:00:00.00,0:00:'.$staticTextDuration.'.00,Default,,0,0,0,,{\an1}{\t(0,'.$staticTextDuration.'000,\fad(1000,0)\move(0,'.$textTotalHeight.',0,'.$textTotalHeight.'))}'.$textToShow."\n";//432 para fontsize=48
-        $assFileContent .= 'Dialogue: 0,0:00:'.$staticTextDuration.'.00,0:00:'.$totalTime.'.00,Default,,0,0,0,,{\an1}{\\t(0,'.$fadeOutAt.'000,\move(0,'.$textTotalHeight.',0,0)\\fad(0,1000))}'.$textToShow."\n";
+	    //$textLineHeight = round($fontSize * 1.2);//TODO uncomment this, that should be used
+		$textTotalHeight = getTextHeightPx($textToShow, $textFontFilePath, $fontSize, $textContainerWidth);
+        $bodyTextFixVar = 0.3958;
+		$textTotalHeightFixed = round((int)$textTotalHeight * $bodyTextFixVar);
+		$fadeOutAt = $totalTime - 5;
+        $assFileContent .= 'Dialogue: 0,0:00:00.00,0:00:'.$staticTextDuration.'.00,Default,,0,0,0,,{\an1}{\t(0,'.$staticTextDuration.'000,\fad(1000,0)\move(0,'.$textTotalHeightFixed.',0,'.$textTotalHeightFixed.'))}'.$textToShow."\n";//432 para fontsize=48
+        $assFileContent .= 'Dialogue: 0,0:00:'.$staticTextDuration.'.00,0:00:'.$totalTime.'.00,Default,,0,0,0,,{\an1}{\\t(0,'.$fadeOutAt.'000,\move(0,'.$textTotalHeightFixed.',0,0)\\fad(0,1000))}'.$textToShow."\n";
 //        $assFileContent .= 'Dialogue: 0,0:00:00.00,0:00:'.$totalTime.'.00,Default,,0,0,0,Scroll up;-150;0;50;fadeawayheight,{\an1}'.$textToShow."\n";
     } else {
-        $lineHeight = round(($textContainerHeight + $fontSize) / 2);
-        $assFileContent .= "Dialogue: 0,0:00:00.00,0:00:".$totalTime.".00,Default,,0,0,0,,{\an1}{\\t(0,".$totalTime."000,\\fad(2000,0)\\move(0,".$lineHeight.",0,".$lineHeight.")\\fad(0,2000))}$textToShow\n";
+        $assFileContent .= "Dialogue: 0,0:00:00.00,0:00:".$totalTime.".00,Default,,0,0,0,,{\an1}{\\t(0,".$totalTime."000,\\fad(2000,0)\\move(0,".$textLineHeight.",0,".$textLineHeight.")\\fad(0,2000))}$textToShow\n";
     }
     return utf8_encode($assFileContent);
 }
@@ -195,15 +262,19 @@ function getFfmpegCmdToAddTextsAndAudioToVideo($params, $outputVideoFilename) {
 
     // Build given texts into subtitle files
     // 1) Build minititle subtitle file. //TODO: make this optional, to only build it if mini-title text is present
-    $miniTitleFileName = "news-mini-title.ass";
+    $ffmpegfinalcmdfilenameExtensionChars = 4;
+	$ffmpegfinalcmdfilenameInput = substr($params['ffmpegfinalcmdfilename'], 0, -$ffmpegfinalcmdfilenameExtensionChars);
+	$miniTitleFileName = $ffmpegfinalcmdfilenameInput . "_news-mini-title.ass";
     $miniTitleSubtitleFilePath = $params['resultantfileslocation'] . $miniTitleFileName;
     $minititleFontName = "Rockford Sans Light";
     $minititleFontColor = $params['minitextcolor'];
-    //$minititleSubtitleTotalTime = 30;
+    $miniTitleFontFilePath = $params['minitextfontfile']; 
+	//$minititleSubtitleTotalTime = 30;
     $minititleSubtitleTotalTime = $textsTotalTime;
     //$minitextBgWidth = "440";
-    $minitextBgWidth = round((round($params['minititlefontsize'] / 2) * strlen($params['newscontentminititle'])) * 1.20);
-    $minitextContainerWidth = round($minitextBgWidth * 1.10);
+    //$minitextBgWidth = round((round($params['minititlefontsize'] / 2) * strlen($params['newscontentminititle'])) * 1.20);
+    $minitextBgWidth = round(getTextWidthPx($params['newscontentminititle'], $miniTitleFontFilePath, $params['minititlefontsize']) * 0.83);//big error in measuring. Fix -17%
+	$minitextContainerWidth = round($minitextBgWidth * 1.10);
 
     // Create news Mini-title text layer
     $minitextBgHeight = round($params['minititlefontsize'] * 1.3);
@@ -219,12 +290,12 @@ function getFfmpegCmdToAddTextsAndAudioToVideo($params, $outputVideoFilename) {
         $minititleSubtitleTotalTime,
         $minitextBgWidth,
         $minitextBgHeight
-        );
+    );
     file_put_contents($miniTitleSubtitleFilePath, $assFileContent);
     echo "File $miniTitleSubtitleFilePath created successfully.\n";
 
     // 2) Build title subtitle file
-    $titleSubtitleFileName = $params['resultantfileslocation']."news-content-title.ass";
+    $titleSubtitleFileName = $params['resultantfileslocation'] . $ffmpegfinalcmdfilenameInput . "_news-content-title.ass";
     $titleFontName = "Galano Grotesque Alt SemiBold";
     $titleFontColor = $params['maintextcolor'];
     //$titleSubtitleTotalTime = 30;
@@ -245,14 +316,15 @@ function getFfmpegCmdToAddTextsAndAudioToVideo($params, $outputVideoFilename) {
         $titleSubtitleTotalTime,
         $titleAndBodyBgWidth,
         $titleSubtitleHeight
-        );
+    );
     file_put_contents($titleSubtitleFileName, $assFileContent);
     echo "File $titleSubtitleFileName created successfully.\n";
 
     // 3) Build news body text subtitle file
-    $newsBodySubtitleFileName = $params['resultantfileslocation']."news-content-body.ass";
+    $newsBodySubtitleFileName = $params['resultantfileslocation'] . $ffmpegfinalcmdfilenameInput . "_news-content-body.ass";
     $newsBodyFontName = "Rockford Sans Light";
     $newsBodyFontColor = $params['maintextcolor'];
+	$bodyFontFilePath = $params['bodytextfontfile'];
     //$newsBodySubtitleTotalTime = 30;
     $newsBodySubtitleTotalTime = $textsTotalTime;
     $bodyTextSubtitleHeight = 150;//height of the box in which the body text will scroll
@@ -265,10 +337,21 @@ function getFfmpegCmdToAddTextsAndAudioToVideo($params, $outputVideoFilename) {
         $newsBodyFontColor,
         $newsBodySubtitleTotalTime,
         $titleAndBodyBgWidth,
-        $bodyTextSubtitleHeight
-        );
+        $bodyTextSubtitleHeight,
+		$bodyFontFilePath 
+    );
     file_put_contents($newsBodySubtitleFileName, $assFileContent);
     echo "File $newsBodySubtitleFileName created successfully.\n";
+
+    //double scape subtitle files in final ffmpeg command:
+    $miniTitleSubtitleFilePathDoubleScaped = str_replace("\\\\", "\\\\\\\\", $miniTitleSubtitleFilePath);
+    $miniTitleSubtitleFilePathDoubleScaped = str_replace(":", "\\\\:", $miniTitleSubtitleFilePathDoubleScaped);
+
+    $titleSubtitleFilePathDoubleScaped = str_replace("\\\\", "\\\\\\\\", $titleSubtitleFileName);
+    $titleSubtitleFilePathDoubleScaped = str_replace(":", "\\\\:", $titleSubtitleFilePathDoubleScaped);
+
+    $bodySubtitleFilePathDoubleScaped = str_replace("\\\\", "\\\\\\\\", $newsBodySubtitleFileName);
+    $bodySubtitleFilePathDoubleScaped = str_replace(":", "\\\\:", $bodySubtitleFilePathDoubleScaped);
 
     $filterComplex = "";
     // Building $filterComplex layer by layer
@@ -282,13 +365,13 @@ function getFfmpegCmdToAddTextsAndAudioToVideo($params, $outputVideoFilename) {
     echo "\n minitextSubtitleWidth=".$minitextSubtitleWidth.",minitextSubtitleHeight=".$minitextSubtitleHeight."\n";
 
     //contenedor de news-mini-title: (tiene q tener 64px de altura)
-    $filterComplex .= " color=c={$params['minitextcontainergbcolor']}@1:s={$minitextSubtitleWidth}x{$minitextSubtitleHeight}:duration={$minititleSubtitleTotalTime},subtitles=" . $miniTitleFileName . ":fontsdir={$params['fontsdir']}/[newsminititle];";
+    $filterComplex .= " color=c={$params['minitextcontainergbcolor']}@1:s={$minitextSubtitleWidth}x{$minitextSubtitleHeight}:duration={$minititleSubtitleTotalTime},subtitles=" . $miniTitleSubtitleFilePathDoubleScaped . ":fontsdir={$params['fontsdir']}/[newsminititle];";
 
     // Creates news Title text layer
-    $filterComplex .= " color=c={$params['maintextcontainerbgcolor']}@1:s={$titleAndBodySubtitleWidth}x{$titleLayerHeight}:duration={$titleSubtitleTotalTime},subtitles=news-content-title.ass:fontsdir={$params['fontsdir']}/[newstitle];";
+    $filterComplex .= " color=c={$params['maintextcontainerbgcolor']}@1:s={$titleAndBodySubtitleWidth}x{$titleLayerHeight}:duration={$titleSubtitleTotalTime},subtitles=" . $titleSubtitleFilePathDoubleScaped . ":fontsdir={$params['fontsdir']}/[newstitle];";
 
     // Creates news Body text layer
-    $filterComplex .= " color=c={$params['maintextcontainerbgcolor']}@1:s={$titleAndBodySubtitleWidth}x{$bodyTextSubtitleHeight}:duration={$newsBodySubtitleTotalTime},subtitles=news-content-body.ass:fontsdir={$params['fontsdir']}/[newsbody];";
+    $filterComplex .= " color=c={$params['maintextcontainerbgcolor']}@1:s={$titleAndBodySubtitleWidth}x{$bodyTextSubtitleHeight}:duration={$newsBodySubtitleTotalTime},subtitles=" . $bodySubtitleFilePathDoubleScaped . ":fontsdir={$params['fontsdir']}/[newsbody];";
 
     // Overlaps the news mini-title text layer over the mini-title container layer
     $filterComplex .= " [minititlecontainer][newsminititle]overlay=eval=init:x=20:y=05[newsminititlefull];";
@@ -406,7 +489,9 @@ $params = getopt("", [
     "eachmediainputtime::",
     "audiofile::",
     "audiointrolength::",
-    "audiooutrolength::"
+    "audiooutrolength::",
+	"minitextfontfile::",
+	"bodytextfontfile::"
 ]);
 
 $requiredParams = [
@@ -430,10 +515,13 @@ $defaultValues = [
     "maintextcolor" => "#3A1E04",
     "minitextcolor" => "#FFFFFF",
     "minitextcontainergbcolor" => "#00223F",
+	"minitextfontfile" => "RockfordSansLight.ttf",
+	"bodytextfontfile" => "GalanoGrotesqueAltSemiBold.otf",
     "ffmpegfinalcmdfilename" => "ffmpegfinalcmd.bat",
-    "minititlefontsize" => 30,
+	"minititlefontsize" => 30,
     "newsbodyfontsize" => 48,
-    "titlefontsize" => 36,
+//    "titlefontsize" => 36,
+    "titlefontsize" => 30,
     "mainvideototaltime" => 40,
     "eachmediainputtime" => 10,
     "videoframerate" => 25,
@@ -442,10 +530,30 @@ $defaultValues = [
 	"videowidth" => '1920',
 	"videoheight" => '1080'
 ];
+//$params['fontsdir']
 $defaultValues["maintextcontainerwidth"] = round($defaultValues['videowidth'] * 0.83);
 $defaultValues["maintextcontainerpositiony"] = round($defaultValues['videoheight'] * 0.65);
 $defaultValues["alltextcontainerspositionx"] = round($defaultValues['videowidth'] * 0.078);
 $defaultValues["minititlecontainerpositiony"] = round($defaultValues['videoheight'] * 0.574);
+
+//sanitize some params which are used by ffmpeg and have strange issues with some chars:
+// Reemplazar caracteres en $resultantfileslocation
+// Agregar una barra invertida adicional al final solo si no está presente
+if (!empty($params['resultantfileslocation']) && substr($params['resultantfileslocation'], -1) !== "\\") {
+    $params['resultantfileslocation'] .= "\\";
+}
+$params['resultantfileslocation'] = str_replace("\\", "\\\\", $params['resultantfileslocation']);
+$params['minitextfontfile'] = $params['fontsdir'] . "\\" . $defaultValues['minitextfontfile'];
+$params['bodytextfontfile'] = $params['fontsdir'] . "\\" . $defaultValues['bodytextfontfile'];
+
+// Reemplazar caracteres en $fontsdir
+if (substr($params['fontsdir'], -1) !== "\\") {
+    $params['fontsdir'] .= "\\";
+}
+$params['fontsdir'] = str_replace("\\", "\\\\\\\\", $params['fontsdir']);
+$params['fontsdir'] = str_replace(":", "\\\\:", $params['fontsdir']);
+
+
 
 //TODO improve esto porque no se entiende nada. como execFileWithFfmpegCmdToGenerateMainVideo no se usara mas, deberia ser suficiente con usar ffmpegfinalcmdfilenamePart1 para armar el filename de cada mp4
 $ffmpegfinalcmdfilenameExtensionChars = 4;
@@ -470,6 +578,11 @@ foreach ($defaultValues as $paramName => $paramDefaultValue) {
 if (!empty($params['audiofile'])) {
     $audioInputLength = getDurationSeconds($params['ffmpegpath'], $params['audiofile']);
     $params['mainvideototaltime'] = $params['audiointrolength'] + $audioInputLength + $params['audiooutrolength'];
+}
+
+echo "\n This is the full list of parameters and values that will be used to execute this script: \n";
+foreach ($params as $paramName => $paramValue) {
+    echo "\n '{$paramName}'='{$paramValue}'\n";
 }
 
 //step 2: generate video
