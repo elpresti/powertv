@@ -2,7 +2,7 @@
 function adminSMNpinaForecastData(){
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var smnPinaSheet = ss.getSheetByName("smnPina2023");
-  getAndSetSMN2023pinaForecastData(ss,smnPinaSheet);
+  getAndSetSMN2024pinaForecastData(ss,smnPinaSheet);
   smnForecastBuildOneLineInfo(ss,smnPinaSheet);
 }
 
@@ -40,15 +40,15 @@ function logSmn2023PinaTime(lastTry,ss){
 function clearSMN2023pinaForecastData(smn2023PinaSheet){
   var blankArray = new Array(35);
    for (var i = 0; i < 35; i++) {
-     blankArray[i] = new Array(6);
+     blankArray[i] = new Array(8);
      for (var w = 0; w < 6; w++) {
        blankArray[i][w]="NULL";
      }
    }
-   smn2023PinaSheet.getRange(2,2,35,6).setValues(blankArray);
+   smn2023PinaSheet.getRange(2,2,35,8).setValues(blankArray);
 }
 
-function getAndSetSMN2023pinaForecastData(ss,smnPinaSheet){
+function getAndSetSMN2024pinaForecastData(ss,smnPinaSheet){
    if (ss==null){
      var ss = SpreadsheetApp.getActiveSpreadsheet();
    }
@@ -59,15 +59,15 @@ function getAndSetSMN2023pinaForecastData(ss,smnPinaSheet){
    logSmn2023PinaTime(lastTry=true,ss);
    
    try {
-     var urlSMNpinaForecastWS = "http://radiopower.com.ar/powerhd/webroot/widgets/weather/util/getSMNinfo2023.php?action=getforecast&locationId=4298";
+     //var urlSMNpinaForecastWS = "http://radiopower.com.ar/powerhd/webroot/widgets/weather/util/getSMNinfo2023.php?action=getforecast&locationId=4298";
+     var urlSMNpinaForecastWS = "https://radiopower.com.ar/powerhd/webroot/widgets/weather/util/getSMN2024server.php?action=get";
      var response = UrlFetchApp.fetch(urlSMNpinaForecastWS);
      var json = response.getContentText();
      //Logger.log(json);
      var data = JSON.parse(json);
-     var forecastData = data.outData;
-     if (forecastData != null  &&  forecastData.length>30){
+     var forecDays = data.outData;
+     if (forecDays != null  &&  forecDays.length>3){
        clearSMN2023pinaForecastData(smnPinaSheet);
-       var forecDays = JSON.parse(forecastData);
        var initColNumber=2;
        var initRowNumber=1;//era 2
        var colNum=initColNumber;
@@ -87,12 +87,12 @@ function getAndSetSMN2023pinaForecastData(ss,smnPinaSheet){
        logSmn2023PinaTime(lastTry=false,ss);
      }else{
        clearSMN2023pinaForecastData(smnPinaSheet);
-       smnPinaSheet.getRangeByName('errorMsgSmn2023').setValue("getAndSetSMN2023pinaForecastData() ERROR! Response of WS was not the expected");//set error message
+       smnPinaSheet.getRangeByName('errorMsgSmn2023').setValue("getAndSetSMN2024pinaForecastData() ERROR! Response of WS was not the expected");//set error message
      }
    } catch (e) {
       var now = new Date();
       var errorInfo="Time: " + now.toLocaleDateString() + ", " + now.toLocaleTimeString() + "\r\nMessage: " + e.message + "\r\nFile: " + e.fileName + "\r\nLine: " + e.lineNumber;
-      //MailApp.sendEmail("elpresti@gmail.com", "getAndSetSMN2023pinaForecastData() Error report", e.message);
+      //MailApp.sendEmail("elpresti@gmail.com", "getAndSetSMN2024pinaForecastData() Error report", e.message);
       smnPinaSheet.getRangeByName('errorMsgSmn2023').setValue(errorInfo);
       clearSMN2023pinaForecastData(smnPinaSheet);
    }
