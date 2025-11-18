@@ -815,8 +815,8 @@ function BARD(prompt) {
   if (prompt == null || prompt.length < 1) {
     prompt = "Write a line about the current wheather";
   }
-  //var api_key = "AIzaSyB4TPDlbfnOpyuWdT9wFOiyzHA2N7Son_A";
-  var api_key = "AIzaSyAQD9gqZQa9VB1nMUDMwvf_k-A-igHbQfM";//gemini pro
+  //var api_key = "<api_key>";
+  var api_key = "<api_key>";//gemini pro
   //var apiurl = "https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText";
 
  // -d '{"contents":[{"parts":[{"text":"Write a story about a magic backpack"}]}]}' \
