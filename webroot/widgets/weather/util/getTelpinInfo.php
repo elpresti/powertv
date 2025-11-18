@@ -1,32 +1,48 @@
 <?php
-	header('Content-Type: text/html; charset=utf-8');
-	
-	header("Access-Control-Allow-Origin: *");
-	//header("Access-Control-Allow-Origin: http://powerhd.com.ar");
-	
-	include("simple_html_dom.php"); //Basic HTML parsing with PHP	
 
-	date_default_timezone_set('America/Argentina/Buenos_Aires');
+//ini_set('display_errors', 1);
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+error_reporting(0);
 
-	
-	$outMsg="NO MESSAGE";
-	$outStatusCode=500;
-	$outData=null;
-	$monthsNames = array( 'Enero' => 1, 'Febrero' => 2, 'Marzo' => 3, 'Abril' => 4, 'Mayo' => 5, 'Junio' => 6, 'Julio' => 7,
-						'Agosto' => 8, 'Septiembre' => 9, 'Octubre' => 10, 'Noviembre' => 11, 'Diciembre' => 12 );
+header('Content-Type: text/html; charset=utf-8');
+
+header("Access-Control-Allow-Origin: *");
+//header("Access-Control-Allow-Origin: http://powerhd.com.ar");
+
+include("simple_html_dom.php"); //Basic HTML parsing with PHP	
+
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+
+$outMsg="NO MESSAGE";
+$outStatusCode=500;
+$outData=null;
+$monthsNames = array( 'Enero' => 1, 'Febrero' => 2, 'Marzo' => 3, 'Abril' => 4, 'Mayo' => 5, 'Junio' => 6, 'Julio' => 7,
+					'Agosto' => 8, 'Septiembre' => 9, 'Octubre' => 10, 'Noviembre' => 11, 'Diciembre' => 12 );
+$MAX_FILE_SIZE = 200 * 1024; // 200 KB
+$HTML_FILE_PATH = __DIR__ . "/telpinWeatherData.html";
 	
 	function printResultInJson(){
 		global $outMsg, $outStatusCode, $outData;
-		$arr = array('statusCode' => $outStatusCode, 'msg' => utf8_encode($outMsg), 'outData' => json_encode($outData)); //json_encode() will convert to null any non-utf8 String
+		//$arr = array('statusCode' => $outStatusCode, 'msg' => utf8_encode($outMsg), 'outData' => json_encode($outData)); //json_encode() will convert to null any non-utf8 String
+		$arr = array(
+		    'statusCode' => $outStatusCode,
+		    'msg' => mb_convert_encoding($outMsg, 'UTF-8', 'ISO-8859-1'),
+		    'outData' => json_encode($outData)
+		);
 		$out = json_encode($arr);
 		$out = str_replace("\\\\\\", "", $out);
 		echo $out;
 	}
 
-	parse_str($_SERVER['QUERY_STRING'], $params);
+	//parse_str($_SERVER['QUERY_STRING'], $params);
 
 	
 	function getCurrentWeatherData(){
+		global $HTML_FILE_PATH;
+		
+		/* //BLOCKED FROM REMOTE SERVER:
 		$fullUrl="http://eltiempo.telpin.com.ar/infocel.htm";
 		$arrContextOptions=array(
 			"ssl"=>array(
@@ -35,6 +51,19 @@
 			),
 		); 
 		$fullHtmlCode = file_get_html($fullUrl, false, stream_context_create($arrContextOptions));
+		*/
+
+		if (!file_exists($HTML_FILE_PATH)) {
+			error_log("Error: The local weather data file does not exist.");
+			return null;
+		}
+
+		$fullHtmlCode = file_get_html($HTML_FILE_PATH);
+		if (!$fullHtmlCode) {
+			error_log("Error: Failed to parse the local weather data file.");
+			return null;
+		}
+	
 		$htmlCode = $fullHtmlCode->find('table', 1);
 		
 		//printHtmlRelevantData($htmlCode);die();
@@ -133,13 +162,23 @@
 		try{
 			$strTmp = $html->find('script',0)->innertext;
 			$strTmp = preg_replace("/\s+/", "", $strTmp); //remove all kind of spaces
-			$fallenRain = get_string_between($strTmp, 'rfall=', ';');
-			if (!empty($fallenRain)  &&  strlen($fallenRain)>0){
-				$out = getOnlyNumbers(trim(str_replace(",",".",$fallenRain)));
-				if (empty($out)  ||  strlen($out)==0){
-					$out = 0.2;
+			$out1 = 0;
+			$fallenRain1 = get_string_between($strTmp, 'rfall=', ';');
+			if (!empty($fallenRain1)  &&  strlen($fallenRain1)>0){
+				$out1 = getOnlyNumbers(trim(str_replace(",",".",$fallenRain1)));
+				if (empty($out1)  ||  strlen($out1)==0){
+					$out1 = 0.2;
 				}
 			}
+			$out2 = 0;
+			$fallenRain2 = get_string_between($strTmp, 'rfallY=', ';');
+			if (!empty($fallenRain2)  &&  strlen($fallenRain2)>0){
+				$out2 = getOnlyNumbers(trim(str_replace(",",".",$fallenRain2)));
+				if (empty($out2)  ||  strlen($out2)==0){
+					$out2 = 0.2;
+				}
+			}
+			$out = round($out1 + $out2);
 		}catch(Exception $e){
 			$out = 0.1;
 		}
@@ -223,8 +262,33 @@
 		return substr($string, $ini, $len);
 	}
 	
+	function executeSaveHtmlInfo($html_data) {
+		global $MAX_FILE_SIZE, $HTML_FILE_PATH;
+		
+		$decodedData = base64_decode($html_data, true);
+
+		if ($decodedData === false) {
+			http_response_code(400);
+			echo "Error: Invalid data received.";
+			exit;
+		}
+
+		if (strlen($decodedData) > $MAX_FILE_SIZE) {
+			http_response_code(413);
+			echo "Error: The file exceeds the maximum allowed size.";
+			exit;
+		}
+
+		if (file_put_contents($HTML_FILE_PATH, $decodedData) !== false) {
+			echo "File successfully saved.";
+		} else {
+			http_response_code(500);
+			echo "Error: Failed to save the file.";
+		}
+	}
+	
 	$action=$_GET['action'];
-	$action = 'getcurrentweather';//QUITAR esto!
+	//$action = 'getcurrentweather';//just for DEV
 	if ($action=='getcurrentweather' ) {
 		$outData = getCurrentWeatherData();
 		if ($outData){
@@ -247,5 +311,15 @@
 		printResultInJson();
 	}
 	
+	if ($action == 'save_html_info' ) {
+		if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['html_data'])) {
+			executeSaveHtmlInfo($_POST['html_data']);
+		} else {
+			http_response_code(400);
+			echo "Error: Unauthorized access.";
+		}
+	}
+	
 
+	
 ?>
